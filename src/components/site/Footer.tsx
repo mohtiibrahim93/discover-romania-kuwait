@@ -34,7 +34,7 @@ export function Footer() {
         ))}
       </div>
       <div className="border-t border-on-dark-muted/20">
-        <p className="container-edit py-6 text-xs text-on-dark-muted">© {new Date().getFullYear()} {SITE.name} · {t("rights", l)} · {t("illustrative", l)}s — AI-generated placeholders.</p>
+        <p className="container-edit py-6 text-xs text-on-dark-muted">© {new Date().getFullYear()} {SITE.name} · {t("rights", l)} {t("placeholders", l)}</p>
       </div>
     </footer>
   );

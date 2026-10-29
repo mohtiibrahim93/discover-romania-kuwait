@@ -64,8 +64,8 @@ export function Header() {
     <header className={cn("fixed inset-x-0 top-0 z-50 transition-colors duration-300", overHero ? "bg-transparent" : "border-b border-border bg-background/95 backdrop-blur")}
       style={{ paddingTop: "env(safe-area-inset-top)" }}>
       <div className="container-edit flex h-18 items-center justify-between gap-4 py-3">
-        <Link to="/$locale" params={{ locale: l }} aria-label="Discover Romania Kuwait — home"><Wordmark light={overHero} /></Link>
-        <nav className="hidden items-center gap-5 xl:flex" aria-label="Main">
+        <Link to="/$locale" params={{ locale: l }} aria-label={t("homeAria", l)}><Wordmark light={overHero} /></Link>
+        <nav className="hidden items-center gap-5 xl:flex" aria-label={t("mainNav", l)}>
           {NAV.slice(1).map((n) => (
             <Link key={n.key} to={n.to} params={{ locale: l }}
               className={cn("text-sm transition-opacity hover:opacity-100", overHero ? "text-on-dark opacity-90" : "text-foreground opacity-80")}
@@ -84,7 +84,7 @@ export function Header() {
       </div>
       {open && (
         <div id="drawer" className="fixed inset-x-0 bottom-0 top-[calc(4.5rem+env(safe-area-inset-top))] overflow-y-auto bg-background xl:hidden">
-          <nav className="container-edit flex flex-col py-6" aria-label="Mobile">
+          <nav className="container-edit flex flex-col py-6" aria-label={t("menu", l)}>
             {NAV.map((n) => (
               <Link key={n.key} to={n.to} params={{ locale: l }} activeOptions={{ exact: n.to === "/$locale" }}
                 className="border-b border-border py-4 font-display text-2xl text-primary"
