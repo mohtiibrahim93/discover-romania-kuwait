@@ -5,6 +5,7 @@ import { seo } from "@/lib/seo";
 import { getDestination } from "@/content/destinations";
 import { publishedTours } from "@/content/tours";
 import { PageHero, btn } from "@/components/site/ui";
+import { Crumbs } from "@/components/site/Crumbs";
 import { TourCard } from "@/components/site/TourCard";
 
 export const Route = createFileRoute("/$locale/destinations/$slug")({
@@ -28,7 +29,7 @@ function Page() {
   );
   return (
     <>
-      <PageHero media={d.media} eyebrow={t("destinations", l)} title={d.name[l]} intro={d.teaser[l]} />
+      <PageHero media={d.media} top={<Crumbs section={t("destinations", l)} to="/$locale/destinations" current={d.name[l]} />} title={d.name[l]} intro={d.teaser[l]} />
       <section className="container-edit py-16 md:py-24">
         <p className="max-w-3xl font-display text-2xl leading-relaxed text-primary md:text-3xl">{d.intro[l]}</p>
         <div className="mt-14 grid gap-12 md:grid-cols-3">

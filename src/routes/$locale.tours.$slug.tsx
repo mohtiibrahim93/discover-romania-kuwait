@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Share2 } from "lucide-react";
+import { MessageCircle, Share2 } from "lucide-react";
+import { Crumbs } from "@/components/site/Crumbs";
 import { useState } from "react";
 import { asLocale, useLocale } from "@/i18n/config";
 import { t } from "@/i18n/ui";
@@ -35,7 +36,7 @@ function TourDetail() {
 
   const share = async () => {
     const url = window.location.href;
-    if (navigator.share) { try { await navigator.share({ title: tour.title[l], url }); } catch { /* cancelled */ } return; }
+    if (navigator.share) { try { await navigator.share({ title: tour.title[l], text: `${t("shareText", l)} ${tour.title[l]}`, url }); } catch { /* cancelled */ } return; }
     await navigator.clipboard.writeText(url); setCopied(true); setTimeout(() => setCopied(false), 2000);
   };
 
@@ -45,7 +46,7 @@ function TourDetail() {
         <div className="absolute inset-0 -z-10"><Img k={tour.media} eager /></div>
         <div className="hero-overlay absolute inset-0 -z-10" />
         <div className="container-edit pb-14 pt-32">
-          <Link to="/$locale/tours" params={{ locale: l }} className="inline-flex min-h-11 items-center gap-2 text-sm text-on-dark-muted hover:text-on-dark"><ArrowLeft className="flip-rtl h-4 w-4" />{t("tours", l)}</Link>
+          <Crumbs section={t("tours", l)} to="/$locale/tours" current={tour.title[l]} />
           <p className="eyebrow mt-4 text-champagne">{tour.days} {t("days", l)} · {tour.places[l]}</p>
           <h1 className="fade-up mt-3 max-w-3xl text-5xl leading-[1.05] text-on-dark md:text-7xl">{tour.title[l]}</h1>
           <p className="fade-up mt-4 max-w-xl text-lg text-on-dark-muted">{tour.tagline[l]}</p>
@@ -104,6 +105,7 @@ function TourDetail() {
             <p className="mt-2 text-sm text-muted-foreground">{t("onRequest", l)}</p>
             <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ tour: tour.slug }} className={`${btn.primary} mt-6 w-full`}>{t("askTour", l)}</Link>
             <button type="button" onClick={share} className={`${btn.link} mt-3 w-full justify-center`}><Share2 className="h-4 w-4" />{copied ? t("copied", l) : t("share", l)}</button>
+            <button type="button" onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(`${t("shareText", l)} ${tour.title[l]} — ${window.location.href}`)}`, "_blank", "noopener")} className={`${btn.link} w-full justify-center`}><MessageCircle className="h-4 w-4" />{t("shareWa", l)}</button>
           </div>
         </aside>
       </div>

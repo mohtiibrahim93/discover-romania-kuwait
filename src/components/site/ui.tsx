@@ -35,12 +35,13 @@ export function SectionHead({ eyebrow, title, intro, light }: { eyebrow?: string
   );
 }
 
-export function PageHero({ eyebrow, title, intro, media }: { eyebrow?: string; title: string; intro?: string; media: MediaKey }) {
+export function PageHero({ eyebrow, title, intro, media, top }: { eyebrow?: string; title: string; intro?: string; media: MediaKey; top?: ReactNode }) {
   return (
     <section className="relative isolate flex min-h-[62svh] items-end overflow-hidden bg-midnight">
       <div className="absolute inset-0 -z-10"><Img k={media} eager /></div>
       <div className="hero-overlay absolute inset-0 -z-10" />
       <div className="container-edit pb-14 pt-32 md:pb-20">
+        {top}
         {eyebrow && <p className="eyebrow mb-4 text-champagne">{eyebrow}</p>}
         <h1 className="fade-up max-w-3xl text-4xl leading-[1.08] text-on-dark md:text-6xl">{title}</h1>
         {intro && <p className="fade-up mt-5 max-w-xl text-base leading-relaxed text-on-dark-muted md:text-lg">{intro}</p>}

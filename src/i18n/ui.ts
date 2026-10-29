@@ -73,6 +73,14 @@ export const UI = d({
   seasonWinter: { en: "Winter", ar: "الشتاء", ro: "Iarnă" },
   dur5: { en: "Up to 6 days", ar: "حتى 6 أيام", ro: "Până la 6 zile" },
   dur7: { en: "7 days or more", ar: "7 أيام أو أكثر", ro: "7 zile sau mai mult" },
+  placeholders: { en: "Images are AI-generated placeholders, not photographs of the places named.", ar: "الصور مؤقتة ومُنشأة بالذكاء الاصطناعي، وليست صورًا فعلية للأماكن المذكورة.", ro: "Imaginile sunt provizorii, generate cu AI, nu fotografii ale locurilor menționate." },
+  homeAria: { en: "Discover Romania Kuwait — home", ar: "Discover Romania Kuwait — الصفحة الرئيسية", ro: "Discover Romania Kuwait — acasă" },
+  mainNav: { en: "Main navigation", ar: "التنقل الرئيسي", ro: "Navigare principală" },
+  breadcrumb: { en: "Breadcrumb", ar: "مسار التنقل", ro: "Traseu de navigare" },
+  notFoundT: { en: "Page not found", ar: "الصفحة غير موجودة", ro: "Pagina nu a fost găsită" },
+  notFoundP: { en: "This page doesn't exist or has moved.", ar: "هذه الصفحة غير موجودة أو تم نقلها.", ro: "Această pagină nu există sau a fost mutată." },
+  shareWa: { en: "Share on WhatsApp", ar: "مشاركة عبر واتساب", ro: "Distribuie pe WhatsApp" },
+  shareText: { en: "Take a look at this proposed Romania journey:", ar: "ألقِ نظرة على هذه الرحلة المقترحة إلى رومانيا:", ro: "Aruncă o privire la acest circuit propus în România:" },
 });
 
 export type UIKey = keyof typeof UI;
