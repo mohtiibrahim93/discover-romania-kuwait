@@ -98,6 +98,7 @@ export function Header() {
             ))}
             <Link to="/$locale/faq" params={{ locale: l }} className="border-b border-border py-4 text-base text-foreground">{t("faq", l)}</Link>
             <Link to="/$locale/travel-information" params={{ locale: l }} className="border-b border-border py-4 text-base text-foreground">{t("travelInfo", l)}</Link>
+            <Link to="/$locale/how-it-works" params={{ locale: l }} className="border-b border-border py-4 text-base text-foreground">{t("howItWorks", l)}</Link>
             <LocaleSwitch className="mt-6" />
             <Link to="/$locale/plan-your-trip" params={{ locale: l }} className={cn(btn.primary, "mt-6 w-full")}>{t("planTrip", l)}</Link>
           </nav>

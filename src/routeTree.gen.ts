@@ -20,6 +20,7 @@ import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
 import { Route as LocaleCookiesRouteImport } from './routes/$locale.cookies'
 import { Route as LocaleExperiencesRouteImport } from './routes/$locale.experiences'
 import { Route as LocaleFaqRouteImport } from './routes/$locale.faq'
+import { Route as LocaleHowItWorksRouteImport } from './routes/$locale.how-it-works'
 import { Route as LocalePlanYourTripRouteImport } from './routes/$locale.plan-your-trip'
 import { Route as LocalePrivacyRouteImport } from './routes/$locale.privacy'
 import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
@@ -85,6 +86,11 @@ const LocaleExperiencesRoute = LocaleExperiencesRouteImport.update({
 const LocaleFaqRoute = LocaleFaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleHowItWorksRoute = LocaleHowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
   getParentRoute: () => LocaleRoute,
 } as any)
 const LocalePlanYourTripRoute = LocalePlanYourTripRouteImport.update({
@@ -159,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/$locale/cookies': typeof LocaleCookiesRoute
   '/$locale/experiences': typeof LocaleExperiencesRoute
   '/$locale/faq': typeof LocaleFaqRoute
+  '/$locale/how-it-works': typeof LocaleHowItWorksRoute
   '/$locale/plan-your-trip': typeof LocalePlanYourTripRoute
   '/$locale/privacy': typeof LocalePrivacyRoute
   '/$locale/terms': typeof LocaleTermsRoute
@@ -182,6 +189,7 @@ export interface FileRoutesByTo {
   '/$locale/cookies': typeof LocaleCookiesRoute
   '/$locale/experiences': typeof LocaleExperiencesRoute
   '/$locale/faq': typeof LocaleFaqRoute
+  '/$locale/how-it-works': typeof LocaleHowItWorksRoute
   '/$locale/plan-your-trip': typeof LocalePlanYourTripRoute
   '/$locale/privacy': typeof LocalePrivacyRoute
   '/$locale/terms': typeof LocaleTermsRoute
@@ -208,6 +216,7 @@ export interface FileRoutesById {
   '/$locale/cookies': typeof LocaleCookiesRoute
   '/$locale/experiences': typeof LocaleExperiencesRoute
   '/$locale/faq': typeof LocaleFaqRoute
+  '/$locale/how-it-works': typeof LocaleHowItWorksRoute
   '/$locale/plan-your-trip': typeof LocalePlanYourTripRoute
   '/$locale/privacy': typeof LocalePrivacyRoute
   '/$locale/terms': typeof LocaleTermsRoute
@@ -234,6 +243,7 @@ export interface FileRouteTypes {
     | '/$locale/cookies'
     | '/$locale/experiences'
     | '/$locale/faq'
+    | '/$locale/how-it-works'
     | '/$locale/plan-your-trip'
     | '/$locale/privacy'
     | '/$locale/terms'
@@ -257,6 +267,7 @@ export interface FileRouteTypes {
     | '/$locale/cookies'
     | '/$locale/experiences'
     | '/$locale/faq'
+    | '/$locale/how-it-works'
     | '/$locale/plan-your-trip'
     | '/$locale/privacy'
     | '/$locale/terms'
@@ -282,6 +293,7 @@ export interface FileRouteTypes {
     | '/$locale/cookies'
     | '/$locale/experiences'
     | '/$locale/faq'
+    | '/$locale/how-it-works'
     | '/$locale/plan-your-trip'
     | '/$locale/privacy'
     | '/$locale/terms'
@@ -382,6 +394,13 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/$locale/faq'
       preLoaderRoute: typeof LocaleFaqRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/how-it-works': {
+      id: '/$locale/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/$locale/how-it-works'
+      preLoaderRoute: typeof LocaleHowItWorksRouteImport
       parentRoute: typeof LocaleRoute
     }
     '/$locale/plan-your-trip': {
@@ -492,6 +511,7 @@ interface LocaleRouteChildren {
   LocaleCookiesRoute: typeof LocaleCookiesRoute
   LocaleExperiencesRoute: typeof LocaleExperiencesRoute
   LocaleFaqRoute: typeof LocaleFaqRoute
+  LocaleHowItWorksRoute: typeof LocaleHowItWorksRoute
   LocalePlanYourTripRoute: typeof LocalePlanYourTripRoute
   LocalePrivacyRoute: typeof LocalePrivacyRoute
   LocaleTermsRoute: typeof LocaleTermsRoute
@@ -510,6 +530,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleCookiesRoute: LocaleCookiesRoute,
   LocaleExperiencesRoute: LocaleExperiencesRoute,
   LocaleFaqRoute: LocaleFaqRoute,
+  LocaleHowItWorksRoute: LocaleHowItWorksRoute,
   LocalePlanYourTripRoute: LocalePlanYourTripRoute,
   LocalePrivacyRoute: LocalePrivacyRoute,
   LocaleTermsRoute: LocaleTermsRoute,
