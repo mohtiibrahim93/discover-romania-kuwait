@@ -77,6 +77,7 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <LocaleSwitch light={overHero} className="hidden md:flex" />
+          <LocaleSwitch light={overHero} compact className="md:hidden" />
           <Link to="/$locale/plan-your-trip" params={{ locale: l }} className={cn("hidden sm:inline-flex", overHero ? btn.light : btn.primary)}>{t("planTrip", l)}</Link>
           <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-controls="drawer"
             aria-label={open ? t("close", l) : t("menu", l)}
