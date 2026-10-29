@@ -25,7 +25,7 @@ export const Route = createFileRoute("/_authenticated/admin")({
 type Inquiry = Tables<"trip_inquiries">;
 type Note = Tables<"inquiry_notes">;
 
-export const STATUSES = [
+const STATUSES = [
   ["new", "New"], ["contacted", "Contacted"], ["qualifying", "Qualifying"], ["quote_preparation", "Quote preparation"],
   ["quote_sent", "Quote sent"], ["awaiting_reply", "Awaiting reply"], ["confirmed_off_platform", "Confirmed (off-platform)"],
   ["lost", "Lost"], ["archived", "Archived"],
