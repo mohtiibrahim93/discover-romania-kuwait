@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
 import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
@@ -47,6 +48,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocaleIndexRoute = LocaleIndexRouteImport.update({
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
   '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/cookies': typeof LocaleCookiesRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/cookies': typeof LocaleCookiesRoute
@@ -177,6 +185,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/$locale': typeof LocaleRouteWithChildren
   '/auth': typeof AuthRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/cookies': typeof LocaleCookiesRoute
@@ -200,6 +209,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$locale'
     | '/auth'
+    | '/sitemap.xml'
     | '/$locale/about'
     | '/$locale/contact'
     | '/$locale/cookies'
@@ -220,6 +230,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/sitemap.xml'
     | '/$locale/about'
     | '/$locale/contact'
     | '/$locale/cookies'
@@ -242,6 +253,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/$locale'
     | '/auth'
+    | '/sitemap.xml'
     | '/$locale/about'
     | '/$locale/contact'
     | '/$locale/cookies'
@@ -265,6 +277,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   LocaleRoute: typeof LocaleRouteWithChildren
   AuthRoute: typeof AuthRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -295,6 +308,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale/': {
@@ -467,6 +487,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   LocaleRoute: LocaleRouteWithChildren,
   AuthRoute: AuthRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
