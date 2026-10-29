@@ -20,6 +20,7 @@ export function Footer() {
           <Wordmark light />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-on-dark-muted">{SITE.tagline[l]}</p>
           {SITE.email && <a href={`mailto:${SITE.email}`} className="ltr-isolate mt-4 block text-sm">{SITE.email}</a>}
+          {SITE.whatsappDigits && <a href={`https://wa.me/${SITE.whatsappDigits}`} target="_blank" rel="noopener" className="ltr-isolate mt-3 inline-flex min-h-10 items-center text-sm text-on-dark hover:text-champagne">WhatsApp +965 5664 2402</a>}
           <LocaleSwitch light className="mt-6" />
         </div>
         {COLS.map((c) => (

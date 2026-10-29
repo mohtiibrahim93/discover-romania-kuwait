@@ -13,7 +13,7 @@ export const SITE = {
     ro: "România, planificată personal",
   } as L,
   email: null as string | null,
-  whatsappDigits: null as string | null, // international digits only, e.g. "965XXXXXXXX"
+  whatsappDigits: "96556642402" as string | null, // international digits only
   socials: [] as { label: string; url: string }[],
   businessRegistration: null as string | null,
   inquiryBackendConnected: true,

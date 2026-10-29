@@ -64,6 +64,7 @@ export function Header() {
   }, [open]);
 
   return (
+    <>
     <header className={cn("fixed inset-x-0 top-0 z-50 transition-colors duration-300", overHero ? "bg-transparent" : "border-b border-border bg-background/95 backdrop-blur")}
       style={{ paddingTop: "env(safe-area-inset-top)" }}>
       <div className="container-edit flex h-18 items-center justify-between gap-4 py-3">
@@ -86,8 +87,9 @@ export function Header() {
           </button>
         </div>
       </div>
+    </header>
       {open && (
-        <div id="drawer" className="fixed inset-x-0 bottom-0 top-[calc(4.5rem+env(safe-area-inset-top))] overflow-y-auto bg-background xl:hidden">
+        <div id="drawer" className="fixed inset-x-0 bottom-0 top-[calc(4.5rem+env(safe-area-inset-top))] z-50 overflow-y-auto bg-background xl:hidden">
           <nav className="container-edit flex flex-col py-6" aria-label={t("menu", l)}>
             {NAV.map((n) => (
               <Link key={n.key} to={n.to} params={{ locale: l }} activeOptions={{ exact: n.to === "/$locale" }}
@@ -101,6 +103,6 @@ export function Header() {
           </nav>
         </div>
       )}
-    </header>
+    </>
   );
 }
