@@ -106,14 +106,14 @@ function Page() {
         {!SITE.inquiryBackendConnected && <p role="status" className="mb-10 border border-champagne bg-card p-4 text-sm">{F.notConnected[l]}</p>}
         <form noValidate onSubmit={onSubmit} className="grid gap-6 sm:grid-cols-2">
           {Object.keys(errors).length > 0 && <p role="alert" className="text-sm font-semibold text-destructive sm:col-span-2">{F.errFix[l]}</p>}
-          <Field id="name" label={F.name[l]} err={errors.name} req><input id="f-name" name="name" autoComplete="name" className={input} aria-invalid={!!errors.name} /></Field>
-          <Field id="email" label={F.email[l]} err={errors.email} req><input id="f-email" name="email" type="email" dir="ltr" autoComplete="email" className={input} aria-invalid={!!errors.email} /></Field>
-          <Field id="phone" label={F.phone[l]} err={errors.phone} req><input id="f-phone" name="phone" type="tel" dir="ltr" inputMode="tel" autoComplete="tel" placeholder="+" className={input} aria-invalid={!!errors.phone} /></Field>
-          <Field id="residence" label={F.residence[l]} err={errors.residence} req><input id="f-residence" name="residence" autoComplete="country-name" className={input} aria-invalid={!!errors.residence} /></Field>
+          <Field id="name" label={F.name[l]} err={errors["name"]} req><input id="f-name" name="name" autoComplete="name" className={input} aria-invalid={!!errors["name"]} /></Field>
+          <Field id="email" label={F.email[l]} err={errors["email"]} req><input id="f-email" name="email" type="email" dir="ltr" autoComplete="email" className={input} aria-invalid={!!errors["email"]} /></Field>
+          <Field id="phone" label={F.phone[l]} err={errors["phone"]} req><input id="f-phone" name="phone" type="tel" dir="ltr" inputMode="tel" autoComplete="tel" placeholder="+" className={input} aria-invalid={!!errors["phone"]} /></Field>
+          <Field id="residence" label={F.residence[l]} err={errors["residence"]} req><input id="f-residence" name="residence" autoComplete="country-name" className={input} aria-invalid={!!errors["residence"]} /></Field>
           <Field id="lang" label={F.lang[l]} req><select id="f-lang" name="lang" defaultValue={l} className={input}>{LOCALES.map((x) => <option key={x} value={x}>{LOCALE_LABELS[x]}</option>)}</select></Field>
-          <Field id="month" label={F.month[l]} err={errors.month} req><select id="f-month" name="month" defaultValue="" className={input} aria-invalid={!!errors.month}><option value="" disabled>—</option>{months.map((m) => <option key={m.v} value={m.v}>{m.label}</option>)}</select></Field>
-          <Field id="adults" label={F.adults[l]} err={errors.adults} req><input id="f-adults" name="adults" type="number" min={1} defaultValue={2} dir="ltr" className={input} aria-invalid={!!errors.adults} /></Field>
-          <Field id="children" label={F.children[l]} err={errors.children} req><input id="f-children" name="children" type="number" min={0} defaultValue={0} dir="ltr" className={input} /></Field>
+          <Field id="month" label={F.month[l]} err={errors["month"]} req><select id="f-month" name="month" defaultValue="" className={input} aria-invalid={!!errors["month"]}><option value="" disabled>—</option>{months.map((m) => <option key={m.v} value={m.v}>{m.label}</option>)}</select></Field>
+          <Field id="adults" label={F.adults[l]} err={errors["adults"]} req><input id="f-adults" name="adults" type="number" min={1} defaultValue={2} dir="ltr" className={input} aria-invalid={!!errors["adults"]} /></Field>
+          <Field id="children" label={F.children[l]} err={errors["children"]} req><input id="f-children" name="children" type="number" min={0} defaultValue={0} dir="ltr" className={input} /></Field>
           <Field id="tour" label={F.tour[l]} req full><select id="f-tour" name="tour" defaultValue={tour && tours.some((x) => x.slug === tour) ? tour : "custom"} className={input}><option value="custom">{F.custom[l]}</option>{tours.map((x) => <option key={x.slug} value={x.slug}>{x.title[l]}</option>)}</select></Field>
 
           <details className="sm:col-span-2 border-y border-border py-4">
@@ -132,10 +132,10 @@ function Page() {
 
           <div className="sm:col-span-2">
             <label className="flex gap-3 text-sm leading-relaxed">
-              <input id="f-consent" type="checkbox" name="consent" className="mt-1 h-5 w-5 shrink-0 accent-accent" aria-invalid={!!errors.consent} aria-describedby={errors.consent ? "e-consent" : undefined} />
+              <input id="f-consent" type="checkbox" name="consent" className="mt-1 h-5 w-5 shrink-0 accent-accent" aria-invalid={!!errors["consent"]} aria-describedby={errors["consent"] ? "e-consent" : undefined} />
               <span>{F.consent[l]} <Link to="/$locale/privacy" params={{ locale: l }} className="underline">{t("privacy", l)}</Link>.</span>
             </label>
-            {errors.consent && <p id="e-consent" className="mt-2 text-sm text-destructive">{errors.consent}</p>}
+            {errors["consent"] && <p id="e-consent" className="mt-2 text-sm text-destructive">{errors["consent"]}</p>}
           </div>
 
           <div className="sm:col-span-2">
@@ -149,7 +149,7 @@ function Page() {
   );
 }
 
-function Field({ id, label, err, req, hint, full, children }: { id: string; label: string; err?: string; req?: boolean; hint?: string; full?: boolean; children: ReactNode }) {
+function Field({ id, label, err, req, hint, full, children }: { id: string; label: string; err?: string | undefined; req?: boolean; hint?: string; full?: boolean; children: ReactNode }) {
   return (
     <div className={full ? "sm:col-span-2" : ""}>
       <label htmlFor={`f-${id}`} className="mb-2 block text-sm font-semibold">{label}{req && <span className="text-destructive" aria-hidden> *</span>}</label>

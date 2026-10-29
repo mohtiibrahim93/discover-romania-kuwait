@@ -144,7 +144,7 @@ function Home() {
         <SectionHead eyebrow={t("tailor", l)} title={C.stepsT[l]} intro={C.nonBinding[l]} />
         <ol className="mt-12 grid gap-8 md:grid-cols-3">
           {C.steps.map((s, i) => {
-            const Icon = [Compass, FileText, Handshake][i];
+            const Icon = [Compass, FileText, Handshake][i] ?? Compass;
             return (
               <li key={i} className="border-t border-primary pt-6">
                 <Icon className="h-6 w-6 text-accent" aria-hidden />
