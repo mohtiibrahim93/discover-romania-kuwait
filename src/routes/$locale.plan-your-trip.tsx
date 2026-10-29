@@ -8,6 +8,9 @@ import { publishedTours } from "@/content/tours";
 import { TRAVEL_STYLES } from "@/content/styles";
 import { SITE } from "@/content/site";
 import { PageHero, btn } from "@/components/site/ui";
+import { useServerFn } from "@tanstack/react-start";
+import { submitInquiry } from "@/lib/inquiry.functions";
+import { DESTINATIONS } from "@/content/destinations";
 
 const F = {
   intro: { en: "Share a few details and we will prepare a personalised proposed itinerary. This is a quote inquiry — not a booking.", ar: "شاركنا بعض التفاصيل وسنعدّ لك برنامجًا مقترحًا مخصصًا. هذا طلب عرض سعر وليس حجزًا.", ro: "Spune-ne câteva detalii și îți pregătim un itinerariu propus personalizat. Aceasta este o cerere de ofertă — nu o rezervare." },
@@ -41,6 +44,29 @@ const F = {
   errAdults: { en: "At least one adult.", ar: "بالغ واحد على الأقل.", ro: "Cel puțin un adult." },
   errConsent: { en: "Please confirm your consent to continue.", ar: "يُرجى تأكيد موافقتك للمتابعة.", ro: "Te rugăm să îți confirmi acordul pentru a continua." },
   errFix: { en: "Please review the highlighted fields.", ar: "يُرجى مراجعة الحقول المحددة.", ro: "Verifică câmpurile marcate." },
+  kindQ: { en: "What would you like?", ar: "ماذا تفضّل؟", ro: "Ce ți-ai dori?" },
+  kindTour: { en: "Start from one of our journeys", ar: "البدء من إحدى رحلاتنا", ro: "Pornesc de la unul dintre circuitele noastre" },
+  kindTourP: { en: "We adapt an existing itinerary to your dates and group.", ar: "نكيّف برنامجًا قائمًا وفق مواعيدك ومجموعتك.", ro: "Adaptăm un itinerariu existent la datele și grupul tău." },
+  kindTailored: { en: "A fully tailored itinerary", ar: "برنامج مصمم بالكامل حسب طلبك", ro: "Un itinerariu complet personalizat" },
+  kindTailoredP: { en: "Tell us what you love and we design a route from scratch.", ar: "أخبرنا بما تحب وسنصمم لك مسارًا من البداية.", ro: "Spune-ne ce îți place și concepem traseul de la zero." },
+  places: { en: "Regions you would like to include", ar: "المناطق التي تود زيارتها", ro: "Regiunile pe care ai vrea să le incluzi" },
+  interests: { en: "Interests and must-sees", ar: "اهتماماتك وما لا تريد تفويته", ro: "Interese și locuri obligatorii" },
+  interestsPh: { en: "e.g. castles, nature walks, family activities, shopping, local food", ar: "مثل القلاع، المشي في الطبيعة، أنشطة عائلية، التسوق، المأكولات المحلية", ro: "ex. castele, plimbări în natură, activități pentru familie, cumpărături, mâncare locală" },
+  pace: { en: "Preferred pace", ar: "الوتيرة المفضلة", ro: "Ritmul preferat" },
+  paceRelaxed: { en: "Relaxed", ar: "هادئة", ro: "Relaxat" },
+  paceBalanced: { en: "Balanced", ar: "متوازنة", ro: "Echilibrat" },
+  paceActive: { en: "Active", ar: "نشطة", ro: "Activ" },
+  accommodation: { en: "Accommodation preference", ar: "تفضيل الإقامة", ro: "Preferința de cazare" },
+  accLux: { en: "Luxury hotels", ar: "فنادق فاخرة", ro: "Hoteluri de lux" },
+  accBoutique: { en: "Boutique / characterful stays", ar: "إقامات بوتيك مميزة", ro: "Cazări boutique / cu personalitate" },
+  accFamily: { en: "Family apartments / villas", ar: "شقق أو فلل عائلية", ro: "Apartamente / vile pentru familie" },
+  accMixed: { en: "Mixed / open to advice", ar: "متنوعة / منفتح على الاقتراحات", ro: "Mixt / deschis la recomandări" },
+  sending: { en: "Sending…", ar: "جارٍ الإرسال…", ro: "Se trimite…" },
+  sendErr: { en: "We could not send your inquiry. Please try again in a moment.", ar: "تعذّر إرسال استفسارك. يُرجى المحاولة مرة أخرى بعد قليل.", ro: "Nu am putut trimite solicitarea. Încearcă din nou în câteva momente." },
+  doneT: { en: "Thank you — your inquiry is received", ar: "شكرًا لك — تم استلام استفسارك", ro: "Mulțumim — solicitarea ta a fost primită" },
+  doneP: { en: "A member of our team will review your request and reply personally with a proposed itinerary and quote. Please keep your reference number.", ar: "سيراجع أحد أعضاء فريقنا طلبك ويرد عليك شخصيًا ببرنامج مقترح وعرض سعر. يُرجى الاحتفاظ برقمك المرجعي.", ro: "Un membru al echipei îți va analiza cererea și îți va răspunde personal cu un itinerariu propus și o ofertă. Păstrează numărul de referință." },
+  ref: { en: "Reference", ar: "الرقم المرجعي", ro: "Referință" },
+  another: { en: "Send another inquiry", ar: "إرسال استفسار آخر", ro: "Trimite o altă solicitare" },
 } satisfies Record<string, L>;
 
 const searchSchema = z.object({ tour: z.string().optional() });
@@ -61,7 +87,11 @@ const schema = (l: Locale) => z.object({
   month: z.string().min(1, F.required[l]),
   adults: z.coerce.number().int().min(1, F.errAdults[l]).max(60),
   children: z.coerce.number().int().min(0).max(40),
-  tour: z.string(),
+  tour: z.string().default("custom"),
+  requestType: z.enum(["tour", "tailored"]),
+  interests: z.string().max(1000).optional(),
+  pace: z.string().max(20).optional(),
+  accommodation: z.string().max(40).optional(),
   budget: z.string().max(40).optional(),
   duration: z.string().max(10).optional(),
   style: z.string().optional(),
@@ -77,23 +107,40 @@ function Page() {
   const { tour } = Route.useSearch();
   const tours = publishedTours();
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [checked, setChecked] = useState(false);
+  const [kind, setKind] = useState<"tour" | "tailored">(tour ? "tour" : "tailored");
+  const [busy, setBusy] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [done, setDone] = useState<string | null>(null);
+  const send = useServerFn(submitInquiry);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const raw = Object.fromEntries(fd.entries());
-    const res = schema(l).safeParse({ ...raw, flights: fd.get("flights") === "on", consent: fd.get("consent") === "on" });
+    const res = schema(l).safeParse({ ...raw, requestType: kind, flights: fd.get("flights") === "on", consent: fd.get("consent") === "on" });
     if (!res.success) {
       const errs: Record<string, string> = {};
       for (const i of res.error.issues) errs[String(i.path[0])] ??= i.message;
-      setErrors(errs); setChecked(false);
+      setErrors(errs);
       document.getElementById(`f-${Object.keys(errs)[0]}`)?.focus();
       return;
     }
-    setErrors({});
-    // No backend is connected yet: never show a false "submitted" state.
-    setChecked(true);
+    setErrors({}); setFailed(false); setBusy(true);
+    const v = res.data;
+    try {
+      const out = await send({ data: {
+        siteLocale: l, requestType: kind, name: v.name, email: v.email, phone: v.phone, residence: v.residence,
+        nationality: v.nationality, lang: v.lang, month: v.month, adults: v.adults, children: v.children,
+        tour: kind === "tour" ? v.tour : "custom", destinations: fd.getAll("destinations").map(String),
+        interests: v.interests, pace: v.pace, accommodation: v.accommodation, budget: v.budget, duration: v.duration,
+        style: v.style, dietary: v.dietary, guideLang: v.guideLang, flights: !!v.flights, notes: v.notes, consent: true,
+        website: String(fd.get("website") ?? ""),
+      } });
+      if (out.ok) { setDone(out.reference); window.scrollTo({ top: 0, behavior: "smooth" }); }
+      else setFailed(true);
+    } catch { setFailed(true); }
+    finally { setBusy(false); }
   };
 
   const months = Array.from({ length: 18 }, (_, i) => { const d = new Date(2026, 10 + i, 1); return { v: d.toISOString().slice(0, 7), label: d.toLocaleDateString(l === "ar" ? "ar-KW" : l, { month: "long", year: "numeric" }) }; });
@@ -104,6 +151,15 @@ function Page() {
       <PageHero media="countryside" eyebrow={t("tailor", l)} title={t("planTrip", l)} intro={F.intro[l]} />
       <section className="container-edit max-w-3xl py-16 md:py-24">
         {!SITE.inquiryBackendConnected && <p role="status" className="mb-10 border border-champagne bg-card p-4 text-sm">{F.notConnected[l]}</p>}
+        {done ? (
+          <div role="status" className="border border-champagne bg-card p-8 text-center">
+            <h2 className="font-display text-3xl text-primary">{F.doneT[l]}</h2>
+            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">{F.doneP[l]}</p>
+            <p className="mt-6 text-sm">{F.ref[l]}</p>
+            <p className="ltr-isolate mt-1 font-display text-2xl tracking-wider text-accent" dir="ltr">{done}</p>
+            <button type="button" onClick={() => setDone(null)} className={`${btn.ghost ?? btn.primary} mt-8`}>{F.another[l]}</button>
+          </div>
+        ) : (
         <form noValidate onSubmit={onSubmit} className="grid gap-6 sm:grid-cols-2">
           {Object.keys(errors).length > 0 && <p role="alert" className="text-sm font-semibold text-destructive sm:col-span-2">{F.errFix[l]}</p>}
           <Field id="name" label={F.name[l]} err={errors["name"]} req><input id="f-name" name="name" autoComplete="name" className={input} aria-invalid={!!errors["name"]} /></Field>
@@ -114,7 +170,37 @@ function Page() {
           <Field id="month" label={F.month[l]} err={errors["month"]} req><select id="f-month" name="month" defaultValue="" className={input} aria-invalid={!!errors["month"]}><option value="" disabled>—</option>{months.map((m) => <option key={m.v} value={m.v}>{m.label}</option>)}</select></Field>
           <Field id="adults" label={F.adults[l]} err={errors["adults"]} req><input id="f-adults" name="adults" type="number" min={1} defaultValue={2} dir="ltr" className={input} aria-invalid={!!errors["adults"]} /></Field>
           <Field id="children" label={F.children[l]} err={errors["children"]} req><input id="f-children" name="children" type="number" min={0} defaultValue={0} dir="ltr" className={input} /></Field>
+          <fieldset className="sm:col-span-2">
+            <legend className="mb-3 text-sm font-semibold">{F.kindQ[l]}</legend>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {(["tailored", "tour"] as const).map((k) => (
+                <label key={k} className={`flex cursor-pointer gap-3 rounded-sm border p-4 ${kind === k ? "border-accent bg-card" : "border-border"}`}>
+                  <input type="radio" name="kind" checked={kind === k} onChange={() => setKind(k)} className="mt-1 h-5 w-5 shrink-0 accent-accent" />
+                  <span><span className="block font-semibold">{k === "tour" ? F.kindTour[l] : F.kindTailored[l]}</span><span className="mt-1 block text-sm text-muted-foreground">{k === "tour" ? F.kindTourP[l] : F.kindTailoredP[l]}</span></span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          {kind === "tailored" ? (
+            <>
+              <fieldset className="sm:col-span-2">
+                <legend className="mb-3 text-sm font-semibold">{F.places[l]}</legend>
+                <div className="flex flex-wrap gap-2">
+                  {DESTINATIONS.map((d) => (
+                    <label key={d.slug} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-sm border border-border px-3 has-[:checked]:border-accent has-[:checked]:bg-card">
+                      <input type="checkbox" name="destinations" value={d.slug} className="h-4 w-4 accent-accent" />{d.name[l]}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+              <Field id="interests" label={F.interests[l]} full><textarea id="f-interests" name="interests" rows={3} placeholder={F.interestsPh[l]} className={`${input} py-3`} /></Field>
+              <Field id="pace" label={F.pace[l]}><select id="f-pace" name="pace" defaultValue="" className={input}><option value="">—</option><option value="relaxed">{F.paceRelaxed[l]}</option><option value="balanced">{F.paceBalanced[l]}</option><option value="active">{F.paceActive[l]}</option></select></Field>
+              <Field id="accommodation" label={F.accommodation[l]}><select id="f-accommodation" name="accommodation" defaultValue="" className={input}><option value="">—</option><option value="luxury">{F.accLux[l]}</option><option value="boutique">{F.accBoutique[l]}</option><option value="family">{F.accFamily[l]}</option><option value="mixed">{F.accMixed[l]}</option></select></Field>
+            </>
+          ) : (
           <Field id="tour" label={F.tour[l]} req full><select id="f-tour" name="tour" defaultValue={tour && tours.some((x) => x.slug === tour) ? tour : "custom"} className={input}><option value="custom">{F.custom[l]}</option>{tours.map((x) => <option key={x.slug} value={x.slug}>{x.title[l]}</option>)}</select></Field>
+          )}
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
 
           <details className="sm:col-span-2 border-y border-border py-4">
             <summary className="min-h-11 cursor-pointer font-display text-xl text-primary">{F.optional[l]}</summary>
@@ -139,11 +225,12 @@ function Page() {
           </div>
 
           <div className="sm:col-span-2">
-            <button type="submit" className={`${btn.primary} w-full sm:w-auto`}>{F.submit[l]}</button>
+            <button type="submit" disabled={busy} className={`${btn.primary} w-full sm:w-auto disabled:opacity-60`}>{busy ? F.sending[l] : F.submit[l]}</button>
             <p className="mt-3 text-xs text-muted-foreground">{t("received", l)}</p>
-            {checked && <p role="status" className="mt-4 border-s-2 border-accent ps-3 text-sm">{F.checked[l]}</p>}
+            {failed && <p role="alert" className="mt-4 text-sm font-semibold text-destructive">{F.sendErr[l]}</p>}
           </div>
         </form>
+        )}
       </section>
     </>
   );

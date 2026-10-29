@@ -16,7 +16,7 @@ export const SITE = {
   whatsappDigits: null as string | null, // international digits only, e.g. "965XXXXXXXX"
   socials: [] as { label: string; url: string }[],
   businessRegistration: null as string | null,
-  inquiryBackendConnected: false,
+  inquiryBackendConnected: true,
 };
 
 /** Visa / entry information — must be human-reviewed; never auto-verified. */
