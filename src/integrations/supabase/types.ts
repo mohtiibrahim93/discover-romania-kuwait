@@ -14,6 +14,44 @@ export type Database = {
   }
   public: {
     Tables: {
+      inquiry_notes: {
+        Row: {
+          author_email: string | null
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          inquiry_id: string
+          kind: string
+        }
+        Insert: {
+          author_email?: string | null
+          author_id?: string
+          body: string
+          created_at?: string
+          id?: string
+          inquiry_id: string
+          kind?: string
+        }
+        Update: {
+          author_email?: string | null
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          inquiry_id?: string
+          kind?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inquiry_notes_inquiry_id_fkey"
+            columns: ["inquiry_id"]
+            isOneToOne: false
+            referencedRelation: "trip_inquiries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       trip_inquiries: {
         Row: {
           accommodation: string | null
@@ -107,15 +145,43 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      can_handle_leads: { Args: { _user_id: string }; Returns: boolean }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "owner" | "sales" | "editor"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -242,6 +308,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["owner", "sales", "editor"],
+    },
   },
 } as const
