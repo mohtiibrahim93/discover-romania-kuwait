@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Project rules
+- All public pages live under `src/routes/$locale.*` (en/ar/ro); every user-facing string is an `L` object `{en,ar,ro}` — never add a page or field missing a language.
+- Editable content (tours, destinations, styles, FAQ, brand/contact, visa info) lives in `src/content/*`; keep it as the single source until a CMS replaces it.
+- The inquiry form must never show a "submitted" state unless a real backend stored the record (`SITE.inquiryBackendConnected`).
