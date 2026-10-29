@@ -29,6 +29,13 @@
       "when": 1793306233658,
       "tag": "0003_seed_site",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793306244243,
+      "tag": "0004_seed_entry",
+      "breakpoints": true
     }
   ]
 }
