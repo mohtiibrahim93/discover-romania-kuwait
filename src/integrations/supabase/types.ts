@@ -14,7 +14,99 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      trip_inquiries: {
+        Row: {
+          accommodation: string | null
+          adults: number
+          budget: string | null
+          children: number
+          consent: boolean
+          created_at: string
+          destinations: string[]
+          dietary: string | null
+          duration: string | null
+          email: string
+          flight_assistance: boolean
+          guide_language: string | null
+          id: string
+          interests: string | null
+          name: string
+          nationality: string | null
+          notes: string | null
+          pace: string | null
+          phone: string
+          preferred_language: string
+          reference: string
+          request_type: string
+          residence: string
+          site_locale: string
+          status: string
+          tour_slug: string | null
+          travel_month: string
+          travel_style: string | null
+        }
+        Insert: {
+          accommodation?: string | null
+          adults: number
+          budget?: string | null
+          children?: number
+          consent: boolean
+          created_at?: string
+          destinations?: string[]
+          dietary?: string | null
+          duration?: string | null
+          email: string
+          flight_assistance?: boolean
+          guide_language?: string | null
+          id?: string
+          interests?: string | null
+          name: string
+          nationality?: string | null
+          notes?: string | null
+          pace?: string | null
+          phone: string
+          preferred_language: string
+          reference: string
+          request_type?: string
+          residence: string
+          site_locale: string
+          status?: string
+          tour_slug?: string | null
+          travel_month: string
+          travel_style?: string | null
+        }
+        Update: {
+          accommodation?: string | null
+          adults?: number
+          budget?: string | null
+          children?: number
+          consent?: boolean
+          created_at?: string
+          destinations?: string[]
+          dietary?: string | null
+          duration?: string | null
+          email?: string
+          flight_assistance?: boolean
+          guide_language?: string | null
+          id?: string
+          interests?: string | null
+          name?: string
+          nationality?: string | null
+          notes?: string | null
+          pace?: string | null
+          phone?: string
+          preferred_language?: string
+          reference?: string
+          request_type?: string
+          residence?: string
+          site_locale?: string
+          status?: string
+          tour_slug?: string | null
+          travel_month?: string
+          travel_style?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
