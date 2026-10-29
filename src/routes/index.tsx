@@ -1,24 +1,36 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { LOCALES, LOCALE_LABELS, LOCALE_STORAGE_KEY, isLocale, pickBrowserLocale } from "@/i18n/config";
+import { Wordmark } from "@/components/site/Wordmark";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Discover Romania Kuwait — Choose your language" },
+      { name: "description", content: "Personally planned journeys to Romania. English, العربية, Română." },
+      { property: "og:title", content: "Discover Romania Kuwait" },
+      { property: "og:description", content: "Personally planned journeys to Romania for travellers from Kuwait and the GCC." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: LocaleGate,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function LocaleGate() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    let stored: string | null = null;
+    try { stored = localStorage.getItem(LOCALE_STORAGE_KEY); } catch { /* ignore */ }
+    const loc = isLocale(stored) ? stored : pickBrowserLocale(navigator.languages ?? [navigator.language]);
+    navigate({ to: "/$locale", params: { locale: loc }, replace: true });
+  }, [navigate]);
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="flex min-h-screen flex-col items-center justify-center gap-8 bg-background px-6">
+      <Wordmark />
+      <nav className="flex gap-6" aria-label="Language">
+        {LOCALES.map((l) => <a key={l} href={`/${l}`} lang={l} className="min-h-11 text-lg text-primary underline-offset-4 hover:underline">{LOCALE_LABELS[l]}</a>)}
+      </nav>
+    </main>
   );
 }

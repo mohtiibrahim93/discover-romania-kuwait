@@ -10,33 +10,228 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
+import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
+import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
+import { Route as LocaleCookiesRouteImport } from './routes/$locale.cookies'
+import { Route as LocaleExperiencesRouteImport } from './routes/$locale.experiences'
+import { Route as LocaleFaqRouteImport } from './routes/$locale.faq'
+import { Route as LocalePlanYourTripRouteImport } from './routes/$locale.plan-your-trip'
+import { Route as LocalePrivacyRouteImport } from './routes/$locale.privacy'
+import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
+import { Route as LocaleTravelInformationRouteImport } from './routes/$locale.travel-information'
+import { Route as LocaleWhyRomaniaRouteImport } from './routes/$locale.why-romania'
+import { Route as LocaleDestinationsIndexRouteImport } from './routes/$locale.destinations.index'
+import { Route as LocaleDestinationsSlugRouteImport } from './routes/$locale.destinations.$slug'
+import { Route as LocaleToursIndexRouteImport } from './routes/$locale.tours.index'
+import { Route as LocaleToursSlugRouteImport } from './routes/$locale.tours.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocaleRoute = LocaleRouteImport.update({
+  id: '/$locale',
+  path: '/$locale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocaleIndexRoute = LocaleIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleAboutRoute = LocaleAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleContactRoute = LocaleContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleCookiesRoute = LocaleCookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleExperiencesRoute = LocaleExperiencesRouteImport.update({
+  id: '/experiences',
+  path: '/experiences',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleFaqRoute = LocaleFaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocalePlanYourTripRoute = LocalePlanYourTripRouteImport.update({
+  id: '/plan-your-trip',
+  path: '/plan-your-trip',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocalePrivacyRoute = LocalePrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleTermsRoute = LocaleTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleTravelInformationRoute = LocaleTravelInformationRouteImport.update({
+  id: '/travel-information',
+  path: '/travel-information',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleWhyRomaniaRoute = LocaleWhyRomaniaRouteImport.update({
+  id: '/why-romania',
+  path: '/why-romania',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleDestinationsIndexRoute = LocaleDestinationsIndexRouteImport.update({
+  id: '/destinations/',
+  path: '/destinations/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleDestinationsSlugRoute = LocaleDestinationsSlugRouteImport.update({
+  id: '/destinations/$slug',
+  path: '/destinations/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleToursIndexRoute = LocaleToursIndexRouteImport.update({
+  id: '/tours/',
+  path: '/tours/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleToursSlugRoute = LocaleToursSlugRouteImport.update({
+  id: '/tours/$slug',
+  path: '/tours/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/about': typeof LocaleAboutRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/cookies': typeof LocaleCookiesRoute
+  '/$locale/experiences': typeof LocaleExperiencesRoute
+  '/$locale/faq': typeof LocaleFaqRoute
+  '/$locale/plan-your-trip': typeof LocalePlanYourTripRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/travel-information': typeof LocaleTravelInformationRoute
+  '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
+  '/$locale/': typeof LocaleIndexRoute
+  '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
+  '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/$locale/destinations/': typeof LocaleDestinationsIndexRoute
+  '/$locale/tours/': typeof LocaleToursIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$locale/about': typeof LocaleAboutRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/cookies': typeof LocaleCookiesRoute
+  '/$locale/experiences': typeof LocaleExperiencesRoute
+  '/$locale/faq': typeof LocaleFaqRoute
+  '/$locale/plan-your-trip': typeof LocalePlanYourTripRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/travel-information': typeof LocaleTravelInformationRoute
+  '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
+  '/$locale': typeof LocaleIndexRoute
+  '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
+  '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/$locale/destinations': typeof LocaleDestinationsIndexRoute
+  '/$locale/tours': typeof LocaleToursIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/about': typeof LocaleAboutRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/cookies': typeof LocaleCookiesRoute
+  '/$locale/experiences': typeof LocaleExperiencesRoute
+  '/$locale/faq': typeof LocaleFaqRoute
+  '/$locale/plan-your-trip': typeof LocalePlanYourTripRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/travel-information': typeof LocaleTravelInformationRoute
+  '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
+  '/$locale/': typeof LocaleIndexRoute
+  '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
+  '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/$locale/destinations/': typeof LocaleDestinationsIndexRoute
+  '/$locale/tours/': typeof LocaleToursIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/$locale'
+    | '/$locale/about'
+    | '/$locale/contact'
+    | '/$locale/cookies'
+    | '/$locale/experiences'
+    | '/$locale/faq'
+    | '/$locale/plan-your-trip'
+    | '/$locale/privacy'
+    | '/$locale/terms'
+    | '/$locale/travel-information'
+    | '/$locale/why-romania'
+    | '/$locale/'
+    | '/$locale/destinations/$slug'
+    | '/$locale/tours/$slug'
+    | '/$locale/destinations/'
+    | '/$locale/tours/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/$locale/about'
+    | '/$locale/contact'
+    | '/$locale/cookies'
+    | '/$locale/experiences'
+    | '/$locale/faq'
+    | '/$locale/plan-your-trip'
+    | '/$locale/privacy'
+    | '/$locale/terms'
+    | '/$locale/travel-information'
+    | '/$locale/why-romania'
+    | '/$locale'
+    | '/$locale/destinations/$slug'
+    | '/$locale/tours/$slug'
+    | '/$locale/destinations'
+    | '/$locale/tours'
+  id:
+    | '__root__'
+    | '/'
+    | '/$locale'
+    | '/$locale/about'
+    | '/$locale/contact'
+    | '/$locale/cookies'
+    | '/$locale/experiences'
+    | '/$locale/faq'
+    | '/$locale/plan-your-trip'
+    | '/$locale/privacy'
+    | '/$locale/terms'
+    | '/$locale/travel-information'
+    | '/$locale/why-romania'
+    | '/$locale/'
+    | '/$locale/destinations/$slug'
+    | '/$locale/tours/$slug'
+    | '/$locale/destinations/'
+    | '/$locale/tours/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LocaleRoute: typeof LocaleRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +243,163 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$locale': {
+      id: '/$locale'
+      path: '/$locale'
+      fullPath: '/$locale'
+      preLoaderRoute: typeof LocaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$locale/': {
+      id: '/$locale/'
+      path: '/'
+      fullPath: '/$locale/'
+      preLoaderRoute: typeof LocaleIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/about': {
+      id: '/$locale/about'
+      path: '/about'
+      fullPath: '/$locale/about'
+      preLoaderRoute: typeof LocaleAboutRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/contact': {
+      id: '/$locale/contact'
+      path: '/contact'
+      fullPath: '/$locale/contact'
+      preLoaderRoute: typeof LocaleContactRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/cookies': {
+      id: '/$locale/cookies'
+      path: '/cookies'
+      fullPath: '/$locale/cookies'
+      preLoaderRoute: typeof LocaleCookiesRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/experiences': {
+      id: '/$locale/experiences'
+      path: '/experiences'
+      fullPath: '/$locale/experiences'
+      preLoaderRoute: typeof LocaleExperiencesRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/faq': {
+      id: '/$locale/faq'
+      path: '/faq'
+      fullPath: '/$locale/faq'
+      preLoaderRoute: typeof LocaleFaqRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/plan-your-trip': {
+      id: '/$locale/plan-your-trip'
+      path: '/plan-your-trip'
+      fullPath: '/$locale/plan-your-trip'
+      preLoaderRoute: typeof LocalePlanYourTripRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/privacy': {
+      id: '/$locale/privacy'
+      path: '/privacy'
+      fullPath: '/$locale/privacy'
+      preLoaderRoute: typeof LocalePrivacyRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/terms': {
+      id: '/$locale/terms'
+      path: '/terms'
+      fullPath: '/$locale/terms'
+      preLoaderRoute: typeof LocaleTermsRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/travel-information': {
+      id: '/$locale/travel-information'
+      path: '/travel-information'
+      fullPath: '/$locale/travel-information'
+      preLoaderRoute: typeof LocaleTravelInformationRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/why-romania': {
+      id: '/$locale/why-romania'
+      path: '/why-romania'
+      fullPath: '/$locale/why-romania'
+      preLoaderRoute: typeof LocaleWhyRomaniaRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/destinations/': {
+      id: '/$locale/destinations/'
+      path: '/destinations'
+      fullPath: '/$locale/destinations/'
+      preLoaderRoute: typeof LocaleDestinationsIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/destinations/$slug': {
+      id: '/$locale/destinations/$slug'
+      path: '/destinations/$slug'
+      fullPath: '/$locale/destinations/$slug'
+      preLoaderRoute: typeof LocaleDestinationsSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/tours/': {
+      id: '/$locale/tours/'
+      path: '/tours'
+      fullPath: '/$locale/tours/'
+      preLoaderRoute: typeof LocaleToursIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/tours/$slug': {
+      id: '/$locale/tours/$slug'
+      path: '/tours/$slug'
+      fullPath: '/$locale/tours/$slug'
+      preLoaderRoute: typeof LocaleToursSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
   }
 }
 
+interface LocaleRouteChildren {
+  LocaleAboutRoute: typeof LocaleAboutRoute
+  LocaleContactRoute: typeof LocaleContactRoute
+  LocaleCookiesRoute: typeof LocaleCookiesRoute
+  LocaleExperiencesRoute: typeof LocaleExperiencesRoute
+  LocaleFaqRoute: typeof LocaleFaqRoute
+  LocalePlanYourTripRoute: typeof LocalePlanYourTripRoute
+  LocalePrivacyRoute: typeof LocalePrivacyRoute
+  LocaleTermsRoute: typeof LocaleTermsRoute
+  LocaleTravelInformationRoute: typeof LocaleTravelInformationRoute
+  LocaleWhyRomaniaRoute: typeof LocaleWhyRomaniaRoute
+  LocaleIndexRoute: typeof LocaleIndexRoute
+  LocaleDestinationsSlugRoute: typeof LocaleDestinationsSlugRoute
+  LocaleToursSlugRoute: typeof LocaleToursSlugRoute
+  LocaleDestinationsIndexRoute: typeof LocaleDestinationsIndexRoute
+  LocaleToursIndexRoute: typeof LocaleToursIndexRoute
+}
+
+const LocaleRouteChildren: LocaleRouteChildren = {
+  LocaleAboutRoute: LocaleAboutRoute,
+  LocaleContactRoute: LocaleContactRoute,
+  LocaleCookiesRoute: LocaleCookiesRoute,
+  LocaleExperiencesRoute: LocaleExperiencesRoute,
+  LocaleFaqRoute: LocaleFaqRoute,
+  LocalePlanYourTripRoute: LocalePlanYourTripRoute,
+  LocalePrivacyRoute: LocalePrivacyRoute,
+  LocaleTermsRoute: LocaleTermsRoute,
+  LocaleTravelInformationRoute: LocaleTravelInformationRoute,
+  LocaleWhyRomaniaRoute: LocaleWhyRomaniaRoute,
+  LocaleIndexRoute: LocaleIndexRoute,
+  LocaleDestinationsSlugRoute: LocaleDestinationsSlugRoute,
+  LocaleToursSlugRoute: LocaleToursSlugRoute,
+  LocaleDestinationsIndexRoute: LocaleDestinationsIndexRoute,
+  LocaleToursIndexRoute: LocaleToursIndexRoute,
+}
+
+const LocaleRouteWithChildren =
+  LocaleRoute._addFileChildren(LocaleRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LocaleRoute: LocaleRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
