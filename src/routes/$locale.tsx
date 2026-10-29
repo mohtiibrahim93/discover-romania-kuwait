@@ -17,6 +17,10 @@ export const Route = createFileRoute("/$locale")({
 
 function LocaleLayout() {
   const l = useLocale();
+  const { queryClient } = Route.useRouteContext();
+  // The loader already fetched saved content for SSR; seed the client cache with
+  // the same snapshot so the first client render matches the server HTML.
+  queryClient.setQueryData(contentQueryOptions, Route.useLoaderData());
   const { site } = useSiteContent();
   return (
     <>
