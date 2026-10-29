@@ -6,8 +6,12 @@ import { seo } from "@/lib/seo";
 import { useSiteContent } from "@/lib/site-content";
 import { publishedTours } from "@/content/tours";
 import { Img, PageHero } from "@/components/site/ui";
+import { ACTIVITIES, ACTIVITY_CATEGORIES } from "@/content/activities";
+import { DESTINATIONS } from "@/content/destinations";
 
-const intro = { en: "Six ways to experience Romania. Choose one to see matching journeys.", ar: "ست طرق لاكتشاف رومانيا. اختر واحدة لعرض الرحلات المناسبة.", ro: "Șase moduri de a descoperi România. Alege unul pentru a vedea circuitele potrivite." };
+const intro = { en: "Travel styles and hands-on activities — from a day as a shepherd to rafting, horse riding and village life.", ar: "أنماط سفر وأنشطة عملية — من يوم كراعٍ إلى التجديف وركوب الخيل والحياة القروية.", ro: "Stiluri de călătorie și activități practice — de la o zi de cioban la rafting, călărie și viața la sat." };
+const actIntro = { en: "Add any of these to a journey. Availability, minimum ages and weather are confirmed in your proposal.", ar: "أضف أيًا منها إلى رحلتك. يُؤكد التوفر والحد الأدنى للأعمار والطقس في العرض.", ro: "Adaugă oricare dintre ele la o călătorie. Disponibilitatea, vârstele minime și vremea se confirmă în propunere." };
+const familyLabel = { en: "Family-friendly", ar: "مناسب للعائلة", ro: "Potrivit pentru familii" };
 
 export const Route = createFileRoute("/$locale/experiences")({
   head: ({ params }) => { const l = asLocale(params.locale); return seo(l, t("styles", l), intro[l], "/experiences"); },
@@ -35,6 +39,27 @@ function Page() {
             </Link>
           );
         })}
+      </section>
+      <section className="border-t border-border bg-card/40">
+        <div className="container-edit py-16 md:py-24">
+          <h2 className="text-3xl text-primary md:text-4xl">{t("activities", l)}</h2>
+          <p className="mt-3 max-w-2xl text-muted-foreground">{actIntro[l]}</p>
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {ACTIVITIES.map((a) => (
+              <article key={a.id} className="flex flex-col bg-background">
+                <div className="aspect-[3/2] overflow-hidden"><Img k={a.media} /></div>
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-accent">{ACTIVITY_CATEGORIES[a.category][l]}</p>
+                  <h3 className="mt-2 text-xl text-primary">{a.title[l]}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{a.intro[l]}</p>
+                  <p className="mt-4 text-xs text-foreground">{a.regions.map((r) => DESTINATIONS.find((d) => d.id === r)?.name[l]).filter(Boolean).join(" · ")}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{a.season[l]}{a.family ? ` · ${familyLabel[l]}` : ""}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <Link to="/$locale/plan-your-trip" params={{ locale: l }} className="mt-10 inline-flex items-center gap-2 font-semibold text-accent">{t("planTrip", l)}<ArrowRight className="flip-rtl h-4 w-4" /></Link>
+        </div>
       </section>
     </>
   );
