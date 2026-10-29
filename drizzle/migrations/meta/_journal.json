@@ -57,6 +57,13 @@
       "when": 1793306274386,
       "tag": "0007_seed_faq_more",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793306330093,
+      "tag": "0008_fix_arabic_diacritics",
+      "breakpoints": true
     }
   ]
 }
