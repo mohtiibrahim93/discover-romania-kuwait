@@ -12,6 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
+import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
+import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
+import { Route as LocaleCookiesRouteImport } from './routes/$locale.cookies'
+import { Route as LocaleExperiencesRouteImport } from './routes/$locale.experiences'
+import { Route as LocaleFaqRouteImport } from './routes/$locale.faq'
+import { Route as LocalePrivacyRouteImport } from './routes/$locale.privacy'
+import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
+import { Route as LocaleTravelInformationRouteImport } from './routes/$locale.travel-information'
+import { Route as LocaleWhyRomaniaRouteImport } from './routes/$locale.why-romania'
 import { Route as LocaleDestinationsIndexRouteImport } from './routes/$locale.destinations.index'
 import { Route as LocaleDestinationsSlugRouteImport } from './routes/$locale.destinations.$slug'
 import { Route as LocaleToursIndexRouteImport } from './routes/$locale.tours.index'
@@ -30,6 +39,51 @@ const LocaleRoute = LocaleRouteImport.update({
 const LocaleIndexRoute = LocaleIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleAboutRoute = LocaleAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleContactRoute = LocaleContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleCookiesRoute = LocaleCookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleExperiencesRoute = LocaleExperiencesRouteImport.update({
+  id: '/experiences',
+  path: '/experiences',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleFaqRoute = LocaleFaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocalePrivacyRoute = LocalePrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleTermsRoute = LocaleTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleTravelInformationRoute = LocaleTravelInformationRouteImport.update({
+  id: '/travel-information',
+  path: '/travel-information',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleWhyRomaniaRoute = LocaleWhyRomaniaRouteImport.update({
+  id: '/why-romania',
+  path: '/why-romania',
   getParentRoute: () => LocaleRoute,
 } as any)
 const LocaleDestinationsIndexRoute = LocaleDestinationsIndexRouteImport.update({
@@ -56,6 +110,15 @@ const LocaleToursSlugRoute = LocaleToursSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/about': typeof LocaleAboutRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/cookies': typeof LocaleCookiesRoute
+  '/$locale/experiences': typeof LocaleExperiencesRoute
+  '/$locale/faq': typeof LocaleFaqRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/travel-information': typeof LocaleTravelInformationRoute
+  '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
@@ -64,6 +127,15 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$locale/about': typeof LocaleAboutRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/cookies': typeof LocaleCookiesRoute
+  '/$locale/experiences': typeof LocaleExperiencesRoute
+  '/$locale/faq': typeof LocaleFaqRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/travel-information': typeof LocaleTravelInformationRoute
+  '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
@@ -74,6 +146,15 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/about': typeof LocaleAboutRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/cookies': typeof LocaleCookiesRoute
+  '/$locale/experiences': typeof LocaleExperiencesRoute
+  '/$locale/faq': typeof LocaleFaqRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/terms': typeof LocaleTermsRoute
+  '/$locale/travel-information': typeof LocaleTravelInformationRoute
+  '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
@@ -85,6 +166,15 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/$locale/about'
+    | '/$locale/contact'
+    | '/$locale/cookies'
+    | '/$locale/experiences'
+    | '/$locale/faq'
+    | '/$locale/privacy'
+    | '/$locale/terms'
+    | '/$locale/travel-information'
+    | '/$locale/why-romania'
     | '/$locale/'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
@@ -93,6 +183,15 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$locale/about'
+    | '/$locale/contact'
+    | '/$locale/cookies'
+    | '/$locale/experiences'
+    | '/$locale/faq'
+    | '/$locale/privacy'
+    | '/$locale/terms'
+    | '/$locale/travel-information'
+    | '/$locale/why-romania'
     | '/$locale'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
@@ -102,6 +201,15 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$locale'
+    | '/$locale/about'
+    | '/$locale/contact'
+    | '/$locale/cookies'
+    | '/$locale/experiences'
+    | '/$locale/faq'
+    | '/$locale/privacy'
+    | '/$locale/terms'
+    | '/$locale/travel-information'
+    | '/$locale/why-romania'
     | '/$locale/'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
@@ -137,6 +245,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleIndexRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/about': {
+      id: '/$locale/about'
+      path: '/about'
+      fullPath: '/$locale/about'
+      preLoaderRoute: typeof LocaleAboutRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/contact': {
+      id: '/$locale/contact'
+      path: '/contact'
+      fullPath: '/$locale/contact'
+      preLoaderRoute: typeof LocaleContactRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/cookies': {
+      id: '/$locale/cookies'
+      path: '/cookies'
+      fullPath: '/$locale/cookies'
+      preLoaderRoute: typeof LocaleCookiesRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/experiences': {
+      id: '/$locale/experiences'
+      path: '/experiences'
+      fullPath: '/$locale/experiences'
+      preLoaderRoute: typeof LocaleExperiencesRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/faq': {
+      id: '/$locale/faq'
+      path: '/faq'
+      fullPath: '/$locale/faq'
+      preLoaderRoute: typeof LocaleFaqRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/privacy': {
+      id: '/$locale/privacy'
+      path: '/privacy'
+      fullPath: '/$locale/privacy'
+      preLoaderRoute: typeof LocalePrivacyRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/terms': {
+      id: '/$locale/terms'
+      path: '/terms'
+      fullPath: '/$locale/terms'
+      preLoaderRoute: typeof LocaleTermsRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/travel-information': {
+      id: '/$locale/travel-information'
+      path: '/travel-information'
+      fullPath: '/$locale/travel-information'
+      preLoaderRoute: typeof LocaleTravelInformationRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/why-romania': {
+      id: '/$locale/why-romania'
+      path: '/why-romania'
+      fullPath: '/$locale/why-romania'
+      preLoaderRoute: typeof LocaleWhyRomaniaRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/destinations/': {
       id: '/$locale/destinations/'
       path: '/destinations'
@@ -169,6 +340,15 @@ declare module '@tanstack/react-router' {
 }
 
 interface LocaleRouteChildren {
+  LocaleAboutRoute: typeof LocaleAboutRoute
+  LocaleContactRoute: typeof LocaleContactRoute
+  LocaleCookiesRoute: typeof LocaleCookiesRoute
+  LocaleExperiencesRoute: typeof LocaleExperiencesRoute
+  LocaleFaqRoute: typeof LocaleFaqRoute
+  LocalePrivacyRoute: typeof LocalePrivacyRoute
+  LocaleTermsRoute: typeof LocaleTermsRoute
+  LocaleTravelInformationRoute: typeof LocaleTravelInformationRoute
+  LocaleWhyRomaniaRoute: typeof LocaleWhyRomaniaRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
   LocaleDestinationsSlugRoute: typeof LocaleDestinationsSlugRoute
   LocaleToursSlugRoute: typeof LocaleToursSlugRoute
@@ -177,6 +357,15 @@ interface LocaleRouteChildren {
 }
 
 const LocaleRouteChildren: LocaleRouteChildren = {
+  LocaleAboutRoute: LocaleAboutRoute,
+  LocaleContactRoute: LocaleContactRoute,
+  LocaleCookiesRoute: LocaleCookiesRoute,
+  LocaleExperiencesRoute: LocaleExperiencesRoute,
+  LocaleFaqRoute: LocaleFaqRoute,
+  LocalePrivacyRoute: LocalePrivacyRoute,
+  LocaleTermsRoute: LocaleTermsRoute,
+  LocaleTravelInformationRoute: LocaleTravelInformationRoute,
+  LocaleWhyRomaniaRoute: LocaleWhyRomaniaRoute,
   LocaleIndexRoute: LocaleIndexRoute,
   LocaleDestinationsSlugRoute: LocaleDestinationsSlugRoute,
   LocaleToursSlugRoute: LocaleToursSlugRoute,
