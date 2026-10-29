@@ -52,7 +52,7 @@ function Page() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-accent">{ACTIVITY_CATEGORIES[a.category][l]}</p>
                   <h3 className="mt-2 text-xl text-primary">{a.title[l]}</h3>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{a.intro[l]}</p>
-                  <p className="mt-4 text-xs text-foreground">{a.regions.map((r) => DESTINATIONS.find((d) => d.id === r)?.name[l]).filter(Boolean).join(" · ")}</p>
+                  <p className="mt-4 text-xs text-foreground">{a.regions.map((r) => DESTINATIONS.find((d) => d.slug === r)?.name[l]).filter(Boolean).join(" · ")}</p>
                   <p className="mt-1 text-xs text-muted-foreground">{a.season[l]}{a.family ? ` · ${familyLabel[l]}` : ""}</p>
                 </div>
               </article>
