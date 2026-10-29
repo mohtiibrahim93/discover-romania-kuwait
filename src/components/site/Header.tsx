@@ -18,7 +18,7 @@ const NAV: { key: UIKey; to: string; search?: Record<string, string> }[] = [
   { key: "contact", to: "/$locale/contact" },
 ];
 
-const LOCALE_SHORT: Record<(typeof LOCALES)[number], string> = { en: "EN", ar: "ع", ro: "RO" };
+const LOCALE_SHORT: Record<(typeof LOCALES)[number], string> = { en: "EN", ar: "AR", ro: "RO" };
 
 export function LocaleSwitch({ light, compact, className }: { light?: boolean; compact?: boolean; className?: string }) {
   const l = useLocale();
