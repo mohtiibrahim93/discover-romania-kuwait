@@ -1,10 +1,13 @@
-import { Link, Outlet, createFileRoute, notFound } from "@tanstack/react-router";
+import { Link, Outlet, createFileRoute, notFound, useLocation } from "@tanstack/react-router";
 import { isLocale, useLocale } from "@/i18n/config";
 import { t } from "@/i18n/ui";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { contentQueryOptions, useSiteContent } from "@/lib/site-content";
+import { whatsappLink, WHATSAPP_LABEL } from "@/lib/whatsapp";
+import { SITE_ORIGIN } from "@/lib/seo";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/$locale")({
   beforeLoad: ({ params }) => {
@@ -21,6 +24,7 @@ export const Route = createFileRoute("/$locale")({
 
 function LocaleLayout() {
   const l = useLocale();
+  const pathname = useLocation({ select: (location) => location.pathname });
   const { queryClient } = Route.useRouteContext();
   // The loader already fetched saved content for SSR; seed the client cache with
   // the same snapshot so the first client render matches the server HTML.
@@ -33,11 +37,13 @@ function LocaleLayout() {
       <main id="main"><Outlet /></main>
       <Footer />
       {site.whatsappDigits && (
-        <a href={`https://wa.me/${site.whatsappDigits}`} target="_blank" rel="noopener" aria-label="WhatsApp"
+        <Button asChild variant="ghost"
           className="fixed bottom-24 end-4 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full bg-forest text-on-dark shadow-lg lg:bottom-6"
           style={{ marginBottom: "env(safe-area-inset-bottom)" }}>
-          <WhatsAppIcon className="h-7 w-7" />
-        </a>
+          <a href={whatsappLink(site.whatsappDigits, l, { pageUrl: `${SITE_ORIGIN}${pathname}` })} target="_blank" rel="noopener noreferrer" aria-label={WHATSAPP_LABEL[l]} title={WHATSAPP_LABEL[l]}>
+            <WhatsAppIcon className="!h-7 !w-7" />
+          </a>
+        </Button>
       )}
     </>
   );

@@ -10,6 +10,9 @@ import { PageHero, btn } from "@/components/site/ui";
 import { useServerFn } from "@tanstack/react-start";
 import { submitInquiry } from "@/lib/inquiry.functions";
 import { DESTINATIONS } from "@/content/destinations";
+import { Button } from "@/components/ui/button";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { whatsappLink, WHATSAPP_LABEL } from "@/lib/whatsapp";
 
 const F = {
   intro: { en: "Share a few details and we will prepare a personalised proposed itinerary. This is a quote inquiry — not a booking.", ar: "شاركنا بعض التفاصيل وسنعدّ لك برنامجًا مقترحًا مخصصًا. هذا طلب عرض سعر وليس حجزًا.", ro: "Spune-ne câteva detalii și îți pregătim un itinerariu propus personalizat. Aceasta este o cerere de ofertă — nu o rezervare." },
@@ -33,6 +36,8 @@ const F = {
   guideLang: { en: "Requested guide language", ar: "لغة المرشد المطلوبة", ro: "Limba ghidului dorită" },
   flights: { en: "Flight assistance might be helpful", ar: "قد تكون المساعدة في الطيران مفيدة", ro: "Ajutorul cu zborurile ar fi util" },
   notes: { en: "Anything else we should know?", ar: "هل هناك ما يجب أن نعرفه أيضًا؟", ro: "Mai este ceva ce ar trebui să știm?" },
+  notesHint: { en: "Children’s ages, prayer breaks, room arrangements or rest days. Please do not include passport numbers, payment details or medical information.", ar: "أعمار الأطفال، فترات الصلاة، ترتيبات الغرف أو أيام الراحة. يُرجى عدم إدراج أرقام جوازات السفر أو بيانات الدفع أو المعلومات الطبية.", ro: "Vârstele copiilor, pauze pentru rugăciune, configurația camerelor sau zile de odihnă. Nu include numere de pașaport, date de plată ori informații medicale." },
+  requestsHint: { en: "Dining, guide-language and accommodation requests depend on availability and must be confirmed in your written proposal.", ar: "تعتمد طلبات الطعام ولغة المرشد والإقامة على التوفر، ويجب تأكيدها في المقترح المكتوب.", ro: "Cerințele de masă, limba ghidului și cazarea depind de disponibilitate și trebuie confirmate în propunerea scrisă." },
   consent: { en: "I agree to be contacted about this inquiry and to the processing of my details as described in the", ar: "أوافق على التواصل معي بخصوص هذا الاستفسار وعلى معالجة بياناتي كما هو موضح في", ro: "Sunt de acord să fiu contactat(ă) privind această solicitare și cu prelucrarea datelor mele conform" },
   submit: { en: "Send inquiry", ar: "إرسال الاستفسار", ro: "Trimite solicitarea" },
   notConnected: { en: "Preview mode: the inquiry system is not connected yet, so this form cannot send. Your details have not been submitted.", ar: "وضع المعاينة: نظام الاستفسارات غير متصل بعد، لذلك لا يمكن إرسال هذا النموذج. لم يتم إرسال بياناتك.", ro: "Mod previzualizare: sistemul de solicitări nu este încă conectat, deci formularul nu poate trimite. Datele tale nu au fost transmise." },
@@ -157,7 +162,10 @@ function Page() {
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">{F.doneP[l]}</p>
             <p className="mt-6 text-sm">{F.ref[l]}</p>
             <p className="ltr-isolate mt-1 font-display text-2xl tracking-wider text-accent" dir="ltr">{done}</p>
-            <button type="button" onClick={() => setDone(null)} className={`${btn.outline} mt-8`}>{F.another[l]}</button>
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              {site.whatsappDigits && <Button asChild className={`${btn.primary} h-auto whitespace-normal`}><a href={whatsappLink(site.whatsappDigits, l, { reference: done })} target="_blank" rel="noopener noreferrer"><WhatsAppIcon />{WHATSAPP_LABEL[l]}</a></Button>}
+              <Button type="button" variant="outline" onClick={() => setDone(null)} className={`${btn.outline} h-auto whitespace-normal`}>{F.another[l]}</Button>
+            </div>
           </div>
         ) : (
         <form noValidate onSubmit={onSubmit} className="grid gap-6 sm:grid-cols-2">
@@ -212,7 +220,8 @@ function Page() {
               <Field id="dietary" label={F.dietary[l]}><input id="f-dietary" name="dietary" className={input} /></Field>
               <Field id="guideLang" label={F.guideLang[l]}><input id="f-guideLang" name="guideLang" className={input} /></Field>
               <label className="flex min-h-11 items-center gap-3 sm:col-span-2"><input type="checkbox" name="flights" className="h-5 w-5 accent-accent" />{F.flights[l]}</label>
-              <Field id="notes" label={F.notes[l]} full><textarea id="f-notes" name="notes" rows={4} className={`${input} py-3`} /></Field>
+              <Field id="notes" label={F.notes[l]} hint={F.notesHint[l]} full><textarea id="f-notes" name="notes" rows={4} maxLength={2000} className={`${input} py-3`} /></Field>
+              <p className="text-sm leading-relaxed text-muted-foreground sm:col-span-2">{F.requestsHint[l]}</p>
             </div>
           </details>
 

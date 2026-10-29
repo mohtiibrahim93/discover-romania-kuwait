@@ -11,7 +11,7 @@ import { TourCard } from "@/components/site/TourCard";
 
 const C = {
   title: { en: "Discover Romania, Your Way.", ar: "اكتشف رومانيا على طريقتك", ro: "Descoperă România în felul tău." },
-  sub: { en: "From enchanting castles and mountain escapes to memorable family journeys, discover a different side of Europe with travel experiences shaped around you.", ar: "من القلاع الساحرة والجبال الخلابة إلى الرحلات العائلية المميزة، اكتشف وجهًا مختلفًا من أوروبا مع تجارب سفر تُصمَّم وفق اهتماماتك.", ro: "De la castele fascinante și refugii montane la vacanțe de familie memorabile, descoperă România prin experiențe create în jurul preferințelor tale." },
+  sub: { en: "Romanian mountain escapes, castles and relaxed family journeys for travellers from Kuwait. Explore a private-trip idea or request an itinerary shaped around your dates, family and interests.", ar: "رحلات إلى جبال رومانيا وقلاعها وبرامج عائلية هادئة للمسافرين من الكويت. استكشف فكرة لرحلة خاصة أو اطلب برنامجًا يناسب مواعيدك وعائلتك واهتماماتك.", ro: "Refugii montane, castele și călătorii relaxate de familie în România, pentru călătorii din Kuweit. Explorează o idee de circuit privat sau solicită un itinerariu adaptat datelor, familiei și intereselor tale." },
   cue: { en: "Romania · Europe", ar: "رومانيا · أوروبا", ro: "România · Europa" },
   diffT: { en: "A Different Side of Europe", ar: "وجه مختلف من أوروبا", ro: "O altă față a Europei" },
   diffP: { en: "Cool mountain mornings, castles above forested valleys, old towns made for slow evenings and countryside that still keeps its rhythms. Romania offers space, comfort and discovery — ideal for families and couples who want something beyond the familiar capitals.", ar: "صباحات جبلية منعشة، وقلاع تطل على وديان مكسوة بالغابات، وبلدات قديمة تليق بالأمسيات الهادئة، وريف ما زال يحتفظ بإيقاعه. تقدم رومانيا المساحة والراحة والاكتشاف، وهي مثالية للعائلات والأزواج الباحثين عن تجربة تتجاوز العواصم المألوفة.", ro: "Dimineți răcoroase la munte, castele deasupra văilor împădurite, orașe vechi făcute pentru seri lente și sate care își păstrează ritmul. România oferă spațiu, confort și descoperire — ideală pentru familii și cupluri care caută mai mult decât capitalele cunoscute." },
@@ -21,7 +21,7 @@ const C = {
   thoughtT: { en: "Travel, Thoughtfully Planned", ar: "سفر يُخطَّط له بعناية", ro: "Călătorii planificate cu grijă" },
   thought: [
     { en: "Pacing you choose", ar: "إيقاع تختاره أنت", ro: "Ritmul pe care îl alegi" },
-    { en: "Destination knowledge, subject to partner confirmation", ar: "معرفة بالوجهة، تخضع لتأكيد الشركاء", ro: "Cunoașterea destinației, sub rezerva confirmării partenerilor" },
+    { en: "Routes shaped around your interests", ar: "مسارات تناسب اهتماماتك", ro: "Trasee adaptate intereselor tale" },
     { en: "Attentive, personal consultation", ar: "استشارة شخصية واهتمام بالتفاصيل", ro: "Consultanță atentă, personală" },
     { en: "Flexible options", ar: "خيارات مرنة", ro: "Opțiuni flexibile" },
     { en: "A transparent quotation process", ar: "عملية تسعير شفافة", ro: "Un proces de ofertare transparent" },
