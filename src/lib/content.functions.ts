@@ -3,7 +3,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { Database } from "@/integrations/supabase/types";
 import { CONTENT_KEYS, validateContent } from "@/lib/content-schema";
 
-type ContentJson = Database["public"]["Tables"]["content_collections"]["Insert"]["data"];
+type ContentJson = NonNullable<Database["public"]["Tables"]["content_collections"]["Insert"]["data"]>;
 
 /**
  * Saving editorial content. Restricted to owner/editor roles in three places:
