@@ -13,7 +13,7 @@ const L = z.object({
 
 const mediaKey = z.enum(["mountains", "oldTown", "countryside", "delta"]);
 const link = z.object({ label: z.string().trim().min(1), url: z.string().url() });
-const blankToNull = (v: string) => (v.trim() === "" ? null : v.trim());
+const blankToNull = (v: unknown) => (typeof v === "string" ? (v.trim() === "" ? null : v.trim()) : v);
 
 export const contentSchemas = {
   faq: z.array(z.object({ q: L, a: L })),

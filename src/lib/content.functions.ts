@@ -1,6 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import type { Database } from "@/integrations/supabase/types";
 import { CONTENT_KEYS, validateContent } from "@/lib/content-schema";
+
+type ContentJson = Database["public"]["Tables"]["content_collections"]["Insert"]["data"];
 
 /**
  * Saving editorial content. Restricted to owner/editor roles in three places:
@@ -22,7 +25,7 @@ export const saveContentCollection = createServerFn({ method: "POST" })
     const { error } = await context.supabase
       .from("content_collections")
       .upsert(
-        { key: data.key, data: checked.data as object, updated_by: context.userId, updated_at: new Date().toISOString() },
+        { key: data.key, data: checked.data as ContentJson, updated_by: context.userId, updated_at: new Date().toISOString() },
         { onConflict: "key" },
       );
     if (error) {

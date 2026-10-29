@@ -9,6 +9,9 @@ export type Faq = typeof FAQ;
 export type SiteSettings = typeof SITE;
 export type EntryInfo = typeof ENTRY_INFO;
 
+/** Saved editorial rows; anything absent falls back to the code defaults. */
+export type Collections = { styles?: unknown; faq?: unknown; site?: unknown; entry?: unknown };
+
 /**
  * Editorial content comes from the database when a row exists and falls back to
  * the code defaults otherwise, so the site never renders empty while a section
@@ -16,7 +19,7 @@ export type EntryInfo = typeof ENTRY_INFO;
  */
 export const contentQueryOptions = queryOptions({
   queryKey: ["content-collections"],
-  queryFn: async () => {
+  queryFn: async (): Promise<Collections> => {
     const { data, error } = await supabase.from("content_collections").select("key, data");
     if (error) {
       // Editorial content must never blank a public page: fall back to code defaults.
@@ -25,7 +28,7 @@ export const contentQueryOptions = queryOptions({
     }
     const out: Record<string, unknown> = {};
     for (const row of data ?? []) out[row.key] = row.data;
-    return out;
+    return out as Collections;
   },
   staleTime: 60_000,
 });
