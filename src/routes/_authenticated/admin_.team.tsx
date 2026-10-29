@@ -23,7 +23,7 @@ export const Route = createFileRoute("/_authenticated/admin_/team")({
 const ROLES = [
   ["owner", "Owner", "Everything, including team and export"],
   ["sales", "Sales", "View and work on trip requests"],
-  ["editor", "Editor", "Content editing (coming soon)"],
+  ["editor", "Editor", "Content editing only"],
 ] as const;
 
 function TeamPage() {
