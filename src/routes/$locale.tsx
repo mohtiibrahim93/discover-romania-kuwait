@@ -3,7 +3,7 @@ import { isLocale, useLocale } from "@/i18n/config";
 import { t } from "@/i18n/ui";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { MessageCircle } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { SITE } from "@/content/site";
 
 export const Route = createFileRoute("/$locale")({
@@ -26,7 +26,7 @@ function LocaleLayout() {
         <a href={`https://wa.me/${SITE.whatsappDigits}`} target="_blank" rel="noopener" aria-label="WhatsApp"
           className="fixed bottom-24 end-4 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full bg-forest text-on-dark shadow-lg lg:bottom-6"
           style={{ marginBottom: "env(safe-area-inset-bottom)" }}>
-          <MessageCircle className="h-6 w-6" />
+          <WhatsAppIcon className="h-7 w-7" />
         </a>
       )}
     </>
