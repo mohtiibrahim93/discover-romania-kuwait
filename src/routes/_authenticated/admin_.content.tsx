@@ -190,7 +190,7 @@ function ContentPage() {
       </div>
 
       <div className="sticky bottom-0 mt-6 flex items-center gap-3 border-t border-border bg-mist py-4">
-        <button onClick={() => submit(tab)} disabled={mut.isPending} className={btn.solid}>
+        <button onClick={() => submit(tab)} disabled={mut.isPending} className={btn.primary}>
           {mut.isPending ? "Saving…" : `Save ${TABS.find(([k]) => k === tab)?.[1]}`}
         </button>
         <Link to="/admin" className={btn.outline}>Back to requests</Link>
@@ -211,12 +211,12 @@ function Shell({ children }: { children: ReactNode }) {
   );
 }
 
-function Card({ title, onRemove, children }: { title: string; onRemove: () => void; children: ReactNode }) {
+function Card({ title, onRemove, children }: { title: string; onRemove?: () => void; children: ReactNode }) {
   return (
     <section className="border border-border bg-background p-5">
       <div className="flex items-center justify-between gap-4">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">{title}</h2>
-        <button onClick={onRemove} className={btn.outline}>Remove</button>
+        {onRemove && <button onClick={onRemove} className={btn.outline}>Remove</button>}
       </div>
       <div className="mt-4">{children}</div>
     </section>
