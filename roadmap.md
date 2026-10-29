@@ -7,11 +7,12 @@
 - Trilingual sitemap + hreflang; staff pages noindex
 - Content editor at `/admin/content` for FAQ, travel styles, brand/contact, entry guidance
   (owner/editor only, trilingual completeness gate, public pages read saved rows)
+- Kuwait-focused family/private-trip positioning, arrival/comfort guidance in EN/AR/RO
+- Contextual WhatsApp drafts for public pages/journeys and saved-reference follow-up (real inquiry tested and test record removed)
+- Entry-process claim checked against official Council conclusions; Kuwait source linked with explicit non-exemption caution (not an individual entry-eligibility check)
 
 ## Open
 - [ ] Promotion readiness: verified operating arrangement and reviewed privacy/terms — waiting on operator/legal details; no invented licence or partner claims
-- [ ] Verify dated entry-policy news against official sources; never imply GCC visa-free travel
-- [ ] Kuwait-focused family/private-trip positioning, practical arrival/comfort guidance, contextual WhatsApp drafts and saved-reference handoff — current batch
 - [ ] Native Arabic editorial review and verified Arabic-speaking support — waiting on operator confirmation
 - [ ] Consent-aware inquiry/WhatsApp conversion measurement and campaign attribution — follow after privacy review; no advertising trackers yet
 - [ ] Tours and day-by-day itineraries editable (needs its own collection + editor)
