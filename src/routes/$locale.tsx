@@ -4,26 +4,28 @@ import { t } from "@/i18n/ui";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
-import { SITE } from "@/content/site";
+import { contentQueryOptions, useSiteContent } from "@/lib/site-content";
 
 export const Route = createFileRoute("/$locale")({
   beforeLoad: ({ params }) => {
     if (!isLocale(params.locale)) throw notFound();
   },
+  loader: ({ context }) => context.queryClient.ensureQueryData(contentQueryOptions),
   component: LocaleLayout,
   notFoundComponent: LocaleNotFound,
 });
 
 function LocaleLayout() {
   const l = useLocale();
+  const { site } = useSiteContent();
   return (
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[60] focus:bg-background focus:p-3">{t("skip", l)}</a>
       <Header />
       <main id="main"><Outlet /></main>
       <Footer />
-      {SITE.whatsappDigits && (
-        <a href={`https://wa.me/${SITE.whatsappDigits}`} target="_blank" rel="noopener" aria-label="WhatsApp"
+      {site.whatsappDigits && (
+        <a href={`https://wa.me/${site.whatsappDigits}`} target="_blank" rel="noopener" aria-label="WhatsApp"
           className="fixed bottom-24 end-4 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full bg-forest text-on-dark shadow-lg lg:bottom-6"
           style={{ marginBottom: "env(safe-area-inset-bottom)" }}>
           <WhatsAppIcon className="h-7 w-7" />

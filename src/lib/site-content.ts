@@ -18,7 +18,11 @@ export const contentQueryOptions = queryOptions({
   queryKey: ["content-collections"],
   queryFn: async () => {
     const { data, error } = await supabase.from("content_collections").select("key, data");
-    if (error) throw error;
+    if (error) {
+      // Editorial content must never blank a public page: fall back to code defaults.
+      console.error("content read failed, using defaults", error);
+      return {};
+    }
     const out: Record<string, unknown> = {};
     for (const row of data ?? []) out[row.key] = row.data;
     return out;
