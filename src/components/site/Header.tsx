@@ -18,21 +18,24 @@ const NAV: { key: UIKey; to: string; search?: Record<string, string> }[] = [
   { key: "contact", to: "/$locale/contact" },
 ];
 
-export function LocaleSwitch({ light, className }: { light?: boolean; className?: string }) {
+const LOCALE_SHORT: Record<(typeof LOCALES)[number], string> = { en: "EN", ar: "ع", ro: "RO" };
+
+export function LocaleSwitch({ light, compact, className }: { light?: boolean; compact?: boolean; className?: string }) {
   const l = useLocale();
   const { pathname, searchStr } = useRouterState({ select: (s) => ({ pathname: s.location.pathname, searchStr: s.location.searchStr }) });
   return (
     <nav aria-label={t("language", l)} className={cn("flex items-center gap-1 text-sm", className)}>
       {LOCALES.map((loc, i) => (
         <span key={loc} className="flex items-center">
-          {i > 0 && <span className={cn("px-1", light ? "text-on-dark-muted" : "text-muted-foreground")} aria-hidden>|</span>}
+          {i > 0 && <span className={cn("px-0.5", light ? "text-on-dark-muted" : "text-muted-foreground")} aria-hidden>|</span>}
           <a
             href={swapLocale(pathname, loc) + (searchStr ?? "")}
             hrefLang={loc} lang={loc}
             aria-current={loc === l ? "true" : undefined}
+            aria-label={LOCALE_LABELS[loc]}
             onClick={() => { try { localStorage.setItem(LOCALE_STORAGE_KEY, loc); } catch { /* ignore */ } }}
             className={cn("inline-flex min-h-11 items-center px-1.5", loc === l ? "font-semibold underline decoration-champagne underline-offset-4" : "opacity-80 hover:opacity-100", light ? "text-on-dark" : "text-foreground")}
-          >{LOCALE_LABELS[loc]}</a>
+          >{compact ? LOCALE_SHORT[loc] : LOCALE_LABELS[loc]}</a>
         </span>
       ))}
     </nav>
@@ -74,7 +77,8 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <LocaleSwitch light={overHero} className="hidden md:flex" />
-          <Link to="/$locale/plan-your-trip" params={{ locale: l }} className={cn("hidden sm:inline-flex", overHero ? btn.light : btn.primary)}>{t("planTrip", l)}</Link>
+          <LocaleSwitch light={overHero} compact className="md:hidden" />
+          <Link to="/$locale/plan-your-trip" params={{ locale: l }} className={cn("max-sm:hidden", overHero ? btn.light : btn.primary)}>{t("planTrip", l)}</Link>
           <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-controls="drawer"
             aria-label={open ? t("close", l) : t("menu", l)}
             className={cn("inline-flex h-11 w-11 items-center justify-center xl:hidden", overHero ? "text-on-dark" : "text-primary")}>
