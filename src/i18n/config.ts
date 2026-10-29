@@ -36,3 +36,5 @@ export function swapLocale(pathname: string, to: Locale): string {
 }
 
 export const LOCALE_STORAGE_KEY = "drk-locale";
+
+export const asLocale = (v: unknown): Locale => (isLocale(v) ? v : "en");

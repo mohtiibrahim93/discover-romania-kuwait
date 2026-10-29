@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Compass, FileText, Handshake } from "lucide-react";
-import { useLocale, type L } from "@/i18n/config";
+import { asLocale, useLocale, type L } from "@/i18n/config";
 import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
 import { publishedTours } from "@/content/tours";
@@ -41,8 +41,8 @@ const C = {
 
 export const Route = createFileRoute("/$locale/")({
   head: ({ params }) => {
-    const l = params.locale as "en";
-    return seo(params.locale, C.title[l] ?? C.title.en, C.sub[l] ?? C.sub.en);
+    const l = asLocale(params.locale);
+    return seo(l, C.title[l], C.sub[l]);
   },
   component: Home,
 });
