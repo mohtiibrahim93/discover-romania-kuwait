@@ -12,6 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
+import { Route as LocaleDestinationsIndexRouteImport } from './routes/$locale.destinations.index'
+import { Route as LocaleDestinationsSlugRouteImport } from './routes/$locale.destinations.$slug'
+import { Route as LocaleToursIndexRouteImport } from './routes/$locale.tours.index'
+import { Route as LocaleToursSlugRouteImport } from './routes/$locale.tours.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,28 +32,81 @@ const LocaleIndexRoute = LocaleIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleDestinationsIndexRoute = LocaleDestinationsIndexRouteImport.update({
+  id: '/destinations/',
+  path: '/destinations/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleDestinationsSlugRoute = LocaleDestinationsSlugRouteImport.update({
+  id: '/destinations/$slug',
+  path: '/destinations/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleToursIndexRoute = LocaleToursIndexRouteImport.update({
+  id: '/tours/',
+  path: '/tours/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleToursSlugRoute = LocaleToursSlugRouteImport.update({
+  id: '/tours/$slug',
+  path: '/tours/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
   '/$locale/': typeof LocaleIndexRoute
+  '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
+  '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/$locale/destinations/': typeof LocaleDestinationsIndexRoute
+  '/$locale/tours/': typeof LocaleToursIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleIndexRoute
+  '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
+  '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/$locale/destinations': typeof LocaleDestinationsIndexRoute
+  '/$locale/tours': typeof LocaleToursIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
   '/$locale/': typeof LocaleIndexRoute
+  '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
+  '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/$locale/destinations/': typeof LocaleDestinationsIndexRoute
+  '/$locale/tours/': typeof LocaleToursIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$locale' | '/$locale/'
+  fullPaths:
+    | '/'
+    | '/$locale'
+    | '/$locale/'
+    | '/$locale/destinations/$slug'
+    | '/$locale/tours/$slug'
+    | '/$locale/destinations/'
+    | '/$locale/tours/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$locale'
-  id: '__root__' | '/' | '/$locale' | '/$locale/'
+  to:
+    | '/'
+    | '/$locale'
+    | '/$locale/destinations/$slug'
+    | '/$locale/tours/$slug'
+    | '/$locale/destinations'
+    | '/$locale/tours'
+  id:
+    | '__root__'
+    | '/'
+    | '/$locale'
+    | '/$locale/'
+    | '/$locale/destinations/$slug'
+    | '/$locale/tours/$slug'
+    | '/$locale/destinations/'
+    | '/$locale/tours/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -80,15 +137,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleIndexRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/destinations/': {
+      id: '/$locale/destinations/'
+      path: '/destinations'
+      fullPath: '/$locale/destinations/'
+      preLoaderRoute: typeof LocaleDestinationsIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/destinations/$slug': {
+      id: '/$locale/destinations/$slug'
+      path: '/destinations/$slug'
+      fullPath: '/$locale/destinations/$slug'
+      preLoaderRoute: typeof LocaleDestinationsSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/tours/': {
+      id: '/$locale/tours/'
+      path: '/tours'
+      fullPath: '/$locale/tours/'
+      preLoaderRoute: typeof LocaleToursIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/tours/$slug': {
+      id: '/$locale/tours/$slug'
+      path: '/tours/$slug'
+      fullPath: '/$locale/tours/$slug'
+      preLoaderRoute: typeof LocaleToursSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
   }
 }
 
 interface LocaleRouteChildren {
   LocaleIndexRoute: typeof LocaleIndexRoute
+  LocaleDestinationsSlugRoute: typeof LocaleDestinationsSlugRoute
+  LocaleToursSlugRoute: typeof LocaleToursSlugRoute
+  LocaleDestinationsIndexRoute: typeof LocaleDestinationsIndexRoute
+  LocaleToursIndexRoute: typeof LocaleToursIndexRoute
 }
 
 const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleIndexRoute: LocaleIndexRoute,
+  LocaleDestinationsSlugRoute: LocaleDestinationsSlugRoute,
+  LocaleToursSlugRoute: LocaleToursSlugRoute,
+  LocaleDestinationsIndexRoute: LocaleDestinationsIndexRoute,
+  LocaleToursIndexRoute: LocaleToursIndexRoute,
 }
 
 const LocaleRouteWithChildren =

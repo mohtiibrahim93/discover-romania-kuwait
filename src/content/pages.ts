@@ -1,0 +1,63 @@
+import type { L } from "@/i18n/config";
+import type { TextSection } from "@/components/site/TextPage";
+
+type Page = { title: L; intro: L; sections: TextSection[] };
+
+export const WHY: Page = {
+  title: { en: "Why Romania?", ar: "لماذا رومانيا؟", ro: "De ce România?" },
+  intro: { en: "Mountains, heritage, cities and nature — in a country that still feels like a discovery.", ar: "جبال وتراث ومدن وطبيعة، في بلد ما زال يمنحك متعة الاكتشاف.", ro: "Munți, patrimoniu, orașe și natură — într-o țară care încă se simte ca o descoperire." },
+  sections: [
+    { h: { en: "Landscape", ar: "الطبيعة", ro: "Peisaj" }, p: { en: "The Carpathian arc shapes much of the country: forested slopes, high pastures and cool valleys, with a long Danube and its Delta to the east.", ar: "يشكّل قوس جبال الكاربات جزءًا كبيرًا من البلاد: منحدرات مكسوة بالغابات ومراعٍ مرتفعة ووديان منعشة، ويمتد نهر الدانوب ودلتاه نحو الشرق.", ro: "Arcul Carpaților modelează mare parte din țară: pante împădurite, pășuni înalte și văi răcoroase, iar spre est Dunărea și Delta ei." } },
+    { h: { en: "Heritage", ar: "التراث", ro: "Patrimoniu" }, p: { en: "Castles, medieval town centres, fortified churches, wooden villages and painted traditions offer a remarkable range within one journey.", ar: "تقدم القلاع ومراكز المدن التاريخية والكنائس المحصنة والقرى الخشبية والتقاليد الفنية تنوعًا لافتًا في رحلة واحدة.", ro: "Castelele, centrele medievale, bisericile fortificate, satele din lemn și tradițiile pictate oferă o diversitate remarcabilă într-o singură călătorie." } },
+    { h: { en: "Cities", ar: "المدن", ro: "Orașe" }, p: { en: "Bucharest's boulevards and parks, and the walkable old towns of Brașov and Sibiu, balance nature days with comfort and café culture.", ar: "تمنح شوارع بوخارست وحدائقها، والبلدات القديمة في براشوف وسيبيو، توازنًا بين أيام الطبيعة والراحة وثقافة المقاهي.", ro: "Bulevardele și parcurile Bucureștiului, alături de orașele vechi ale Brașovului și Sibiului, echilibrează zilele în natură cu confortul și cultura cafenelelor." } },
+    { h: { en: "Seasons", ar: "المواسم", ro: "Sezoane" }, p: { en: "Summer offers mountain coolness and long days; spring and autumn are mild and colourful; winter brings snow. Each changes what is possible — some roads and activities are seasonal.", ar: "يوفر الصيف برودة الجبال والأيام الطويلة، والربيع والخريف معتدلان ومليئان بالألوان، ويأتي الشتاء بالثلوج. ويغيّر كل موسم ما هو ممكن، فبعض الطرق والأنشطة موسمية.", ro: "Vara aduce răcoarea munților și zile lungi; primăvara și toamna sunt blânde și colorate; iarna aduce zăpadă. Fiecare sezon schimbă ce este posibil — unele drumuri și activități sunt sezoniere." } },
+    { h: { en: "Practical planning", ar: "التخطيط العملي", ro: "Planificare practică" }, p: { en: "Distances between regions can be long. A good itinerary balances driving with rest — which is why every proposal is shaped personally.", ar: "قد تكون المسافات بين المناطق طويلة، والبرنامج الجيد يوازن بين القيادة والراحة، ولهذا يُصمَّم كل مقترح بشكل شخصي.", ro: "Distanțele dintre regiuni pot fi mari. Un itinerariu bun echilibrează drumul cu odihna — de aceea fiecare propunere este creată personal." } },
+  ],
+};
+
+export const ABOUT: Page = {
+  title: { en: "About Discover Romania Kuwait", ar: "عن Discover Romania Kuwait", ro: "Despre Discover Romania Kuwait" },
+  intro: { en: "An emerging, independent concept connecting travellers in Kuwait and the GCC with personally developed Romanian itineraries.", ar: "مفهوم مستقل وناشئ يربط المسافرين في الكويت ودول الخليج ببرامج سفر إلى رومانيا تُعدّ بشكل شخصي.", ro: "Un concept independent, în dezvoltare, care leagă călătorii din Kuweit și Golf de itinerarii românești create personal." },
+  sections: [
+    { h: { en: "Where we are", ar: "أين نحن الآن", ro: "Unde ne aflăm" }, p: { en: "We are at a pre-launch stage, preparing for a potential first season in 2027. We do not yet operate as a licensed travel agency, and we will say so clearly until that changes.", ar: "نحن في مرحلة ما قبل الإطلاق، ونستعد لموسم أول محتمل في 2027. لا نعمل حاليًا كوكالة سفر مرخّصة، وسنوضح ذلك بجلاء إلى أن يتغير الأمر.", ro: "Ne aflăm într-o etapă de pre-lansare, pregătind un posibil prim sezon în 2027. Nu funcționăm încă drept agenție de turism licențiată și vom spune clar acest lucru până când situația se schimbă." } },
+    { h: { en: "Our approach", ar: "نهجنا", ro: "Abordarea noastră" }, p: { en: "We listen first, then propose. A GCC-facing team handles conversation and planning; destination logistics are developed with Romanian operational partners once agreements are in place.", ar: "نستمع أولًا ثم نقترح. يتولى فريق موجّه لسوق الخليج التواصل والتخطيط، بينما تُطوَّر الترتيبات الميدانية مع شركاء تشغيليين في رومانيا بعد إبرام الاتفاقيات.", ro: "Mai întâi ascultăm, apoi propunem. O echipă orientată spre Golf se ocupă de comunicare și planificare; logistica la destinație se dezvoltă cu parteneri operaționali din România, după încheierea acordurilor." } },
+    { h: { en: "What we promise", ar: "ما نلتزم به", ro: "Ce promitem" }, p: { en: "Honesty about what is confirmed and what is not. No invented prices, reviews or guarantees — just careful, transparent planning.", ar: "الصدق بشأن ما هو مؤكد وما ليس كذلك. لا أسعار أو تقييمات أو ضمانات مختلقة، بل تخطيط دقيق وشفاف.", ro: "Sinceritate privind ce este confirmat și ce nu. Fără prețuri, recenzii sau garanții inventate — doar planificare atentă și transparentă." } },
+  ],
+};
+
+export const TRAVEL_INFO: Page = {
+  title: { en: "Travel Information", ar: "معلومات السفر", ro: "Informații de călătorie" },
+  intro: { en: "Practical context for planning — always confirm entry requirements with official sources.", ar: "معلومات عملية تساعدك في التخطيط، مع ضرورة التأكد من متطلبات الدخول من المصادر الرسمية دائمًا.", ro: "Context practic pentru planificare — confirmă întotdeauna condițiile de intrare din surse oficiale." },
+  sections: [
+    { h: { en: "Seasons", ar: "المواسم", ro: "Sezoane" }, p: { en: "Romania has four distinct seasons. Summer is warm in the lowlands and cooler in the mountains; winters are cold with snow at altitude. Some mountain roads and nature activities are seasonal.", ar: "تتمتع رومانيا بأربعة مواسم واضحة. الصيف دافئ في السهول وأبرد في الجبال، والشتاء بارد مع ثلوج في المرتفعات. بعض الطرق الجبلية والأنشطة الطبيعية موسمية.", ro: "România are patru anotimpuri distincte. Vara e caldă la câmpie și mai răcoroasă la munte; iernile sunt reci, cu zăpadă la altitudine. Unele drumuri montane și activități în natură sunt sezoniere." } },
+    { h: { en: "Getting around", ar: "التنقل", ro: "Deplasare" }, p: { en: "Most journeys begin in Bucharest. Travel between regions is usually by road and can take several hours; we plan pacing accordingly.", ar: "تبدأ معظم الرحلات من بوخارست، ويكون التنقل بين المناطق غالبًا برًا وقد يستغرق عدة ساعات، لذا نخطط الإيقاع وفقًا لذلك.", ro: "Majoritatea călătoriilor încep la București. Deplasarea între regiuni se face de obicei rutier și poate dura câteva ore; planificăm ritmul în consecință." } },
+    { h: { en: "Family pacing", ar: "إيقاع مناسب للعائلة", ro: "Ritm pentru familii" }, p: { en: "With children, shorter driving days, rest afternoons and weather alternatives make the difference. Tell us ages and preferences in your inquiry.", ar: "مع الأطفال، تُحدث أيام القيادة الأقصر وفترات الراحة بعد الظهر والبدائل في حال سوء الطقس فرقًا كبيرًا. أخبرنا بالأعمار والتفضيلات في استفسارك.", ro: "Cu copiii, zilele cu drumuri mai scurte, după-amiezile de odihnă și alternativele pentru vreme rea fac diferența. Spune-ne vârstele și preferințele în solicitare." } },
+    { h: { en: "Currency", ar: "العملة", ro: "Monedă" }, p: { en: "Romania's currency is the Romanian leu (RON). Cards are widely accepted in cities; some rural places prefer cash.", ar: "عملة رومانيا هي الليو الروماني (RON). تُقبل البطاقات على نطاق واسع في المدن، وتفضّل بعض الأماكن الريفية الدفع نقدًا.", ro: "Moneda României este leul (RON). Cardurile sunt acceptate pe scară largă în orașe; unele locuri rurale preferă numerarul." } },
+  ],
+};
+
+export const LEGAL: Record<"privacy" | "terms" | "cookies", Page> = {
+  privacy: {
+    title: { en: "Privacy Notice", ar: "إشعار الخصوصية", ro: "Notă de confidențialitate" },
+    intro: { en: "How inquiry information would be handled.", ar: "كيف ستُعالج معلومات الاستفسار.", ro: "Cum ar fi gestionate informațiile din solicitări." },
+    sections: [
+      { h: { en: "Status", ar: "الحالة", ro: "Stadiu" }, p: { en: "This notice is a draft. The data controller identity, jurisdiction, legal basis, retention periods and your rights will be inserted after review by qualified counsel, before launch.", ar: "هذا الإشعار مسودة. ستُضاف هوية الجهة المتحكمة في البيانات والاختصاص القضائي والأساس القانوني ومدد الاحتفاظ وحقوقك بعد مراجعة مستشار قانوني مؤهل وقبل الإطلاق.", ro: "Această notă este o ciornă. Identitatea operatorului de date, jurisdicția, temeiul legal, perioadele de păstrare și drepturile tale vor fi adăugate după revizuirea de către un consilier juridic calificat, înainte de lansare." } },
+      { h: { en: "What we would collect", ar: "ما الذي سنجمعه", ro: "Ce am colecta" }, p: { en: "Only what you choose to share in an inquiry: contact details and travel preferences. We do not request passport numbers, IDs, health data or payment details.", ar: "فقط ما تختار مشاركته في الاستفسار: بيانات التواصل وتفضيلات السفر. لا نطلب أرقام جوازات السفر أو الهويات أو البيانات الصحية أو بيانات الدفع.", ro: "Doar ce alegi să ne spui într-o solicitare: date de contact și preferințe de călătorie. Nu solicităm numere de pașaport, acte de identitate, date de sănătate sau date de plată." } },
+    ],
+  },
+  terms: {
+    title: { en: "Terms of Use", ar: "شروط الاستخدام", ro: "Termeni de utilizare" },
+    intro: { en: "Terms for using this website.", ar: "شروط استخدام هذا الموقع.", ro: "Termenii de utilizare a acestui site." },
+    sections: [
+      { h: { en: "Status", ar: "الحالة", ro: "Stadiu" }, p: { en: "Draft terms, pending review by qualified counsel. Contract terms for any trip will be provided only in a confirmed written offer.", ar: "شروط في صيغة مسودة بانتظار مراجعة مستشار قانوني مؤهل. تُقدَّم شروط التعاقد لأي رحلة فقط في عرض مكتوب مؤكد.", ro: "Termeni în stadiu de ciornă, în așteptarea revizuirii de către un consilier juridic calificat. Condițiile contractuale pentru orice călătorie vor fi oferite doar într-o ofertă scrisă confirmată." } },
+      { h: { en: "Content", ar: "المحتوى", ro: "Conținut" }, p: { en: "Journeys on this site are illustrative concepts, not offers for sale. Images are illustrative placeholders.", ar: "الرحلات المعروضة على هذا الموقع تصوّرات توضيحية وليست عروضًا للبيع، والصور توضيحية مؤقتة.", ro: "Circuitele de pe acest site sunt concepte ilustrative, nu oferte de vânzare. Imaginile sunt ilustrative, provizorii." } },
+    ],
+  },
+  cookies: {
+    title: { en: "Cookie Policy", ar: "سياسة ملفات تعريف الارتباط", ro: "Politica privind cookie-urile" },
+    intro: { en: "How this website uses browser storage.", ar: "كيف يستخدم هذا الموقع تخزين المتصفح.", ro: "Cum folosește acest site stocarea din browser." },
+    sections: [
+      { h: { en: "Status", ar: "الحالة", ro: "Stadiu" }, p: { en: "Draft policy pending legal review. Currently the site stores only your language choice in your browser. No analytics or advertising cookies are set.", ar: "سياسة في صيغة مسودة بانتظار المراجعة القانونية. يحفظ الموقع حاليًا اختيارك للغة فقط في متصفحك، ولا تُستخدم ملفات تعريف ارتباط للتحليلات أو الإعلانات.", ro: "Politică în stadiu de ciornă, în așteptarea revizuirii juridice. În prezent, site-ul salvează în browser doar limba aleasă. Nu se folosesc cookie-uri de analiză sau publicitate." } },
+    ],
+  },
+};
