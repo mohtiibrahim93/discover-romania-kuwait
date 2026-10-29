@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
 import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
@@ -22,6 +24,7 @@ import { Route as LocalePrivacyRouteImport } from './routes/$locale.privacy'
 import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
 import { Route as LocaleTravelInformationRouteImport } from './routes/$locale.travel-information'
 import { Route as LocaleWhyRomaniaRouteImport } from './routes/$locale.why-romania'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as LocaleDestinationsIndexRouteImport } from './routes/$locale.destinations.index'
 import { Route as LocaleDestinationsSlugRouteImport } from './routes/$locale.destinations.$slug'
 import { Route as LocaleToursIndexRouteImport } from './routes/$locale.tours.index'
@@ -35,6 +38,15 @@ const IndexRoute = IndexRouteImport.update({
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocaleIndexRoute = LocaleIndexRouteImport.update({
@@ -92,6 +104,11 @@ const LocaleWhyRomaniaRoute = LocaleWhyRomaniaRouteImport.update({
   path: '/why-romania',
   getParentRoute: () => LocaleRoute,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const LocaleDestinationsIndexRoute = LocaleDestinationsIndexRouteImport.update({
   id: '/destinations/',
   path: '/destinations/',
@@ -116,6 +133,7 @@ const LocaleToursSlugRoute = LocaleToursSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/auth': typeof AuthRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/cookies': typeof LocaleCookiesRoute
@@ -126,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/travel-information': typeof LocaleTravelInformationRoute
   '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
@@ -134,6 +153,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/cookies': typeof LocaleCookiesRoute
@@ -144,6 +164,7 @@ export interface FileRoutesByTo {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/travel-information': typeof LocaleTravelInformationRoute
   '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
@@ -153,7 +174,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/$locale': typeof LocaleRouteWithChildren
+  '/auth': typeof AuthRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/cookies': typeof LocaleCookiesRoute
@@ -164,6 +187,7 @@ export interface FileRoutesById {
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/travel-information': typeof LocaleTravelInformationRoute
   '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
@@ -175,6 +199,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/auth'
     | '/$locale/about'
     | '/$locale/contact'
     | '/$locale/cookies'
@@ -185,6 +210,7 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/travel-information'
     | '/$locale/why-romania'
+    | '/admin'
     | '/$locale/'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
@@ -193,6 +219,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/$locale/about'
     | '/$locale/contact'
     | '/$locale/cookies'
@@ -203,6 +230,7 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/travel-information'
     | '/$locale/why-romania'
+    | '/admin'
     | '/$locale'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
@@ -211,7 +239,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/$locale'
+    | '/auth'
     | '/$locale/about'
     | '/$locale/contact'
     | '/$locale/cookies'
@@ -222,6 +252,7 @@ export interface FileRouteTypes {
     | '/$locale/terms'
     | '/$locale/travel-information'
     | '/$locale/why-romania'
+    | '/_authenticated/admin'
     | '/$locale/'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
@@ -231,7 +262,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   LocaleRoute: typeof LocaleRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -248,6 +281,20 @@ declare module '@tanstack/react-router' {
       path: '/$locale'
       fullPath: '/$locale'
       preLoaderRoute: typeof LocaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale/': {
@@ -327,6 +374,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleWhyRomaniaRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/$locale/destinations/': {
       id: '/$locale/destinations/'
       path: '/destinations'
@@ -357,6 +411,17 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface LocaleRouteChildren {
   LocaleAboutRoute: typeof LocaleAboutRoute
@@ -399,7 +464,9 @@ const LocaleRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   LocaleRoute: LocaleRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
