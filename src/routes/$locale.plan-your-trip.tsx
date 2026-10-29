@@ -157,7 +157,7 @@ function Page() {
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">{F.doneP[l]}</p>
             <p className="mt-6 text-sm">{F.ref[l]}</p>
             <p className="ltr-isolate mt-1 font-display text-2xl tracking-wider text-accent" dir="ltr">{done}</p>
-            <button type="button" onClick={() => setDone(null)} className={`${btn.ghost ?? btn.primary} mt-8`}>{F.another[l]}</button>
+            <button type="button" onClick={() => setDone(null)} className={`${btn.primary} mt-8`}>{F.another[l]}</button>
           </div>
         ) : (
         <form noValidate onSubmit={onSubmit} className="grid gap-6 sm:grid-cols-2">
