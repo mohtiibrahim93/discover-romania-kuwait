@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { asLocale } from "@/i18n/config";
 import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
-import { SITE } from "@/content/site";
+import { useSiteContent } from "@/lib/site-content";
 import { PageHero, btn } from "@/components/site/ui";
 
 const C = {
@@ -17,14 +17,15 @@ export const Route = createFileRoute("/$locale/contact")({
 
 function Page() {
   const l = asLocale(Route.useParams().locale);
+  const { site } = useSiteContent();
   return (
     <>
       <PageHero media="oldTown" eyebrow={t("contact", l)} title={t("contact", l)} intro={C.intro[l]} />
       <section className="container-edit max-w-3xl py-16 md:py-24">
-        {SITE.email || SITE.whatsappDigits ? (
+        {site.email || site.whatsappDigits ? (
           <ul className="space-y-4 text-lg">
-            {SITE.email && <li><a href={`mailto:${SITE.email}`} className="ltr-isolate text-accent underline">{SITE.email}</a></li>}
-            {SITE.whatsappDigits && <li><a href={`https://wa.me/${SITE.whatsappDigits}`} className="ltr-isolate text-accent underline">WhatsApp +{SITE.whatsappDigits}</a></li>}
+            {site.email && <li><a href={`mailto:${site.email}`} className="ltr-isolate text-accent underline">{site.email}</a></li>}
+            {site.whatsappDigits && <li><a href={`https://wa.me/${site.whatsappDigits}`} className="ltr-isolate text-accent underline">WhatsApp +{site.whatsappDigits}</a></li>}
           </ul>
         ) : (
           <p className="text-muted-foreground">{C.pending[l]}</p>

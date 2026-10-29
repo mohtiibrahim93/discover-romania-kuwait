@@ -5,7 +5,7 @@ import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
 import { publishedTours, type Season } from "@/content/tours";
 import { DESTINATIONS } from "@/content/destinations";
-import { TRAVEL_STYLES } from "@/content/styles";
+import { useSiteContent } from "@/lib/site-content";
 import { PageHero, btn } from "@/components/site/ui";
 import { TourCard } from "@/components/site/TourCard";
 
@@ -34,6 +34,7 @@ const seasonKey = { spring: "seasonSpring", summer: "seasonSummer", autumn: "sea
 
 function Catalog() {
   const l = useLocale();
+  const { styles } = useSiteContent();
   const s = Route.useSearch();
   const navigate = useNavigate({ from: Route.fullPath });
   const set = (patch: Partial<z.infer<typeof search>>) =>
@@ -57,7 +58,7 @@ function Catalog() {
           <label className="sr-only" htmlFor="f-style">{t("styles", l)}</label>
           <select id="f-style" className={sel} value={s.style ?? ""} onChange={(e) => set({ style: e.target.value || undefined })}>
             <option value="">{t("allStyles", l)}</option>
-            {TRAVEL_STYLES.map((x) => <option key={x.id} value={x.id}>{x.title[l]}</option>)}
+            {styles.map((x) => <option key={x.id} value={x.id}>{x.title[l]}</option>)}
           </select>
           <label className="sr-only" htmlFor="f-region">{t("regions", l)}</label>
           <select id="f-region" className={sel} value={s.region ?? ""} onChange={(e) => set({ region: e.target.value || undefined })}>

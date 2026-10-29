@@ -5,8 +5,7 @@ import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
 import { publishedTours } from "@/content/tours";
 import { DESTINATIONS } from "@/content/destinations";
-import { TRAVEL_STYLES } from "@/content/styles";
-import { FAQ } from "@/content/faq";
+import { useSiteContent } from "@/lib/site-content";
 import { Img, SectionHead, btn } from "@/components/site/ui";
 import { TourCard } from "@/components/site/TourCard";
 
@@ -49,6 +48,7 @@ export const Route = createFileRoute("/$locale/")({
 
 function Home() {
   const l = useLocale();
+  const { styles, faq } = useSiteContent();
   const tours = publishedTours().filter((x) => x.featured).slice(0, 3);
   return (
     <>
@@ -91,7 +91,7 @@ function Home() {
       <section className="container-edit py-24 md:py-32">
         <SectionHead eyebrow={t("styles", l)} title={t("styles", l)} intro={C.stylesP[l]} />
         <div className="mt-12 grid grid-cols-2 gap-px bg-border md:grid-cols-3">
-          {TRAVEL_STYLES.map((s, i) => (
+          {styles.map((s, i) => (
             <Link key={s.id} to="/$locale/tours" params={{ locale: l }} search={{ style: s.id }}
               className="group flex min-h-40 flex-col justify-between bg-background p-6 transition hover:bg-card md:min-h-52 md:p-8">
               <span className="font-display text-sm text-champagne ltr-isolate">0{i + 1}</span>
@@ -163,7 +163,7 @@ function Home() {
             <Link to="/$locale/faq" params={{ locale: l }} className={`${btn.link} mt-4`}>{t("allFaq", l)}<ArrowRight className="flip-rtl h-4 w-4" /></Link>
           </div>
           <div className="divide-y divide-border border-y border-border">
-            {FAQ.slice(0, 4).map((f, i) => (
+            {faq.slice(0, 4).map((f, i) => (
               <details key={i} className="group py-5">
                 <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-lg text-primary">{f.q[l]}<span className="text-champagne transition group-open:rotate-45">+</span></summary>
                 <p className="mt-3 leading-relaxed text-muted-foreground">{f.a[l]}</p>

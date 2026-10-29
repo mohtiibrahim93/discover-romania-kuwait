@@ -7,7 +7,7 @@ import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
 import { getTour, TOURS } from "@/content/tours";
 import { getDestination } from "@/content/destinations";
-import { TRAVEL_STYLES } from "@/content/styles";
+import { useSiteContent } from "@/lib/site-content";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Chip, Img, btn } from "@/components/site/ui";
 import { TourCard } from "@/components/site/TourCard";
@@ -29,6 +29,7 @@ export const Route = createFileRoute("/$locale/tours/$slug")({
 
 function TourDetail() {
   const l = useLocale();
+  const { styles } = useSiteContent();
   const { slug } = Route.useLoaderData();
   const tour = getTour(slug)!;
   const [copied, setCopied] = useState(false);
@@ -58,7 +59,7 @@ function TourDetail() {
           <div className="flex flex-wrap gap-2">
             <Chip>{tour.days} {t("days", l)}</Chip>
             {tour.regions.map((r) => <Chip key={r}>{getDestination(r)?.name[l]}</Chip>)}
-            {tour.styles.map((s) => <Chip key={s}>{TRAVEL_STYLES.find((x) => x.id === s)?.title[l]}</Chip>)}
+            {tour.styles.map((s) => <Chip key={s}>{styles.find((x) => x.id === s)?.title[l]}</Chip>)}
           </div>
           <p className="mt-6 border-s-2 border-champagne ps-4 text-sm italic text-muted-foreground">{t("proposed", l)}</p>
 
