@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -99,6 +99,7 @@ function AdminPage() {
         <div className="flex items-center gap-4"><Wordmark /><span className="eyebrow text-accent max-sm:hidden">Staff</span></div>
         <div className="flex items-center gap-3 text-sm">
           <span className="text-muted-foreground max-sm:hidden">{user.email}</span>
+          {isOwner && <Link to="/admin/team" className={btn.outline}>Team</Link>}
           <button onClick={signOut} className={btn.outline}>Sign out</button>
         </div>
       </header>

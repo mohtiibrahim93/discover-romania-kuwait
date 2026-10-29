@@ -15,3 +15,4 @@
 - The inquiry form must never show a "submitted" state unless a real backend stored the record (`SITE.inquiryBackendConnected`).
 - Inquiries are inserted server-side only (src/lib/inquiry.functions.ts, service role); trip_inquiries has RLS on with no public policies so visitors can never read submissions.
 - Staff area: `/auth` + `/admin` (under `_authenticated`); roles live in `user_roles` (owner/sales/editor), first-ever account auto-becomes owner via DB trigger; inquiry read/update is enforced by RLS (`can_handle_leads`), not by the UI.
+- Team roles are changed only via owner-checked server functions (src/lib/team.functions.ts); sitemap is a hand-built server route listing LOCALES × static pages + tours + destinations — add new public pages to its STATIC list.
