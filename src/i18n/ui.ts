@@ -13,6 +13,8 @@ export const UI = d({
   contact: { en: "Contact", ar: "تواصل معنا", ro: "Contact" },
   faq: { en: "FAQ", ar: "الأسئلة الشائعة", ro: "Întrebări frecvente" },
   travelInfo: { en: "Travel Information", ar: "معلومات السفر", ro: "Informații de călătorie" },
+  howItWorks: { en: "Prices & Payment", ar: "الأسعار والدفع", ro: "Prețuri și plată" },
+  activities: { en: "Activities & Experiences", ar: "الأنشطة والتجارب", ro: "Activități și experiențe" },
   privacy: { en: "Privacy", ar: "الخصوصية", ro: "Confidențialitate" },
   terms: { en: "Terms", ar: "الشروط", ro: "Termeni" },
   cookies: { en: "Cookies", ar: "ملفات تعريف الارتباط", ro: "Cookie-uri" },
