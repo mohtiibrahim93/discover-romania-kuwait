@@ -105,7 +105,7 @@ function TourDetail() {
             <p className="mt-2 text-sm text-muted-foreground">{t("onRequest", l)}</p>
             <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ tour: tour.slug }} className={`${btn.primary} mt-6 w-full`}>{t("askTour", l)}</Link>
             <button type="button" onClick={share} className={`${btn.link} mt-3 w-full justify-center`}><Share2 className="h-4 w-4" />{copied ? t("copied", l) : t("share", l)}</button>
-            <a href={`https://wa.me/?text=${encodeURIComponent(`${t("shareText", l)} ${tour.title[l]} — https://discoverromaniakuwait.com/${l}/tours/${tour.slug}`)}`} target="_blank" rel="noopener noreferrer" className={`${btn.link} w-full justify-center`}><MessageCircle className="h-4 w-4" />{t("shareWa", l)}</a>
+            <button type="button" onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(`${t("shareText", l)} ${tour.title[l]} — ${window.location.href}`)}`, "_blank", "noopener")} className={`${btn.link} w-full justify-center`}><MessageCircle className="h-4 w-4" />{t("shareWa", l)}</button>
           </div>
         </aside>
       </div>

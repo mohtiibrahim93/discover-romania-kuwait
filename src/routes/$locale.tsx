@@ -1,4 +1,4 @@
-import { Outlet, createFileRoute, notFound } from "@tanstack/react-router";
+import { Link, Outlet, createFileRoute, notFound } from "@tanstack/react-router";
 import { isLocale, useLocale } from "@/i18n/config";
 import { t } from "@/i18n/ui";
 import { Header } from "@/components/site/Header";
@@ -9,6 +9,7 @@ export const Route = createFileRoute("/$locale")({
     if (!isLocale(params.locale)) throw notFound();
   },
   component: LocaleLayout,
+  notFoundComponent: LocaleNotFound,
 });
 
 function LocaleLayout() {
@@ -20,5 +21,17 @@ function LocaleLayout() {
       <main id="main"><Outlet /></main>
       <Footer />
     </>
+  );
+}
+
+function LocaleNotFound() {
+  const l = useLocale();
+  return (
+    <div className="container-edit flex min-h-[70svh] flex-col items-start justify-center pt-24">
+      <p className="eyebrow text-accent">404</p>
+      <h1 className="mt-3 text-4xl text-primary">{t("notFoundT", l)}</h1>
+      <p className="mt-3 text-muted-foreground">{t("notFoundP", l)}</p>
+      <Link to="/$locale" params={{ locale: l }} className="mt-8 inline-flex min-h-11 items-center rounded-sm bg-primary px-6 text-sm font-semibold text-primary-foreground">{t("home", l)}</Link>
+    </div>
   );
 }
