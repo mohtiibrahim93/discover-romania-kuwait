@@ -10,7 +10,11 @@ export const Route = createFileRoute("/$locale")({
   beforeLoad: ({ params }) => {
     if (!isLocale(params.locale)) throw notFound();
   },
-  loader: async ({ context }) => ({ content: await context.queryClient.ensureQueryData(contentQueryOptions) }),
+  loader: async ({ context }) => ({
+    // Always read the latest saved content for the server render; the browser
+    // cache keeps the 60s freshness window for in-site navigation.
+    content: await context.queryClient.fetchQuery({ ...contentQueryOptions, staleTime: 0 }),
+  }),
   component: LocaleLayout,
   notFoundComponent: LocaleNotFound,
 });
