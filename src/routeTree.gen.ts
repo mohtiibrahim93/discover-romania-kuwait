@@ -30,6 +30,7 @@ import { Route as LocaleDestinationsIndexRouteImport } from './routes/$locale.de
 import { Route as LocaleDestinationsSlugRouteImport } from './routes/$locale.destinations.$slug'
 import { Route as LocaleToursIndexRouteImport } from './routes/$locale.tours.index'
 import { Route as LocaleToursSlugRouteImport } from './routes/$locale.tours.$slug'
+import { Route as AuthenticatedAdminTeamRouteImport } from './routes/_authenticated/admin_.team'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -135,6 +136,11 @@ const LocaleToursSlugRoute = LocaleToursSlugRouteImport.update({
   path: '/tours/$slug',
   getParentRoute: () => LocaleRoute,
 } as any)
+const AuthenticatedAdminTeamRoute = AuthenticatedAdminTeamRouteImport.update({
+  id: '/admin_/team',
+  path: '/admin/team',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -155,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/admin/team': typeof AuthenticatedAdminTeamRoute
   '/$locale/destinations/': typeof LocaleDestinationsIndexRoute
   '/$locale/tours/': typeof LocaleToursIndexRoute
 }
@@ -176,6 +183,7 @@ export interface FileRoutesByTo {
   '/$locale': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/admin/team': typeof AuthenticatedAdminTeamRoute
   '/$locale/destinations': typeof LocaleDestinationsIndexRoute
   '/$locale/tours': typeof LocaleToursIndexRoute
 }
@@ -200,6 +208,7 @@ export interface FileRoutesById {
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/_authenticated/admin_/team': typeof AuthenticatedAdminTeamRoute
   '/$locale/destinations/': typeof LocaleDestinationsIndexRoute
   '/$locale/tours/': typeof LocaleToursIndexRoute
 }
@@ -224,6 +233,7 @@ export interface FileRouteTypes {
     | '/$locale/'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
+    | '/admin/team'
     | '/$locale/destinations/'
     | '/$locale/tours/'
   fileRoutesByTo: FileRoutesByTo
@@ -245,6 +255,7 @@ export interface FileRouteTypes {
     | '/$locale'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
+    | '/admin/team'
     | '/$locale/destinations'
     | '/$locale/tours'
   id:
@@ -268,6 +279,7 @@ export interface FileRouteTypes {
     | '/$locale/'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
+    | '/_authenticated/admin_/team'
     | '/$locale/destinations/'
     | '/$locale/tours/'
   fileRoutesById: FileRoutesById
@@ -429,15 +441,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleToursSlugRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/_authenticated/admin_/team': {
+      id: '/_authenticated/admin_/team'
+      path: '/admin/team'
+      fullPath: '/admin/team'
+      preLoaderRoute: typeof AuthenticatedAdminTeamRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAdminTeamRoute: typeof AuthenticatedAdminTeamRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAdminTeamRoute: AuthenticatedAdminTeamRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
