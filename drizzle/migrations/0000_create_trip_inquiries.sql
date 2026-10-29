@@ -1,0 +1,32 @@
+CREATE TABLE public.trip_inquiries (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  reference text NOT NULL UNIQUE,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  status text NOT NULL DEFAULT 'new',
+  site_locale text NOT NULL,
+  request_type text NOT NULL DEFAULT 'tour',
+  name text NOT NULL,
+  email text NOT NULL,
+  phone text NOT NULL,
+  residence text NOT NULL,
+  nationality text,
+  preferred_language text NOT NULL,
+  travel_month text NOT NULL,
+  adults int NOT NULL,
+  children int NOT NULL DEFAULT 0,
+  tour_slug text,
+  destinations text[] NOT NULL DEFAULT '{}',
+  interests text,
+  pace text,
+  accommodation text,
+  budget text,
+  duration text,
+  travel_style text,
+  dietary text,
+  guide_language text,
+  flight_assistance boolean NOT NULL DEFAULT false,
+  notes text,
+  consent boolean NOT NULL
+);
+GRANT ALL ON public.trip_inquiries TO service_role;
+ALTER TABLE public.trip_inquiries ENABLE ROW LEVEL SECURITY;
