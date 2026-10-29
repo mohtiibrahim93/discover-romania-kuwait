@@ -5,8 +5,7 @@ import { asLocale, LOCALES, LOCALE_LABELS, type L, type Locale } from "@/i18n/co
 import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
 import { publishedTours } from "@/content/tours";
-import { TRAVEL_STYLES } from "@/content/styles";
-import { SITE } from "@/content/site";
+import { useSiteContent } from "@/lib/site-content";
 import { PageHero, btn } from "@/components/site/ui";
 import { useServerFn } from "@tanstack/react-start";
 import { submitInquiry } from "@/lib/inquiry.functions";
@@ -104,6 +103,7 @@ const schema = (l: Locale) => z.object({
 
 function Page() {
   const l = asLocale(Route.useParams().locale);
+  const { styles, site } = useSiteContent();
   const { tour } = Route.useSearch();
   const tours = publishedTours();
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -150,7 +150,7 @@ function Page() {
     <>
       <PageHero media="countryside" eyebrow={t("tailor", l)} title={t("planTrip", l)} intro={F.intro[l]} />
       <section className="container-edit max-w-3xl py-16 md:py-24">
-        {!SITE.inquiryBackendConnected && <p role="status" className="mb-10 border border-champagne bg-card p-4 text-sm">{F.notConnected[l]}</p>}
+        {!site.inquiryBackendConnected && <p role="status" className="mb-10 border border-champagne bg-card p-4 text-sm">{F.notConnected[l]}</p>}
         {done ? (
           <div role="status" className="border border-champagne bg-card p-8 text-center">
             <h2 className="font-display text-3xl text-primary">{F.doneT[l]}</h2>
@@ -208,7 +208,7 @@ function Page() {
               <Field id="nationality" label={F.nationality[l]}><input id="f-nationality" name="nationality" className={input} /></Field>
               <Field id="budget" label={F.budget[l]} hint={F.budgetHint[l]}><input id="f-budget" name="budget" inputMode="numeric" dir="ltr" className={input} /></Field>
               <Field id="duration" label={F.duration[l]}><input id="f-duration" name="duration" type="number" min={2} dir="ltr" className={input} /></Field>
-              <Field id="style" label={F.style[l]}><select id="f-style" name="style" defaultValue="" className={input}><option value="">—</option>{TRAVEL_STYLES.map((s) => <option key={s.id} value={s.id}>{s.title[l]}</option>)}</select></Field>
+              <Field id="style" label={F.style[l]}><select id="f-style" name="style" defaultValue="" className={input}><option value="">—</option>{styles.map((s) => <option key={s.id} value={s.id}>{s.title[l]}</option>)}</select></Field>
               <Field id="dietary" label={F.dietary[l]}><input id="f-dietary" name="dietary" className={input} /></Field>
               <Field id="guideLang" label={F.guideLang[l]}><input id="f-guideLang" name="guideLang" className={input} /></Field>
               <label className="flex min-h-11 items-center gap-3 sm:col-span-2"><input type="checkbox" name="flights" className="h-5 w-5 accent-accent" />{F.flights[l]}</label>

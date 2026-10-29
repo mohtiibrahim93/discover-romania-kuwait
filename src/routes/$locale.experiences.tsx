@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { asLocale } from "@/i18n/config";
 import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
-import { TRAVEL_STYLES } from "@/content/styles";
+import { useSiteContent } from "@/lib/site-content";
 import { publishedTours } from "@/content/tours";
 import { Img, PageHero } from "@/components/site/ui";
 
@@ -16,12 +16,13 @@ export const Route = createFileRoute("/$locale/experiences")({
 
 function Page() {
   const l = asLocale(Route.useParams().locale);
+  const { styles } = useSiteContent();
   const tours = publishedTours();
   return (
     <>
       <PageHero media="countryside" eyebrow={t("styles", l)} title={t("styles", l)} intro={intro[l]} />
       <section className="container-edit grid gap-6 py-16 md:grid-cols-2 md:py-24 lg:grid-cols-3">
-        {TRAVEL_STYLES.map((s) => {
+        {styles.map((s) => {
           const n = tours.filter((x) => x.styles.includes(s.id)).length;
           return (
             <Link key={s.id} to="/$locale/tours" params={{ locale: l }} search={{ style: s.id }} className="group flex flex-col bg-card">

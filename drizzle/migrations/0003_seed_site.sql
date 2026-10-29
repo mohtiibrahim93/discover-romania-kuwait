@@ -1,0 +1,1 @@
+INSERT INTO public.content_collections (key, data, updated_at) VALUES ('site', '{"name":"Discover Romania Kuwait","tagline":{"en":"Romania, personally planned","ar":"رومانيا، برحلة تٌخطَّط لك شخصيًا","ro":"România, planificată personal"},"email":null,"whatsappDigits":"96556642402","socials":[],"businessRegistration":null}'::jsonb, now()) ON CONFLICT (key) DO NOTHING;

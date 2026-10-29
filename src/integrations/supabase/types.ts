@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      content_collections: {
+        Row: {
+          data: Json
+          key: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          data?: Json
+          key: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          data?: Json
+          key?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       inquiry_notes: {
         Row: {
           author_email: string | null
@@ -171,6 +192,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_edit_content: { Args: { _user_id: string }; Returns: boolean }
       can_handle_leads: { Args: { _user_id: string }; Returns: boolean }
       has_role: {
         Args: {

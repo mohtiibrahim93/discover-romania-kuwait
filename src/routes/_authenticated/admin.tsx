@@ -47,6 +47,7 @@ function AdminPage() {
   });
   const canLeads = roles.data?.some((r) => r === "owner" || r === "sales") ?? false;
   const isOwner = roles.data?.includes("owner") ?? false;
+  const isEditor = roles.data?.includes("editor") ?? false;
 
   const leads = useQuery({
     queryKey: ["inquiries"],
@@ -100,6 +101,7 @@ function AdminPage() {
         <div className="flex items-center gap-3 text-sm">
           <span className="text-muted-foreground max-sm:hidden">{user.email}</span>
           {isOwner && <Link to="/admin/team" className={btn.outline}>Team</Link>}
+          {(isOwner || isEditor) && <Link to="/admin/content" className={btn.outline}>Content</Link>}
           <button onClick={signOut} className={btn.outline}>Sign out</button>
         </div>
       </header>
@@ -109,6 +111,7 @@ function AdminPage() {
           <div className="rounded-sm bg-background p-8">
             <h1 className="text-2xl text-primary">No access yet</h1>
             <p className="mt-3 text-muted-foreground">Your account exists but has not been given a role. Ask the owner to grant you access.</p>
+            {isEditor && <Link to="/admin/content" className={`${btn.outline} mt-6`}>Open content editor</Link>}
           </div>
         ) : (
           <>

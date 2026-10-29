@@ -30,6 +30,7 @@ import { Route as LocaleDestinationsIndexRouteImport } from './routes/$locale.de
 import { Route as LocaleDestinationsSlugRouteImport } from './routes/$locale.destinations.$slug'
 import { Route as LocaleToursIndexRouteImport } from './routes/$locale.tours.index'
 import { Route as LocaleToursSlugRouteImport } from './routes/$locale.tours.$slug'
+import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin_.content'
 import { Route as AuthenticatedAdminTeamRouteImport } from './routes/_authenticated/admin_.team'
 
 const IndexRoute = IndexRouteImport.update({
@@ -136,6 +137,12 @@ const LocaleToursSlugRoute = LocaleToursSlugRouteImport.update({
   path: '/tours/$slug',
   getParentRoute: () => LocaleRoute,
 } as any)
+const AuthenticatedAdminContentRoute =
+  AuthenticatedAdminContentRouteImport.update({
+    id: '/admin_/content',
+    path: '/admin/content',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminTeamRoute = AuthenticatedAdminTeamRouteImport.update({
   id: '/admin_/team',
   path: '/admin/team',
@@ -161,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/team': typeof AuthenticatedAdminTeamRoute
   '/$locale/destinations/': typeof LocaleDestinationsIndexRoute
   '/$locale/tours/': typeof LocaleToursIndexRoute
@@ -183,6 +191,7 @@ export interface FileRoutesByTo {
   '/$locale': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/team': typeof AuthenticatedAdminTeamRoute
   '/$locale/destinations': typeof LocaleDestinationsIndexRoute
   '/$locale/tours': typeof LocaleToursIndexRoute
@@ -208,6 +217,7 @@ export interface FileRoutesById {
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/destinations/$slug': typeof LocaleDestinationsSlugRoute
   '/$locale/tours/$slug': typeof LocaleToursSlugRoute
+  '/_authenticated/admin_/content': typeof AuthenticatedAdminContentRoute
   '/_authenticated/admin_/team': typeof AuthenticatedAdminTeamRoute
   '/$locale/destinations/': typeof LocaleDestinationsIndexRoute
   '/$locale/tours/': typeof LocaleToursIndexRoute
@@ -233,6 +243,7 @@ export interface FileRouteTypes {
     | '/$locale/'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
+    | '/admin/content'
     | '/admin/team'
     | '/$locale/destinations/'
     | '/$locale/tours/'
@@ -255,6 +266,7 @@ export interface FileRouteTypes {
     | '/$locale'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
+    | '/admin/content'
     | '/admin/team'
     | '/$locale/destinations'
     | '/$locale/tours'
@@ -279,6 +291,7 @@ export interface FileRouteTypes {
     | '/$locale/'
     | '/$locale/destinations/$slug'
     | '/$locale/tours/$slug'
+    | '/_authenticated/admin_/content'
     | '/_authenticated/admin_/team'
     | '/$locale/destinations/'
     | '/$locale/tours/'
@@ -441,6 +454,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleToursSlugRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/_authenticated/admin_/content': {
+      id: '/_authenticated/admin_/content'
+      path: '/admin/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AuthenticatedAdminContentRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin_/team': {
       id: '/_authenticated/admin_/team'
       path: '/admin/team'
@@ -453,11 +473,13 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
   AuthenticatedAdminTeamRoute: typeof AuthenticatedAdminTeamRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
   AuthenticatedAdminTeamRoute: AuthenticatedAdminTeamRoute,
 }
 

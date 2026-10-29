@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { asLocale } from "@/i18n/config";
 import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
-import { FAQ } from "@/content/faq";
+import { useSiteContent } from "@/lib/site-content";
 import { PageHero } from "@/components/site/ui";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
@@ -15,12 +15,13 @@ export const Route = createFileRoute("/$locale/faq")({
 
 function Page() {
   const l = asLocale(Route.useParams().locale);
+  const { faq } = useSiteContent();
   return (
     <>
       <PageHero media="delta" eyebrow={t("faq", l)} title={t("faq", l)} intro={intro[l]} />
       <section className="container-edit max-w-3xl py-16 md:py-24">
         <Accordion type="single" collapsible>
-          {FAQ.map((f, i) => (
+          {faq.map((f, i) => (
             <AccordionItem key={i} value={`q${i}`}>
               <AccordionTrigger className="min-h-14 text-start font-display text-lg text-primary">{f.q[l]}</AccordionTrigger>
               <AccordionContent className="text-base leading-relaxed text-muted-foreground">{f.a[l]}</AccordionContent>

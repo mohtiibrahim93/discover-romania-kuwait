@@ -11,7 +11,7 @@
 
 ## Project rules
 - All public pages live under `src/routes/$locale.*` (en/ar/ro); every user-facing string is an `L` object `{en,ar,ro}` — never add a page or field missing a language.
-- Editable content (tours, destinations, styles, FAQ, brand/contact, visa info) lives in `src/content/*`; keep it as the single source until a CMS replaces it.
+- Editable content lives in the `content_collections` table (faq, styles, site, entry), saved only through the owner/editor server function in src/lib/content.functions.ts and gated by the trilingual schema in src/lib/content-schema.ts; `src/content/*` remains the code fallback and the source for tours/destinations, which are not editable yet.
 - The inquiry form must never show a "submitted" state unless a real backend stored the record (`SITE.inquiryBackendConnected`).
 - Inquiries are inserted server-side only (src/lib/inquiry.functions.ts, service role); trip_inquiries has RLS on with no public policies so visitors can never read submissions.
 - Staff area: `/auth` + `/admin` (under `_authenticated`); roles live in `user_roles` (owner/sales/editor), first-ever account auto-becomes owner via DB trigger; inquiry read/update is enforced by RLS (`can_handle_leads`), not by the UI.
