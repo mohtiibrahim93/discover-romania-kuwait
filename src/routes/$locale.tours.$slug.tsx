@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { MessageCircle, Share2 } from "lucide-react";
+import { Share2 } from "lucide-react";
 import { Crumbs } from "@/components/site/Crumbs";
 import { useState } from "react";
 import { asLocale, useLocale } from "@/i18n/config";
@@ -11,6 +11,10 @@ import { useSiteContent } from "@/lib/site-content";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Chip, Img, btn } from "@/components/site/ui";
 import { TourCard } from "@/components/site/TourCard";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { Button } from "@/components/ui/button";
+import { whatsappLink, WHATSAPP_LABEL } from "@/lib/whatsapp";
+import { SITE_ORIGIN } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/tours/$slug")({
   loader: ({ params }) => {
@@ -29,11 +33,13 @@ export const Route = createFileRoute("/$locale/tours/$slug")({
 
 function TourDetail() {
   const l = useLocale();
-  const { styles } = useSiteContent();
+  const { styles, site } = useSiteContent();
   const { slug } = Route.useLoaderData();
-  const tour = getTour(slug)!;
+  const tour = getTour(slug);
   const [copied, setCopied] = useState(false);
-  const related = tour.related.map((r) => TOURS.find((x) => x.slug === r)).filter(Boolean);
+  if (!tour) throw notFound();
+  const related = TOURS.filter((candidate) => tour.related.includes(candidate.slug));
+  const discussHref = site.whatsappDigits ? whatsappLink(site.whatsappDigits, l, { journey: tour.title[l], pageUrl: `${SITE_ORIGIN}/${l}/tours/${tour.slug}` }) : undefined;
 
   const share = async () => {
     const url = window.location.href;
@@ -105,8 +111,9 @@ function TourDetail() {
             <p className="font-display text-2xl text-primary">{tour.title[l]}</p>
             <p className="mt-2 text-sm text-muted-foreground">{t("onRequest", l)}</p>
             <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ tour: tour.slug }} className={`${btn.primary} mt-6 w-full`}>{t("askTour", l)}</Link>
-            <button type="button" onClick={share} className={`${btn.link} mt-3 w-full justify-center`}><Share2 className="h-4 w-4" />{copied ? t("copied", l) : t("share", l)}</button>
-            <button type="button" onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(`${t("shareText", l)} ${tour.title[l]} — ${window.location.href}`)}`, "_blank", "noopener")} className={`${btn.link} w-full justify-center`}><MessageCircle className="h-4 w-4" />{t("shareWa", l)}</button>
+            {discussHref && <Button asChild variant="link" className={`${btn.link} mt-3 h-auto w-full whitespace-normal justify-center`}><a href={discussHref} target="_blank" rel="noopener noreferrer"><WhatsAppIcon />{WHATSAPP_LABEL[l]}</a></Button>}
+            <Button type="button" variant="link" onClick={share} className={`${btn.link} mt-3 h-auto w-full whitespace-normal justify-center`}><Share2 className="h-4 w-4" />{copied ? t("copied", l) : t("share", l)}</Button>
+            <Button type="button" variant="link" onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(`${t("shareText", l)} ${tour.title[l]} — ${window.location.href}`)}`, "_blank", "noopener")} className={`${btn.link} h-auto w-full whitespace-normal justify-center`}><WhatsAppIcon />{t("shareWa", l)}</Button>
           </div>
         </aside>
       </div>
@@ -115,14 +122,15 @@ function TourDetail() {
         <section className="bg-mist py-20">
           <div className="container-edit">
             <h2 className="text-3xl text-primary">{t("related", l)}</h2>
-            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{related.map((r) => <TourCard key={r!.id} tour={r!} />)}</div>
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{related.map((r) => <TourCard key={r.id} tour={r} />)}</div>
           </div>
         </section>
       )}
 
       <div className="fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-border bg-background/95 p-3 backdrop-blur lg:hidden" style={{ paddingBottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}>
         <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ tour: tour.slug }} className={`${btn.primary} flex-1`}>{t("askTour", l)}</Link>
-        <button type="button" onClick={share} aria-label={t("share", l)} className={btn.outline}><Share2 className="h-4 w-4" /></button>
+        {discussHref && <Button asChild variant="outline" className="h-auto min-h-11 px-3"><a href={discussHref} target="_blank" rel="noopener noreferrer" aria-label={WHATSAPP_LABEL[l]} title={WHATSAPP_LABEL[l]}><WhatsAppIcon /></a></Button>}
+        <Button type="button" variant="outline" onClick={share} aria-label={t("share", l)} title={t("share", l)} className="h-auto min-h-11 px-3"><Share2 className="h-4 w-4" /></Button>
       </div>
     </>
   );

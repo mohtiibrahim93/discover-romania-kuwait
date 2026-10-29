@@ -9,6 +9,11 @@
   (owner/editor only, trilingual completeness gate, public pages read saved rows)
 
 ## Open
+- [ ] Promotion readiness: verified operating arrangement and reviewed privacy/terms — waiting on operator/legal details; no invented licence or partner claims
+- [ ] Verify dated entry-policy news against official sources; never imply GCC visa-free travel
+- [ ] Kuwait-focused family/private-trip positioning, practical arrival/comfort guidance, contextual WhatsApp drafts and saved-reference handoff — current batch
+- [ ] Native Arabic editorial review and verified Arabic-speaking support — waiting on operator confirmation
+- [ ] Consent-aware inquiry/WhatsApp conversion measurement and campaign attribution — follow after privacy review; no advertising trackers yet
 - [ ] Tours and day-by-day itineraries editable (needs its own collection + editor)
 - [ ] Destinations editable
 - [ ] Home-page editorial copy and legal pages editable
@@ -16,3 +21,8 @@
 - [ ] Licensed photography replacing the AI placeholder imagery — waiting on the operator's files
 - [ ] Verified business details (email, registration, social profiles) — waiting on the operator
 - [ ] Email notifications for new inquiries — needs a verified sending domain
+
+## Review decisions
+- Preserve the existing site, languages, inquiry-to-human-quote flow and required contact fields; do not rebuild or add payments/an AI chatbot.
+- Existing seasonal advice, family pacing, dietary requests and passport-nationality fields already cover much of the review; improve clarity rather than duplicate them.
+- Share photographs/cards, business identity, response hours and fulfilment promises must use verified operator information, not placeholders or assumptions.
