@@ -27,3 +27,5 @@
 - Preserve the existing site, languages, inquiry-to-human-quote flow and required contact fields; do not rebuild or add payments/an AI chatbot.
 - Existing seasonal advice, family pacing, dietary requests and passport-nationality fields already cover much of the review; improve clarity rather than duplicate them.
 - Share photographs/cards, business identity, response hours and fulfilment promises must use verified operator information, not placeholders or assumptions.
+- [x] Activities catalog, Ardeal & Bucovina family journey, Prices & Payment page
+- [ ] Ask Romanian partner for real circuits/activities to confirm details (waiting on user)
