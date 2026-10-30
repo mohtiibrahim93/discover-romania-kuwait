@@ -28,6 +28,11 @@ export const inquiryInput = z.object({
   flights: z.boolean(),
   notes: opt(2000),
   consent: z.literal(true),
+  heardAbout: opt(20),
+  utmSource: opt(100),
+  utmMedium: opt(100),
+  utmCampaign: opt(100),
+  referrerHost: opt(100),
   website: z.string().max(0).optional(), // honeypot
 });
 
@@ -72,6 +77,11 @@ export const submitInquiry = createServerFn({ method: "POST" })
       flight_assistance: data.flights,
       notes: data.notes,
       consent: true,
+      heard_about: data.heardAbout,
+      utm_source: data.utmSource,
+      utm_medium: data.utmMedium,
+      utm_campaign: data.utmCampaign,
+      referrer_host: data.referrerHost,
     });
     if (error) {
       console.error("inquiry insert failed", error);

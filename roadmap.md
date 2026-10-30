@@ -12,8 +12,10 @@
 - Contextual WhatsApp drafts for public pages/journeys and saved-reference follow-up (real inquiry tested and test record removed)
 - Entry-process claim checked against official Council conclusions; Kuwait source linked with explicit non-exemption caution (not an individual entry-eligibility check)
 - Lovable Storage enabled: private `site-media` folder (20MB per file), staff read + owner/editor write rules; upload and cleanup verified
+- Inquiry lead source: optional "How did you hear about us?" plus first-party utm_* tags and referring host, shown in /admin and CSV (no third-party trackers); travel-month off-by-one fix
 
 ## Open
+- [ ] Canonical/sitemap/WhatsApp page links use `SITE_ORIGIN` (picture-perfect-screen-scene.lovable.app) — confirm the published domain or custom domain, then update `src/lib/seo.ts`
 - [ ] Promotion readiness: verified operating arrangement and reviewed privacy/terms — waiting on operator/legal details; no invented licence or partner claims
 - [ ] Native Arabic editorial review and verified Arabic-speaking support — waiting on operator confirmation
 - [ ] Consent-aware inquiry/WhatsApp conversion measurement and campaign attribution — follow after privacy review; no advertising trackers yet
