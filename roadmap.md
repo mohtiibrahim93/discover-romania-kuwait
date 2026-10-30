@@ -21,7 +21,7 @@
 - [ ] Destinations editable
 - [ ] Home-page editorial copy and legal pages editable
 - [ ] OG/social share cards for each locale page
-- [ ] Decide how photographs reach visitors: allow public folders in workspace settings (then `site-media` can be switched public), or serve private files through signed links the site generates
+- [ ] Switch `site-media` to public and open visitor reads — waiting on you to allow public folders in workspace Settings → Privacy & Security; then I flip it in one step
 - [ ] Licensed photography replacing the AI placeholder imagery — waiting on the operator's files
 - [ ] Verified business details (email, registration, social profiles) — waiting on the operator
 - [ ] Email notifications for new inquiries — needs a verified sending domain
