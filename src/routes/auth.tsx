@@ -66,6 +66,8 @@ function AuthPage() {
         <label className="block text-sm">Password<input type="password" required minLength={8} autoComplete={mode === "in" ? "current-password" : "new-password"} value={password} onChange={(e) => setPassword(e.target.value)} className={input} /></label>
         {msg && <p role="status" className="text-sm text-muted-foreground">{msg}</p>}
         <button disabled={busy} className={btn.primary + " w-full disabled:opacity-60"}>{busy ? "…" : mode === "in" ? "Sign in" : "Create account"}</button>
+        <div className="flex items-center gap-3 text-xs text-muted-foreground"><span className="h-px flex-1 bg-border" />or<span className="h-px flex-1 bg-border" /></div>
+        <button type="button" disabled={busy} onClick={lovableIn} className={btn.outline + " w-full disabled:opacity-60"}>Continue with Lovable</button>
         <button type="button" onClick={() => { setMode(mode === "in" ? "up" : "in"); setMsg(null); }} className="text-sm text-accent underline-offset-4 hover:underline">
           {mode === "in" ? "New team member? Create an account" : "Already have an account? Sign in"}
         </button>
