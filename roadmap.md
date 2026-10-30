@@ -11,6 +11,7 @@
 - Kuwait-focused family/private-trip positioning, arrival/comfort guidance in EN/AR/RO
 - Contextual WhatsApp drafts for public pages/journeys and saved-reference follow-up (real inquiry tested and test record removed)
 - Entry-process claim checked against official Council conclusions; Kuwait source linked with explicit non-exemption caution (not an individual entry-eligibility check)
+- Lovable Storage enabled: private `site-media` folder (20MB per file), staff read + owner/editor write rules; upload and cleanup verified
 
 ## Open
 - [ ] Promotion readiness: verified operating arrangement and reviewed privacy/terms — waiting on operator/legal details; no invented licence or partner claims
@@ -20,6 +21,7 @@
 - [ ] Destinations editable
 - [ ] Home-page editorial copy and legal pages editable
 - [ ] OG/social share cards for each locale page
+- [ ] Decide how photographs reach visitors: allow public folders in workspace settings (then `site-media` can be switched public), or serve private files through signed links the site generates
 - [ ] Licensed photography replacing the AI placeholder imagery — waiting on the operator's files
 - [ ] Verified business details (email, registration, social profiles) — waiting on the operator
 - [ ] Email notifications for new inquiries — needs a verified sending domain

@@ -64,6 +64,13 @@
       "when": 1793306330093,
       "tag": "0008_fix_arabic_diacritics",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793374015234,
+      "tag": "0009_storage_rls_site_media",
+      "breakpoints": true
     }
   ]
 }
