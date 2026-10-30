@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
 import { Wordmark } from "@/components/site/Wordmark";
 import { btn } from "@/components/site/ui";
 
@@ -42,6 +43,17 @@ function AuthPage() {
       if (data.session) navigate({ to: "/admin" });
       else setMsg("Check your email to confirm your account, then sign in. An owner must grant you access.");
     }
+  }
+
+  async function lovableIn() {
+    setBusy(true); setMsg(null);
+    const res = await lovable.auth.signInWithOAuth("lovable", { redirect_uri: window.location.origin });
+    if (res.redirected) return;
+    setBusy(false);
+    if (res.error) return setMsg(res.error.message);
+    const { data } = await supabase.auth.getUser();
+    if (data.user) navigate({ to: "/admin" });
+    else setMsg("Sign-in did not complete. Please try again.");
   }
 
   const input = "mt-1 w-full rounded-sm border border-input bg-background px-3 py-2.5 text-foreground ltr-isolate";
