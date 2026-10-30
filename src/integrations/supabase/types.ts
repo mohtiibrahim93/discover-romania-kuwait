@@ -103,6 +103,11 @@ export type Database = {
           tour_slug: string | null
           travel_month: string
           travel_style: string | null
+          heard_about: string | null
+          referrer_host: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
         }
         Insert: {
           accommodation?: string | null
@@ -133,6 +138,11 @@ export type Database = {
           tour_slug?: string | null
           travel_month: string
           travel_style?: string | null
+          heard_about?: string | null
+          referrer_host?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Update: {
           accommodation?: string | null
@@ -163,6 +173,11 @@ export type Database = {
           tour_slug?: string | null
           travel_month?: string
           travel_style?: string | null
+          heard_about?: string | null
+          referrer_host?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
         }
         Relationships: []
       }

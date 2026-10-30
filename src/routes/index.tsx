@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { LOCALES, LOCALE_LABELS, LOCALE_STORAGE_KEY, isLocale, pickBrowserLocale } from "@/i18n/config";
 import { Wordmark } from "@/components/site/Wordmark";
+import { captureLeadSource } from "@/lib/lead-source";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,6 +21,7 @@ export const Route = createFileRoute("/")({
 function LocaleGate() {
   const navigate = useNavigate();
   useEffect(() => {
+    captureLeadSource(); // before the redirect drops the ad link's utm_* tags
     let stored: string | null = null;
     try { stored = localStorage.getItem(LOCALE_STORAGE_KEY); } catch { /* ignore */ }
     const loc = isLocale(stored) ? stored : pickBrowserLocale(navigator.languages ?? [navigator.language]);

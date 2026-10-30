@@ -13,6 +13,8 @@ import { DESTINATIONS } from "@/content/destinations";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { whatsappLink, WHATSAPP_LABEL } from "@/lib/whatsapp";
+import { HEARD_ABOUT, readLeadSource } from "@/lib/lead-source";
+import { PLANNER_WHEN, PLANNER_WHO } from "@/components/site/QuickPlanner";
 
 const F = {
   intro: { en: "Share a few details and we will prepare a personalised proposed itinerary. This is a quote inquiry — not a booking.", ar: "شاركنا بعض التفاصيل وسنعدّ لك برنامجًا مقترحًا مخصصًا. هذا طلب عرض سعر وليس حجزًا.", ro: "Spune-ne câteva detalii și îți pregătim un itinerariu propus personalizat. Aceasta este o cerere de ofertă — nu o rezervare." },
@@ -35,6 +37,8 @@ const F = {
   dietary: { en: "Dietary requests (e.g. halal)", ar: "طلبات غذائية (مثل الحلال)", ro: "Cerințe alimentare (ex. halal)" },
   guideLang: { en: "Requested guide language", ar: "لغة المرشد المطلوبة", ro: "Limba ghidului dorită" },
   flights: { en: "Flight assistance might be helpful", ar: "قد تكون المساعدة في الطيران مفيدة", ro: "Ajutorul cu zborurile ar fi util" },
+  fromPlanner: { en: "Your choices", ar: "اختياراتك", ro: "Alegerile tale" },
+  heardAbout: { en: "How did you hear about us? (optional)", ar: "كيف عرفت عنا؟ (اختياري)", ro: "Cum ai aflat de noi? (opțional)" },
   notes: { en: "Anything else we should know?", ar: "هل هناك ما يجب أن نعرفه أيضًا؟", ro: "Mai este ceva ce ar trebui să știm?" },
   notesHint: { en: "Children’s ages, prayer breaks, room arrangements or rest days. Please do not include passport numbers, payment details or medical information.", ar: "أعمار الأطفال، فترات الصلاة، ترتيبات الغرف أو أيام الراحة. يُرجى عدم إدراج أرقام جوازات السفر أو بيانات الدفع أو المعلومات الطبية.", ro: "Vârstele copiilor, pauze pentru rugăciune, configurația camerelor sau zile de odihnă. Nu include numere de pașaport, date de plată ori informații medicale." },
   requestsHint: { en: "Dining, guide-language and accommodation requests depend on availability and must be confirmed in your written proposal.", ar: "تعتمد طلبات الطعام ولغة المرشد والإقامة على التوفر، ويجب تأكيدها في المقترح المكتوب.", ro: "Cerințele de masă, limba ghidului și cazarea depind de disponibilitate și trebuie confirmate în propunerea scrisă." },
@@ -73,7 +77,11 @@ const F = {
   another: { en: "Send another inquiry", ar: "إرسال استفسار آخر", ro: "Trimite o altă solicitare" },
 } satisfies Record<string, L>;
 
-const searchSchema = z.object({ tour: z.string().optional() });
+const searchSchema = z.object({
+  tour: z.string().optional(),
+  who: z.enum(PLANNER_WHO.map((o) => o.id) as [string, ...string[]]).optional().catch(undefined),
+  when: z.enum(PLANNER_WHEN.map((o) => o.id) as [string, ...string[]]).optional().catch(undefined),
+});
 
 export const Route = createFileRoute("/$locale/plan-your-trip")({
   validateSearch: (s) => searchSchema.catch({}).parse(s),
@@ -103,13 +111,16 @@ const schema = (l: Locale) => z.object({
   guideLang: z.string().max(60).optional(),
   flights: z.boolean().optional(),
   notes: z.string().max(2000).optional(),
+  heardAbout: z.string().max(20).optional(),
   consent: z.literal(true, { errorMap: () => ({ message: F.errConsent[l] }) }),
 });
 
 function Page() {
   const l = asLocale(Route.useParams().locale);
   const { styles, site } = useSiteContent();
-  const { tour } = Route.useSearch();
+  const { tour, who, when } = Route.useSearch();
+  // Choices from the home-page planner travel with the inquiry as a line in the notes.
+  const plannerText = [PLANNER_WHO.find((o) => o.id === who)?.label[l], PLANNER_WHEN.find((o) => o.id === when)?.label[l]].filter(Boolean).join(" · ");
   const tours = publishedTours();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [kind, setKind] = useState<"tour" | "tailored">(tour ? "tour" : "tailored");
@@ -139,7 +150,8 @@ function Page() {
         nationality: v.nationality, lang: v.lang, month: v.month, adults: v.adults, children: v.children,
         tour: kind === "tour" ? v.tour : "custom", destinations: fd.getAll("destinations").map(String),
         interests: v.interests, pace: v.pace, accommodation: v.accommodation, budget: v.budget, duration: v.duration,
-        style: v.style, dietary: v.dietary, guideLang: v.guideLang, flights: !!v.flights, notes: v.notes, consent: true,
+        style: v.style, dietary: v.dietary, guideLang: v.guideLang, flights: !!v.flights, notes: plannerText ? [`${F.fromPlanner[l]}: ${plannerText}`, v.notes].filter(Boolean).join("\n") : v.notes, consent: true,
+        heardAbout: v.heardAbout, ...readLeadSource(),
         website: String(fd.get("website") ?? ""),
       } });
       if (out.ok) { setDone(out.reference); window.scrollTo({ top: 0, behavior: "smooth" }); }
@@ -148,7 +160,10 @@ function Page() {
     finally { setBusy(false); }
   };
 
-  const months = Array.from({ length: 18 }, (_, i) => { const d = new Date(2026, 10 + i, 1); return { v: d.toISOString().slice(0, 7), label: d.toLocaleDateString(l === "ar" ? "ar-KW" : l, { month: "long", year: "numeric" }) }; });
+  // Build "YYYY-MM" from the numbers, not toISOString(): east of UTC (Kuwait, Romania) local
+  // midnight on the 1st is still the previous month in UTC, which shifted the saved month.
+  const now = new Date();
+  const months = Array.from({ length: 18 }, (_, i) => { const y = now.getFullYear() + Math.floor((now.getMonth() + i) / 12), m = (now.getMonth() + i) % 12, d = new Date(y, m, 1); return { v: `${y}-${String(m + 1).padStart(2, "0")}`, label: d.toLocaleDateString(l === "ar" ? "ar-KW" : l, { month: "long", year: "numeric" }) }; });
   const input = "min-h-12 w-full rounded-sm border border-input bg-card px-3 text-base focus-visible:border-accent aria-[invalid=true]:border-destructive";
 
   return (
@@ -169,6 +184,7 @@ function Page() {
           </div>
         ) : (
         <form noValidate onSubmit={onSubmit} className="grid gap-6 sm:grid-cols-2">
+          {plannerText && <p className="rounded-2xl bg-mint px-4 py-3 text-sm text-mint-ink sm:col-span-2"><span className="font-semibold">{F.fromPlanner[l]}:</span> {plannerText}</p>}
           {Object.keys(errors).length > 0 && <p role="alert" className="text-sm font-semibold text-destructive sm:col-span-2">{F.errFix[l]}</p>}
           <Field id="name" label={F.name[l]} err={errors["name"]} req><input id="f-name" name="name" autoComplete="name" className={input} aria-invalid={!!errors["name"]} /></Field>
           <Field id="email" label={F.email[l]} err={errors["email"]} req><input id="f-email" name="email" type="email" dir="ltr" autoComplete="email" className={input} aria-invalid={!!errors["email"]} /></Field>
@@ -224,6 +240,8 @@ function Page() {
               <p className="text-sm leading-relaxed text-muted-foreground sm:col-span-2">{F.requestsHint[l]}</p>
             </div>
           </details>
+
+          <Field id="heardAbout" label={F.heardAbout[l]} full><select id="f-heardAbout" name="heardAbout" defaultValue="" className={input}><option value="">—</option>{HEARD_ABOUT.map((h) => <option key={h.id} value={h.id}>{h.label[l]}</option>)}</select></Field>
 
           <div className="sm:col-span-2">
             <label className="flex gap-3 text-sm leading-relaxed">

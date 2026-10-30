@@ -8,6 +8,8 @@ import { contentQueryOptions, useSiteContent } from "@/lib/site-content";
 import { whatsappLink, WHATSAPP_LABEL } from "@/lib/whatsapp";
 import { SITE_ORIGIN } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
+import { captureLeadSource } from "@/lib/lead-source";
 
 export const Route = createFileRoute("/$locale")({
   beforeLoad: ({ params }) => {
@@ -30,6 +32,7 @@ function LocaleLayout() {
   // the same snapshot so the first client render matches the server HTML.
   queryClient.setQueryData(contentQueryOptions.queryKey, Route.useLoaderData().content);
   const { site } = useSiteContent();
+  useEffect(() => captureLeadSource(), []);
   return (
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[60] focus:bg-background focus:p-3">{t("skip", l)}</a>

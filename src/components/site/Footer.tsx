@@ -7,7 +7,7 @@ import { Wordmark } from "./Wordmark";
 import { LocaleSwitch } from "./Header";
 
 const COLS: { title: UIKey; links: { key: UIKey; to: string }[] }[] = [
-  { title: "tours", links: [{ key: "tours", to: "/$locale/tours" }, { key: "styles", to: "/$locale/experiences" }, { key: "destinations", to: "/$locale/destinations" }, { key: "planTrip", to: "/$locale/plan-your-trip" }] },
+  { title: "tours", links: [{ key: "tours", to: "/$locale/tours" }, { key: "services", to: "/$locale/services" }, { key: "styles", to: "/$locale/experiences" }, { key: "destinations", to: "/$locale/destinations" }, { key: "planTrip", to: "/$locale/plan-your-trip" }] },
   { title: "about", links: [{ key: "about", to: "/$locale/about" }, { key: "why", to: "/$locale/why-romania" }, { key: "faq", to: "/$locale/faq" }, { key: "travelInfo", to: "/$locale/travel-information" }, { key: "howItWorks", to: "/$locale/how-it-works" }, { key: "contact", to: "/$locale/contact" }] },
   { title: "privacy", links: [{ key: "privacy", to: "/$locale/privacy" }, { key: "terms", to: "/$locale/terms" }, { key: "cookies", to: "/$locale/cookies" }] },
 ];

@@ -83,7 +83,7 @@ function AdminPage() {
   }
 
   function exportCsv() {
-    const cols: (keyof Inquiry)[] = ["reference", "created_at", "status", "name", "email", "phone", "residence", "nationality", "preferred_language", "request_type", "tour_slug", "destinations", "travel_month", "adults", "children", "budget", "duration", "notes"];
+    const cols: (keyof Inquiry)[] = ["reference", "created_at", "status", "name", "email", "phone", "residence", "nationality", "preferred_language", "request_type", "tour_slug", "destinations", "travel_month", "adults", "children", "budget", "duration", "notes", "heard_about", "utm_source", "utm_medium", "utm_campaign", "referrer_host"];
     const esc = (v: unknown) => `"${String(Array.isArray(v) ? v.join("; ") : v ?? "").replace(/"/g, '""')}"`;
     const csv = [cols.join(","), ...rows.map((r) => cols.map((c) => esc(r[c])).join(","))].join("\n");
     const a = document.createElement("a");
@@ -237,7 +237,7 @@ function LeadPanel({ lead, email, onClose }: { lead: Inquiry; email: string | nu
           {field("Email", lead.email)}{field("WhatsApp / phone", lead.phone)}
           {field("Residence", lead.residence)}{field("Nationality", lead.nationality)}
           {field("Preferred language", lead.preferred_language)}{field("Site language", lead.site_locale)}
-          {field("Request", lead.request_type === "custom" ? "Tailored itinerary" : "Tour")}{field("Tour", lead.tour_slug)}
+          {field("Request", lead.request_type === "tailored" ? "Tailored itinerary" : "Tour")}{field("Tour", lead.tour_slug)}
           {field("Destinations", lead.destinations)}{field("Travel month", lead.travel_month)}
           {field("Adults", lead.adults)}{field("Children", lead.children)}
           {field("Duration", lead.duration)}{field("Budget", lead.budget)}
@@ -245,6 +245,8 @@ function LeadPanel({ lead, email, onClose }: { lead: Inquiry; email: string | nu
           {field("Travel style", lead.travel_style)}{field("Guide language", lead.guide_language)}
           {field("Dietary", lead.dietary)}{field("Flight help", lead.flight_assistance)}
           {field("Interests", lead.interests)}
+          {field("Heard about us via", lead.heard_about)}{field("Arrived from site", lead.referrer_host)}
+          {field("Campaign (utm)", [lead.utm_source, lead.utm_medium, lead.utm_campaign].filter(Boolean).join(" / ") || null)}
         </dl>
         {lead.notes && <div className="mt-4 rounded-sm bg-mist p-4 text-sm"><p className="text-xs text-muted-foreground">Guest notes</p><p className="mt-1 whitespace-pre-wrap">{lead.notes}</p></div>}
 

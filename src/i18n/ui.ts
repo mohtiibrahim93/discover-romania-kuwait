@@ -5,6 +5,7 @@ const d = <T extends Record<string, L>>(x: T) => x;
 export const UI = d({
   home: { en: "Home", ar: "الرئيسية", ro: "Acasă" },
   tours: { en: "Tours", ar: "الرحلات", ro: "Circuite" },
+  services: { en: "Services", ar: "خدماتنا", ro: "Servicii" },
   destinations: { en: "Destinations", ar: "الوجهات", ro: "Destinații" },
   styles: { en: "Travel Styles", ar: "أنماط السفر", ro: "Stiluri de călătorie" },
   tailor: { en: "Tailor-Made Trips", ar: "رحلات مصممة خصيصًا لك", ro: "Călătorii personalizate" },
