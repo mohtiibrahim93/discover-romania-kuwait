@@ -35,8 +35,21 @@
   --color-mist: var(--mist);
   --color-on-dark: var(--on-dark);
   --color-on-dark-muted: var(--on-dark-muted);
-  --font-display: "Fraunces", "Noto Naskh Arabic", Georgia, serif;
-  --font-sans: "Manrope", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --color-gold: var(--gold);
+  --color-sky: var(--sky);
+  --color-sky-soft: var(--sky-soft);
+  --color-sky-ink: var(--sky-ink);
+  --color-terracotta: var(--terracotta);
+  --color-mint: var(--mint);
+  --color-mint-ink: var(--mint-ink);
+  --color-leaf: var(--leaf);
+  --color-peach: var(--peach);
+  --color-peach-ink: var(--peach-ink);
+  --color-butter: var(--butter);
+  --color-butter-ink: var(--butter-ink);
+  --color-bronze: var(--bronze);
+  --font-display: "Bricolage Grotesque", "Noto Kufi Arabic", system-ui, sans-serif;
+  --font-sans: "Nunito Sans", "IBM Plex Sans Arabic", system-ui, sans-serif;
 }
 
 :root {
@@ -49,6 +62,20 @@
   --mist: oklch(0.93 0.005 140);
   --on-dark: oklch(0.973 0.007 85);
   --on-dark-muted: oklch(0.973 0.007 85 / 0.78);
+  /* Accents of the 2026 refresh: gold on dark, sky for actions, soft tints for cards. */
+  --gold: #e3c27f;
+  --sky: #1d5f99;
+  --sky-soft: #e6f0f7;
+  --sky-ink: #1d4f7d;
+  --terracotta: #b4532a;
+  --mint: #e5f3ec;
+  --mint-ink: #1f5c43;
+  --leaf: #1f6f53;
+  --peach: #fdeee4;
+  --peach-ink: #8a3a17;
+  --butter: #fff3d6;
+  --butter-ink: #6d4c00;
+  --bronze: #8a6a2e;
 
   --background: var(--ivory);
   --foreground: var(--charcoal);
@@ -83,8 +110,8 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.01em; }
-  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4 { font-family: "IBM Plex Sans Arabic", sans-serif; font-weight: 500; letter-spacing: 0; line-height: 1.35; }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; }
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4 { font-family: "Noto Kufi Arabic", sans-serif; font-weight: 700; letter-spacing: 0; line-height: 1.35; }
   [dir="rtl"] body { line-height: 1.8; }
   :focus-visible { outline: 2px solid var(--color-champagne); outline-offset: 3px; }
   @media (prefers-reduced-motion: reduce) {

@@ -23,6 +23,7 @@ import { Route as LocaleFaqRouteImport } from './routes/$locale.faq'
 import { Route as LocaleHowItWorksRouteImport } from './routes/$locale.how-it-works'
 import { Route as LocalePlanYourTripRouteImport } from './routes/$locale.plan-your-trip'
 import { Route as LocalePrivacyRouteImport } from './routes/$locale.privacy'
+import { Route as LocaleServicesRouteImport } from './routes/$locale.services'
 import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
 import { Route as LocaleTravelInformationRouteImport } from './routes/$locale.travel-information'
 import { Route as LocaleWhyRomaniaRouteImport } from './routes/$locale.why-romania'
@@ -103,6 +104,11 @@ const LocalePrivacyRoute = LocalePrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleServicesRoute = LocaleServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleTermsRoute = LocaleTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -168,6 +174,7 @@ export interface FileRoutesByFullPath {
   '/$locale/how-it-works': typeof LocaleHowItWorksRoute
   '/$locale/plan-your-trip': typeof LocalePlanYourTripRoute
   '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/services': typeof LocaleServicesRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/travel-information': typeof LocaleTravelInformationRoute
   '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
@@ -192,6 +199,7 @@ export interface FileRoutesByTo {
   '/$locale/how-it-works': typeof LocaleHowItWorksRoute
   '/$locale/plan-your-trip': typeof LocalePlanYourTripRoute
   '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/services': typeof LocaleServicesRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/travel-information': typeof LocaleTravelInformationRoute
   '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
@@ -219,6 +227,7 @@ export interface FileRoutesById {
   '/$locale/how-it-works': typeof LocaleHowItWorksRoute
   '/$locale/plan-your-trip': typeof LocalePlanYourTripRoute
   '/$locale/privacy': typeof LocalePrivacyRoute
+  '/$locale/services': typeof LocaleServicesRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/travel-information': typeof LocaleTravelInformationRoute
   '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
@@ -246,6 +255,7 @@ export interface FileRouteTypes {
     | '/$locale/how-it-works'
     | '/$locale/plan-your-trip'
     | '/$locale/privacy'
+    | '/$locale/services'
     | '/$locale/terms'
     | '/$locale/travel-information'
     | '/$locale/why-romania'
@@ -270,6 +280,7 @@ export interface FileRouteTypes {
     | '/$locale/how-it-works'
     | '/$locale/plan-your-trip'
     | '/$locale/privacy'
+    | '/$locale/services'
     | '/$locale/terms'
     | '/$locale/travel-information'
     | '/$locale/why-romania'
@@ -296,6 +307,7 @@ export interface FileRouteTypes {
     | '/$locale/how-it-works'
     | '/$locale/plan-your-trip'
     | '/$locale/privacy'
+    | '/$locale/services'
     | '/$locale/terms'
     | '/$locale/travel-information'
     | '/$locale/why-romania'
@@ -417,6 +429,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocalePrivacyRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/services': {
+      id: '/$locale/services'
+      path: '/services'
+      fullPath: '/$locale/services'
+      preLoaderRoute: typeof LocaleServicesRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/terms': {
       id: '/$locale/terms'
       path: '/terms'
@@ -514,6 +533,7 @@ interface LocaleRouteChildren {
   LocaleHowItWorksRoute: typeof LocaleHowItWorksRoute
   LocalePlanYourTripRoute: typeof LocalePlanYourTripRoute
   LocalePrivacyRoute: typeof LocalePrivacyRoute
+  LocaleServicesRoute: typeof LocaleServicesRoute
   LocaleTermsRoute: typeof LocaleTermsRoute
   LocaleTravelInformationRoute: typeof LocaleTravelInformationRoute
   LocaleWhyRomaniaRoute: typeof LocaleWhyRomaniaRoute
@@ -533,6 +553,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleHowItWorksRoute: LocaleHowItWorksRoute,
   LocalePlanYourTripRoute: LocalePlanYourTripRoute,
   LocalePrivacyRoute: LocalePrivacyRoute,
+  LocaleServicesRoute: LocaleServicesRoute,
   LocaleTermsRoute: LocaleTermsRoute,
   LocaleTravelInformationRoute: LocaleTravelInformationRoute,
   LocaleWhyRomaniaRoute: LocaleWhyRomaniaRoute,

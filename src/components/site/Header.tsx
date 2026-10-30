@@ -10,12 +10,19 @@ import { btn } from "./ui";
 const NAV: { key: UIKey; to: string; search?: Record<string, string> }[] = [
   { key: "home", to: "/$locale" },
   { key: "tours", to: "/$locale/tours" },
+  { key: "services", to: "/$locale/services" },
   { key: "destinations", to: "/$locale/destinations" },
   { key: "styles", to: "/$locale/experiences" },
-  { key: "tailor", to: "/$locale/plan-your-trip" },
-  { key: "why", to: "/$locale/why-romania" },
+  { key: "travelInfo", to: "/$locale/travel-information" },
   { key: "about", to: "/$locale/about" },
+];
+
+/** Secondary pages: in the phone menu and the footer, not the desktop bar. */
+const MORE: { key: UIKey; to: string }[] = [
+  { key: "why", to: "/$locale/why-romania" },
   { key: "contact", to: "/$locale/contact" },
+  { key: "faq", to: "/$locale/faq" },
+  { key: "howItWorks", to: "/$locale/how-it-works" },
 ];
 
 const LOCALE_SHORT: Record<(typeof LOCALES)[number], string> = { en: "EN", ar: "AR", ro: "RO" };
@@ -47,7 +54,9 @@ export function Header() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const overHero = !scrolled && !open;
+  // The Arabic home opens on a light background, so its header starts solid.
+  const lightTop = /^\/ar\/?$/.test(pathname);
+  const overHero = !scrolled && !open && !lightTop;
 
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 24);
@@ -96,9 +105,9 @@ export function Header() {
                 className="border-b border-border py-4 font-display text-2xl text-primary"
                 activeProps={{ className: "text-accent" }}>{t(n.key, l)}</Link>
             ))}
-            <Link to="/$locale/faq" params={{ locale: l }} className="border-b border-border py-4 text-base text-foreground">{t("faq", l)}</Link>
-            <Link to="/$locale/travel-information" params={{ locale: l }} className="border-b border-border py-4 text-base text-foreground">{t("travelInfo", l)}</Link>
-            <Link to="/$locale/how-it-works" params={{ locale: l }} className="border-b border-border py-4 text-base text-foreground">{t("howItWorks", l)}</Link>
+            {MORE.map((n) => (
+              <Link key={n.key} to={n.to} params={{ locale: l }} className="border-b border-border py-4 text-base text-foreground">{t(n.key, l)}</Link>
+            ))}
             <LocaleSwitch className="mt-6" />
             <Link to="/$locale/plan-your-trip" params={{ locale: l }} className={cn(btn.primary, "mt-6 w-full")}>{t("planTrip", l)}</Link>
           </nav>

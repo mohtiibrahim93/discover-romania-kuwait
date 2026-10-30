@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { whatsappLink, WHATSAPP_LABEL } from "@/lib/whatsapp";
 import { HEARD_ABOUT, readLeadSource } from "@/lib/lead-source";
+import { PLANNER_WHEN, PLANNER_WHO } from "@/components/site/QuickPlanner";
 
 const F = {
   intro: { en: "Share a few details and we will prepare a personalised proposed itinerary. This is a quote inquiry — not a booking.", ar: "شاركنا بعض التفاصيل وسنعدّ لك برنامجًا مقترحًا مخصصًا. هذا طلب عرض سعر وليس حجزًا.", ro: "Spune-ne câteva detalii și îți pregătim un itinerariu propus personalizat. Aceasta este o cerere de ofertă — nu o rezervare." },
@@ -36,6 +37,7 @@ const F = {
   dietary: { en: "Dietary requests (e.g. halal)", ar: "طلبات غذائية (مثل الحلال)", ro: "Cerințe alimentare (ex. halal)" },
   guideLang: { en: "Requested guide language", ar: "لغة المرشد المطلوبة", ro: "Limba ghidului dorită" },
   flights: { en: "Flight assistance might be helpful", ar: "قد تكون المساعدة في الطيران مفيدة", ro: "Ajutorul cu zborurile ar fi util" },
+  fromPlanner: { en: "Your choices", ar: "اختياراتك", ro: "Alegerile tale" },
   heardAbout: { en: "How did you hear about us? (optional)", ar: "كيف عرفت عنا؟ (اختياري)", ro: "Cum ai aflat de noi? (opțional)" },
   notes: { en: "Anything else we should know?", ar: "هل هناك ما يجب أن نعرفه أيضًا؟", ro: "Mai este ceva ce ar trebui să știm?" },
   notesHint: { en: "Children’s ages, prayer breaks, room arrangements or rest days. Please do not include passport numbers, payment details or medical information.", ar: "أعمار الأطفال، فترات الصلاة، ترتيبات الغرف أو أيام الراحة. يُرجى عدم إدراج أرقام جوازات السفر أو بيانات الدفع أو المعلومات الطبية.", ro: "Vârstele copiilor, pauze pentru rugăciune, configurația camerelor sau zile de odihnă. Nu include numere de pașaport, date de plată ori informații medicale." },
@@ -75,7 +77,11 @@ const F = {
   another: { en: "Send another inquiry", ar: "إرسال استفسار آخر", ro: "Trimite o altă solicitare" },
 } satisfies Record<string, L>;
 
-const searchSchema = z.object({ tour: z.string().optional() });
+const searchSchema = z.object({
+  tour: z.string().optional(),
+  who: z.enum(PLANNER_WHO.map((o) => o.id) as [string, ...string[]]).optional().catch(undefined),
+  when: z.enum(PLANNER_WHEN.map((o) => o.id) as [string, ...string[]]).optional().catch(undefined),
+});
 
 export const Route = createFileRoute("/$locale/plan-your-trip")({
   validateSearch: (s) => searchSchema.catch({}).parse(s),
@@ -112,7 +118,9 @@ const schema = (l: Locale) => z.object({
 function Page() {
   const l = asLocale(Route.useParams().locale);
   const { styles, site } = useSiteContent();
-  const { tour } = Route.useSearch();
+  const { tour, who, when } = Route.useSearch();
+  // Choices from the home-page planner travel with the inquiry as a line in the notes.
+  const plannerText = [PLANNER_WHO.find((o) => o.id === who)?.label[l], PLANNER_WHEN.find((o) => o.id === when)?.label[l]].filter(Boolean).join(" · ");
   const tours = publishedTours();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [kind, setKind] = useState<"tour" | "tailored">(tour ? "tour" : "tailored");
@@ -142,7 +150,7 @@ function Page() {
         nationality: v.nationality, lang: v.lang, month: v.month, adults: v.adults, children: v.children,
         tour: kind === "tour" ? v.tour : "custom", destinations: fd.getAll("destinations").map(String),
         interests: v.interests, pace: v.pace, accommodation: v.accommodation, budget: v.budget, duration: v.duration,
-        style: v.style, dietary: v.dietary, guideLang: v.guideLang, flights: !!v.flights, notes: v.notes, consent: true,
+        style: v.style, dietary: v.dietary, guideLang: v.guideLang, flights: !!v.flights, notes: plannerText ? [`${F.fromPlanner[l]}: ${plannerText}`, v.notes].filter(Boolean).join("\n") : v.notes, consent: true,
         heardAbout: v.heardAbout, ...readLeadSource(),
         website: String(fd.get("website") ?? ""),
       } });
@@ -176,6 +184,7 @@ function Page() {
           </div>
         ) : (
         <form noValidate onSubmit={onSubmit} className="grid gap-6 sm:grid-cols-2">
+          {plannerText && <p className="rounded-2xl bg-mint px-4 py-3 text-sm text-mint-ink sm:col-span-2"><span className="font-semibold">{F.fromPlanner[l]}:</span> {plannerText}</p>}
           {Object.keys(errors).length > 0 && <p role="alert" className="text-sm font-semibold text-destructive sm:col-span-2">{F.errFix[l]}</p>}
           <Field id="name" label={F.name[l]} err={errors["name"]} req><input id="f-name" name="name" autoComplete="name" className={input} aria-invalid={!!errors["name"]} /></Field>
           <Field id="email" label={F.email[l]} err={errors["email"]} req><input id="f-email" name="email" type="email" dir="ltr" autoComplete="email" className={input} aria-invalid={!!errors["email"]} /></Field>
