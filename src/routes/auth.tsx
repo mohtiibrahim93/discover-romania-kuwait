@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
 import { Wordmark } from "@/components/site/Wordmark";
 import { btn } from "@/components/site/ui";
 
@@ -44,6 +45,17 @@ function AuthPage() {
     }
   }
 
+  async function lovableIn() {
+    setBusy(true); setMsg(null);
+    const res = await lovable.auth.signInWithOAuth("lovable", { redirect_uri: window.location.origin });
+    if (res.redirected) return;
+    setBusy(false);
+    if (res.error) return setMsg(res.error.message);
+    const { data } = await supabase.auth.getUser();
+    if (data.user) navigate({ to: "/admin" });
+    else setMsg("Sign-in did not complete. Please try again.");
+  }
+
   const input = "mt-1 w-full rounded-sm border border-input bg-background px-3 py-2.5 text-foreground ltr-isolate";
   return (
     <main className="flex min-h-screen items-center justify-center bg-mist px-5 py-10" dir="ltr">
@@ -54,6 +66,8 @@ function AuthPage() {
         <label className="block text-sm">Password<input type="password" required minLength={8} autoComplete={mode === "in" ? "current-password" : "new-password"} value={password} onChange={(e) => setPassword(e.target.value)} className={input} /></label>
         {msg && <p role="status" className="text-sm text-muted-foreground">{msg}</p>}
         <button disabled={busy} className={btn.primary + " w-full disabled:opacity-60"}>{busy ? "…" : mode === "in" ? "Sign in" : "Create account"}</button>
+        <div className="flex items-center gap-3 text-xs text-muted-foreground"><span className="h-px flex-1 bg-border" />or<span className="h-px flex-1 bg-border" /></div>
+        <button type="button" disabled={busy} onClick={lovableIn} className={btn.outline + " w-full disabled:opacity-60"}>Continue with Lovable</button>
         <button type="button" onClick={() => { setMode(mode === "in" ? "up" : "in"); setMsg(null); }} className="text-sm text-accent underline-offset-4 hover:underline">
           {mode === "in" ? "New team member? Create an account" : "Already have an account? Sign in"}
         </button>

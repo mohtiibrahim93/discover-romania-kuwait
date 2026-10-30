@@ -4,6 +4,7 @@
 - Trilingual public site (EN/AR-RTL/RO), URL-based locale with header language switcher
 - Trip-request form → `trip_inquiries` (server-side insert, reference codes, no fake success)
 - Staff area: `/auth`, `/admin` (lead pipeline), `/admin/team` (owner-managed roles)
+- Sign-in methods: email/password (confirmation required) plus "Continue with Lovable" on `/auth`
 - Trilingual sitemap + hreflang; staff pages noindex
 - Content editor at `/admin/content` for FAQ, travel styles, brand/contact, entry guidance
   (owner/editor only, trilingual completeness gate, public pages read saved rows)
