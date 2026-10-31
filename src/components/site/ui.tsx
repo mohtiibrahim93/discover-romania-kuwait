@@ -35,9 +35,9 @@ export function SectionHead({ eyebrow, title, intro, light }: { eyebrow?: string
   );
 }
 
-export function PageHero({ eyebrow, title, intro, media, top }: { eyebrow?: string; title: string; intro?: string; media: MediaKey; top?: ReactNode }) {
+export function PageHero({ eyebrow, title, intro, media, top, compact }: { eyebrow?: string; title: string; intro?: string; media: MediaKey; top?: ReactNode; compact?: boolean }) {
   return (
-    <section className="relative isolate flex min-h-[62svh] items-end overflow-hidden bg-midnight">
+    <section className={cn("relative isolate flex items-end overflow-hidden bg-midnight", compact ? "min-h-[34svh] md:min-h-[44svh]" : "min-h-[62svh]")}>
       <div className="absolute inset-0 -z-10"><Img k={media} eager /></div>
       <div className="hero-overlay absolute inset-0 -z-10" />
       <div className="container-edit pb-14 pt-32 md:pb-20">

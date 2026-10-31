@@ -8,7 +8,6 @@ import { seo } from "@/lib/seo";
 import { getTour, TOURS } from "@/content/tours";
 import { getDestination } from "@/content/destinations";
 import { useSiteContent } from "@/lib/site-content";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Chip, Img, btn } from "@/components/site/ui";
 import { TourCard } from "@/components/site/TourCard";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
@@ -79,16 +78,15 @@ function TourDetail() {
           </ul>
 
           <h2 className="mt-12 text-3xl text-primary">{t("dayByDay", l)}</h2>
-          <Accordion type="multiple" defaultValue={["d0"]} className="mt-4">
+          <ol className="mt-6 border-s-2 border-border">
             {tour.itinerary.map((d, i) => (
-              <AccordionItem key={i} value={`d${i}`}>
-                <AccordionTrigger className="min-h-14 text-start text-base">
-                  <span className="flex gap-4"><span className="eyebrow min-w-14 pt-1 text-accent">{t("day", l)} {i + 1}</span><span className="line-clamp-1">{d[l]}</span></span>
-                </AccordionTrigger>
-                <AccordionContent className="ps-18 text-base leading-relaxed text-muted-foreground">{d[l]}</AccordionContent>
-              </AccordionItem>
+              <li key={i} className="relative pb-6 ps-6 last:pb-0">
+                <span aria-hidden className="absolute -start-[7px] top-1.5 h-3 w-3 rounded-full bg-terracotta" />
+                <p className="text-xs font-bold uppercase tracking-wide text-terracotta">{t("day", l)} <span className="ltr-isolate">{i + 1}</span></p>
+                <p className="mt-1 leading-relaxed">{d[l]}</p>
+              </li>
             ))}
-          </Accordion>
+          </ol>
 
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             <div><h3 className="text-xl text-primary">{t("customize", l)}</h3><p className="mt-3 text-muted-foreground">{tour.customize[l]}</p></div>
@@ -113,7 +111,6 @@ function TourDetail() {
             <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ tour: tour.slug }} className={`${btn.primary} mt-6 w-full`}>{t("askTour", l)}</Link>
             {discussHref && <Button asChild variant="link" className={`${btn.link} mt-3 h-auto w-full whitespace-normal justify-center`}><a href={discussHref} target="_blank" rel="noopener noreferrer"><WhatsAppIcon />{WHATSAPP_LABEL[l]}</a></Button>}
             <Button type="button" variant="link" onClick={share} className={`${btn.link} mt-3 h-auto w-full whitespace-normal justify-center`}><Share2 className="h-4 w-4" />{copied ? t("copied", l) : t("share", l)}</Button>
-            <Button type="button" variant="link" onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(`${t("shareText", l)} ${tour.title[l]} — ${window.location.href}`)}`, "_blank", "noopener")} className={`${btn.link} h-auto w-full whitespace-normal justify-center`}><WhatsAppIcon />{t("shareWa", l)}</Button>
           </div>
         </aside>
       </div>

@@ -15,6 +15,8 @@ import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { whatsappLink, WHATSAPP_LABEL } from "@/lib/whatsapp";
 import { HEARD_ABOUT, readLeadSource } from "@/lib/lead-source";
 import { PLANNER_WHEN, PLANNER_WHO } from "@/components/site/QuickPlanner";
+import { SERVICES } from "@/content/services";
+import { ACTIVITIES } from "@/content/activities";
 
 const F = {
   intro: { en: "Share a few details and we will prepare a personalised proposed itinerary. This is a quote inquiry — not a booking.", ar: "شاركنا بعض التفاصيل وسنعدّ لك برنامجًا مقترحًا مخصصًا. هذا طلب عرض سعر وليس حجزًا.", ro: "Spune-ne câteva detalii și îți pregătim un itinerariu propus personalizat. Aceasta este o cerere de ofertă — nu o rezervare." },
@@ -81,6 +83,9 @@ const searchSchema = z.object({
   tour: z.string().optional(),
   who: z.enum(PLANNER_WHO.map((o) => o.id) as [string, ...string[]]).optional().catch(undefined),
   when: z.enum(PLANNER_WHEN.map((o) => o.id) as [string, ...string[]]).optional().catch(undefined),
+  region: z.string().max(40).optional().catch(undefined),
+  service: z.string().max(40).optional().catch(undefined),
+  activity: z.string().max(40).optional().catch(undefined),
 });
 
 export const Route = createFileRoute("/$locale/plan-your-trip")({
@@ -118,9 +123,15 @@ const schema = (l: Locale) => z.object({
 function Page() {
   const l = asLocale(Route.useParams().locale);
   const { styles, site } = useSiteContent();
-  const { tour, who, when } = Route.useSearch();
-  // Choices from the home-page planner travel with the inquiry as a line in the notes.
-  const plannerText = [PLANNER_WHO.find((o) => o.id === who)?.label[l], PLANNER_WHEN.find((o) => o.id === when)?.label[l]].filter(Boolean).join(" · ");
+  const { tour, who, when, region, service, activity } = Route.useSearch();
+  // Choices made elsewhere on the site (planner, destination, service, activity) travel with the inquiry as a line in the notes.
+  const plannerText = [
+    PLANNER_WHO.find((o) => o.id === who)?.label[l],
+    PLANNER_WHEN.find((o) => o.id === when)?.label[l],
+    DESTINATIONS.find((d) => d.slug === region)?.name[l],
+    SERVICES.find((x) => x.id === service)?.title[l],
+    ACTIVITIES.find((x) => x.id === activity)?.title[l],
+  ].filter(Boolean).join(" · ");
   const tours = publishedTours();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [kind, setKind] = useState<"tour" | "tailored">(tour ? "tour" : "tailored");
@@ -168,7 +179,7 @@ function Page() {
 
   return (
     <>
-      <PageHero media="countryside" eyebrow={t("tailor", l)} title={t("planTrip", l)} intro={F.intro[l]} />
+      <PageHero compact media="countryside" eyebrow={t("tailor", l)} title={t("planTrip", l)} intro={F.intro[l]} />
       <section className="container-edit max-w-3xl py-16 md:py-24">
         {!site.inquiryBackendConnected && <p role="status" className="mb-10 border border-champagne bg-card p-4 text-sm">{F.notConnected[l]}</p>}
         {done ? (
@@ -212,7 +223,7 @@ function Page() {
                 <div className="flex flex-wrap gap-2">
                   {DESTINATIONS.map((d) => (
                     <label key={d.slug} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-sm border border-border px-3 has-[:checked]:border-accent has-[:checked]:bg-card">
-                      <input type="checkbox" name="destinations" value={d.slug} className="h-4 w-4 accent-accent" />{d.name[l]}
+                      <input type="checkbox" name="destinations" value={d.slug} defaultChecked={region === d.slug} className="h-4 w-4 accent-accent" />{d.name[l]}
                     </label>
                   ))}
                 </div>

@@ -11,6 +11,7 @@ import { DESTINATIONS } from "@/content/destinations";
 
 const intro = { en: "Travel styles and hands-on activities — from a day as a shepherd to rafting, horse riding and village life.", ar: "أنماط سفر وأنشطة عملية — من يوم كراعٍ إلى التجديف وركوب الخيل والحياة القروية.", ro: "Stiluri de călătorie și activități practice — de la o zi de cioban la rafting, călărie și viața la sat." };
 const actIntro = { en: "Add any of these to a journey. Availability, minimum ages and weather are confirmed in your proposal.", ar: "أضف أيًا منها إلى رحلتك. يُؤكد التوفر والحد الأدنى للأعمار والطقس في العرض.", ro: "Adaugă oricare dintre ele la o călătorie. Disponibilitatea, vârstele minime și vremea se confirmă în propunere." };
+const addToTrip = { en: "Add to my trip", ar: "أضفه إلى رحلتي", ro: "Adaugă în călătoria mea" };
 const familyLabel = { en: "Family-friendly", ar: "مناسب للعائلة", ro: "Potrivit pentru familii" };
 
 export const Route = createFileRoute("/$locale/experiences")({
@@ -54,6 +55,7 @@ function Page() {
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{a.intro[l]}</p>
                   <p className="mt-4 text-xs text-foreground">{a.regions.map((r) => DESTINATIONS.find((d) => d.slug === r)?.name[l]).filter(Boolean).join(" · ")}</p>
                   <p className="mt-1 text-xs text-muted-foreground">{a.season[l]}{a.family ? ` · ${familyLabel[l]}` : ""}</p>
+                  <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ activity: a.id }} className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-sky">{addToTrip[l]}<ArrowRight className="flip-rtl h-4 w-4" aria-hidden /></Link>
                 </div>
               </article>
             ))}
