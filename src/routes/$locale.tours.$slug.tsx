@@ -98,14 +98,14 @@ function TourDetail() {
           </div>
           <p className="mt-2 text-xs text-muted-foreground">{t("illustrative", l)}</p>
 
-          <div className="mt-12 bg-mist p-6">
+          <div className="mt-12 rounded-3xl bg-mint p-6">
             <h3 className="text-xl text-primary">{t("travelNotes", l)}</h3>
             <p className="mt-3 text-muted-foreground">{tour.notes[l]}</p>
           </div>
         </div>
 
         <aside className="hidden lg:block">
-          <div className="sticky top-28 border border-border bg-card p-6">
+          <div className="sticky top-28 rounded-3xl border-[1.5px] border-border bg-card p-6">
             <p className="font-display text-2xl text-primary">{tour.title[l]}</p>
             <p className="mt-2 text-sm text-muted-foreground">{t("onRequest", l)}</p>
             <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ tour: tour.slug }} className={`${btn.primary} mt-6 w-full`}>{t("askTour", l)}</Link>

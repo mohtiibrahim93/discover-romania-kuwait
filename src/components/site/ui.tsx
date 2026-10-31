@@ -5,11 +5,11 @@ import { MEDIA, type MediaKey } from "@/content/media";
 import { useLocale } from "@/i18n/config";
 
 export const btn = {
-  primary: "inline-flex min-h-11 items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-accent",
-  light: "inline-flex min-h-11 items-center justify-center gap-2 rounded-sm bg-ivory px-6 py-3 text-sm font-semibold text-midnight transition hover:bg-champagne",
-  ghostLight: "inline-flex min-h-11 items-center justify-center gap-2 rounded-sm border border-on-dark-muted px-6 py-3 text-sm font-semibold text-on-dark transition hover:bg-on-dark hover:text-midnight",
-  outline: "inline-flex min-h-11 items-center justify-center gap-2 rounded-sm border border-primary px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground",
-  link: "inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent underline-offset-4 hover:underline",
+  primary: "inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-sky px-6 py-3 text-sm font-bold text-white transition hover:bg-sky-ink",
+  light: "inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-gold px-6 py-3 text-sm font-bold text-midnight transition hover:bg-champagne",
+  ghostLight: "inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border-[1.5px] border-on-dark-muted px-6 py-3 text-sm font-bold text-on-dark transition hover:bg-on-dark hover:text-midnight",
+  outline: "inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border-[1.5px] border-midnight px-6 py-3 text-sm font-bold text-midnight transition hover:bg-midnight hover:text-on-dark",
+  link: "inline-flex min-h-11 items-center gap-2 text-sm font-bold text-sky underline-offset-4 hover:underline",
 };
 
 export function Img({ k, className, eager, sizes }: { k: MediaKey; className?: string; eager?: boolean; sizes?: string }) {
@@ -51,7 +51,7 @@ export function PageHero({ eyebrow, title, intro, media, top, compact }: { eyebr
 }
 
 export function Chip({ children }: { children: ReactNode }) {
-  return <span className="inline-flex items-center rounded-sm border border-border bg-card px-2.5 py-1 text-xs font-medium text-muted-foreground">{children}</span>;
+  return <span className="inline-flex items-center rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold text-muted-foreground">{children}</span>;
 }
 
 export function LocaleLink(props: { to: string; params?: Record<string, string>; search?: Record<string, string>; className?: string; children: ReactNode; "aria-label"?: string; onClick?: () => void }) {

@@ -48,7 +48,7 @@ function Catalog() {
     (!s.family || x.familyFriendly) &&
     (!s.private || x.privateOption));
   const any = Object.values(s).some(Boolean);
-  const sel = "min-h-11 w-full rounded-sm border border-input bg-card px-3 text-sm";
+  const sel = "min-h-11 w-full rounded-xl border border-input bg-card px-3 text-sm";
 
   return (
     <>

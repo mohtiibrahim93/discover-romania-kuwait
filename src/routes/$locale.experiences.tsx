@@ -30,7 +30,7 @@ function Page() {
         {styles.map((s) => {
           const n = tours.filter((x) => x.styles.includes(s.id)).length;
           return (
-            <Link key={s.id} to="/$locale/tours" params={{ locale: l }} search={{ style: s.id }} className="group flex flex-col bg-card">
+            <Link key={s.id} to="/$locale/tours" params={{ locale: l }} search={{ style: s.id }} className="group flex flex-col overflow-hidden rounded-3xl border-[1.5px] border-border bg-card">
               <div className="aspect-[3/2] overflow-hidden"><Img k={s.media} className="transition-transform duration-700 group-hover:scale-105" /></div>
               <div className="flex flex-1 flex-col p-6">
                 <h2 className="text-2xl text-primary">{s.title[l]}</h2>
@@ -47,7 +47,7 @@ function Page() {
           <p className="mt-3 max-w-2xl text-muted-foreground">{actIntro[l]}</p>
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {ACTIVITIES.map((a) => (
-              <article key={a.id} className="flex flex-col bg-background">
+              <article key={a.id} className="flex flex-col overflow-hidden rounded-3xl border-[1.5px] border-border bg-background">
                 <div className="aspect-[3/2] overflow-hidden"><Img k={a.media} /></div>
                 <div className="flex flex-1 flex-col p-6">
                   <p className="text-xs font-semibold uppercase tracking-wider text-accent">{ACTIVITY_CATEGORIES[a.category][l]}</p>

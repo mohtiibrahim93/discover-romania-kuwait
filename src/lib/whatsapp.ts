@@ -13,6 +13,12 @@ const MESSAGE: L = {
 };
 const REFERENCE: L = { en: "Inquiry reference", ar: "الرقم المرجعي للاستفسار", ro: "Referința solicitării" };
 
+/** Display form of an international number, e.g. "96556642402" → "+965 5664 2402". */
+export function formatPhone(digits: string) {
+  if (digits.startsWith("965") && digits.length === 11) return `+965 ${digits.slice(3, 7)} ${digits.slice(7)}`;
+  return `+${digits}`;
+}
+
 /** Draft only: the visitor decides whether to send it in WhatsApp. */
 export function whatsappLink(digits: string, locale: Locale, context: { pageUrl?: string; journey?: string; reference?: string } = {}) {
   const lines = [MESSAGE[locale]];

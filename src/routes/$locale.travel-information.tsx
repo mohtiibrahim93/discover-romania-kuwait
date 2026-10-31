@@ -24,7 +24,7 @@ function Page() {
     <>
       <TextPage eyebrow={t("travelInfo", l)} title={P.title} intro={P.intro} media="mountains" sections={P.sections} cta={false} />
       <section className="container-edit pb-24">
-        <div className="max-w-4xl border-t-2 border-champagne bg-card p-6 md:p-10">
+        <div className="max-w-4xl rounded-3xl border-[1.5px] border-border bg-card p-6 md:p-10">
           <h2 className="text-3xl text-primary">{visaH[l]}</h2>
           <p className="mt-2 text-xs text-muted-foreground">{t("lastReviewed", l)}: {date}</p>
           <p className="mt-5 leading-relaxed">{entry.body[l]}</p>

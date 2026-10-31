@@ -166,6 +166,7 @@ function Home() {
             </li>
           ))}
         </ol>
+        <Link to="/$locale/how-it-works" params={{ locale: l }} className="mt-6 inline-flex min-h-11 items-center gap-2 font-bold text-sky">{t("howItWorks", l)}<ArrowRight className="flip-rtl h-4 w-4" aria-hidden /></Link>
       </section>
 
       <section className="container-edit pb-20">

@@ -4,6 +4,9 @@ import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
 import { useSiteContent } from "@/lib/site-content";
 import { PageHero, btn } from "@/components/site/ui";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { formatPhone, whatsappLink } from "@/lib/whatsapp";
+import { SITE_ORIGIN } from "@/lib/seo";
 
 const C = {
   intro: { en: "The best way to reach us is the trip-planning form — tell us your ideas and we will respond personally.", ar: "أفضل طريقة للتواصل معنا هي نموذج تخطيط الرحلة — شاركنا أفكارك وسنرد عليك شخصيًا.", ro: "Cea mai bună cale de a ne contacta este formularul de planificare — spune-ne ideile tale și îți vom răspunde personal." },
@@ -20,12 +23,12 @@ function Page() {
   const { site } = useSiteContent();
   return (
     <>
-      <PageHero media="oldTown" eyebrow={t("contact", l)} title={t("contact", l)} intro={C.intro[l]} />
+      <PageHero compact media="oldTown" eyebrow={t("contact", l)} title={t("contact", l)} intro={C.intro[l]} />
       <section className="container-edit max-w-3xl py-16 md:py-24">
         {site.email || site.whatsappDigits ? (
           <ul className="space-y-4 text-lg">
             {site.email && <li><a href={`mailto:${site.email}`} className="ltr-isolate text-accent underline">{site.email}</a></li>}
-            {site.whatsappDigits && <li><a href={`https://wa.me/${site.whatsappDigits}`} className="ltr-isolate text-accent underline">WhatsApp +{site.whatsappDigits}</a></li>}
+            {site.whatsappDigits && <li><a href={whatsappLink(site.whatsappDigits, l, { pageUrl: `${SITE_ORIGIN}/${l}/contact` })} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center gap-3 rounded-2xl bg-mint px-5 font-bold text-mint-ink"><WhatsAppIcon className="h-5 w-5" /><span className="ltr-isolate">{formatPhone(site.whatsappDigits)}</span></a></li>}
           </ul>
         ) : (
           <p className="text-muted-foreground">{C.pending[l]}</p>
