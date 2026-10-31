@@ -49,10 +49,10 @@ const MADE: { t: L; d: L }[] = [
   { t: { en: "Visa & entry guidance", ar: "إرشادات التأشيرة والدخول", ro: "Informații despre viză și intrare" }, d: { en: "Linked to official EU sources", ar: "مرتبطة بمصادر الاتحاد الأوروبي الرسمية", ro: "Cu trimitere la surse oficiale UE" } },
 ];
 
-const WHEN: { t: L; d: L; tone: string }[] = [
-  { t: { en: "Summer", ar: "الصيف", ro: "Vara" }, d: { en: "Cool mountain air, away from the heat", ar: "هواء الجبال المنعش، بعيدًا عن الحر", ro: "Aer răcoros de munte, departe de căldură" }, tone: "bg-mint text-mint-ink" },
-  { t: { en: "Eid & school holidays", ar: "العيد والعطل المدرسية", ro: "Eid și vacanțe școlare" }, d: { en: "Tell us your dates early", ar: "أخبرنا بمواعيدك مبكرًا", ro: "Spune-ne datele din timp" }, tone: "bg-butter text-butter-ink" },
-  { t: { en: "Winter", ar: "الشتاء", ro: "Iarna" }, d: { en: "Snow and skiing in Poiana Brașov", ar: "الثلج والتزلج في بويانا براشوف", ro: "Zăpadă și schi în Poiana Brașov" }, tone: "bg-sky-soft text-sky-ink" },
+const WHEN: { id: "summer" | "eid" | "winter"; t: L; d: L; tone: string }[] = [
+  { id: "summer", t: { en: "Summer", ar: "الصيف", ro: "Vara" }, d: { en: "Cool mountain air, away from the heat", ar: "هواء الجبال المنعش، بعيدًا عن الحر", ro: "Aer răcoros de munte, departe de căldură" }, tone: "bg-mint text-mint-ink" },
+  { id: "eid", t: { en: "Eid & school holidays", ar: "العيد والعطل المدرسية", ro: "Eid și vacanțe școlare" }, d: { en: "Tell us your dates early", ar: "أخبرنا بمواعيدك مبكرًا", ro: "Spune-ne datele din timp" }, tone: "bg-butter text-butter-ink" },
+  { id: "winter", t: { en: "Winter", ar: "الشتاء", ro: "Iarna" }, d: { en: "Snow and skiing in Poiana Brașov", ar: "الثلج والتزلج في بويانا براشوف", ro: "Zăpadă și schi în Poiana Brașov" }, tone: "bg-sky-soft text-sky-ink" },
 ];
 
 const STEPS: { t: L; d: L }[] = [
@@ -147,11 +147,11 @@ function Home() {
       <section className="container-edit py-6 md:py-8">
         <h2 className={h2}>{C.whenT[l]}</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {WHEN.map((x, i) => (
-            <div key={i} className={cn("rounded-3xl p-6", x.tone)}>
-              <strong className="block font-display text-2xl">{x.t[l]}</strong>
-              <span>{x.d[l]}</span>
-            </div>
+          {WHEN.map((x) => (
+            <Link key={x.id} to="/$locale/plan-your-trip" params={{ locale: l }} search={{ when: x.id }} className={cn("group flex items-end justify-between gap-3 rounded-3xl p-6 transition hover:brightness-95", x.tone)}>
+              <span><strong className="block font-display text-2xl">{x.t[l]}</strong><span>{x.d[l]}</span></span>
+              <ArrowRight className="flip-rtl h-5 w-5 shrink-0 transition group-hover:translate-x-1" aria-hidden />
+            </Link>
           ))}
         </div>
       </section>

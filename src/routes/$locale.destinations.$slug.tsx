@@ -47,7 +47,7 @@ function Page() {
         </section>
       )}
       <section className="container-edit py-20 text-center">
-        <Link to="/$locale/plan-your-trip" params={{ locale: l }} className={btn.primary}>{t("requestPersonalQuote", l)}</Link>
+        <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ region: d.slug }} className={btn.primary}>{t("requestPersonalQuote", l)}</Link>
       </section>
     </>
   );

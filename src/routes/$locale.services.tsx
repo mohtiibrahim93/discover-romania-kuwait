@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import { asLocale, type L } from "@/i18n/config";
 import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
@@ -8,6 +9,7 @@ import { PageHero, btn } from "@/components/site/ui";
 const C = {
   intro: { en: "Everything we can arrange in Romania, with our local partner — combined into one private trip around your family.", ar: "كل ما يمكننا ترتيبه في رومانيا مع شريكنا المحلي — في رحلة خاصة واحدة تُصمَّم حول عائلتك.", ro: "Tot ce putem organiza în România, împreună cu partenerul nostru local — într-o singură călătorie privată, în jurul familiei tale." },
   examples: { en: "For example", ar: "على سبيل المثال", ro: "De exemplu" },
+  ask: { en: "Ask about this", ar: "اسأل عن هذه الخدمة", ro: "Întreabă despre acest serviciu" },
   note: { en: "Programmes, availability and minimum ages are confirmed in your written proposal.", ar: "تُؤكَّد البرامج والتوفر والأعمار الدنيا في عرضك المكتوب.", ro: "Programele, disponibilitatea și vârstele minime sunt confirmate în oferta scrisă." },
 } satisfies Record<string, L>;
 
@@ -31,6 +33,7 @@ function Page() {
             <ul className="mt-2 space-y-1.5 text-sm">
               {s.examples.map((e, i) => <li key={i} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-terracotta" aria-hidden />{e[l]}</li>)}
             </ul>
+            <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ service: s.id }} className="mt-5 inline-flex min-h-11 items-center gap-2 font-bold text-sky">{C.ask[l]}<ArrowRight className="flip-rtl h-4 w-4" aria-hidden /></Link>
           </article>
         ))}
       </section>

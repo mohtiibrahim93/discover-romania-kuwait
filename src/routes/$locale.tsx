@@ -39,7 +39,8 @@ function LocaleLayout() {
       <Header />
       <main id="main"><Outlet /></main>
       <Footer />
-      {site.whatsappDigits && (
+      {/* Tour pages carry their own WhatsApp button, so the floating one would duplicate it. */}
+      {site.whatsappDigits && !/^\/[a-z]{2}\/tours\/[^/]+\/?$/.test(pathname) && (
         <Button asChild variant="ghost"
           className="fixed bottom-24 end-4 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full bg-forest text-on-dark shadow-lg lg:bottom-6"
           style={{ marginBottom: "env(safe-area-inset-bottom)" }}>
