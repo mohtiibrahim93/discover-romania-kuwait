@@ -9,12 +9,12 @@ import { Img, btn } from "./ui";
 export function TourCard({ tour }: { tour: Tour }) {
   const l = useLocale();
   return (
-    <article className="group flex flex-col overflow-hidden bg-card">
+    <article className="group flex flex-col overflow-hidden rounded-3xl border-[1.5px] border-border bg-card">
       <Link to="/$locale/tours/$slug" params={{ locale: l, slug: tour.slug }} className="block aspect-[4/3] overflow-hidden" tabIndex={-1} aria-hidden>
         <Img k={tour.media} className="transition-transform duration-700 group-hover:scale-[1.03]" />
       </Link>
       <div className="flex flex-1 flex-col p-6">
-        <p className="eyebrow text-accent">{tour.days} {t("days", l)} · {tour.regions.map((r) => getDestination(r)?.name[l]).slice(0, 2).join(" · ")}</p>
+        <p className="text-xs font-bold uppercase tracking-wide text-terracotta">{tour.days} {t("days", l)} · {tour.regions.map((r) => getDestination(r)?.name[l]).slice(0, 2).join(" · ")}</p>
         <h3 className="mt-3 text-2xl text-primary">
           <Link to="/$locale/tours/$slug" params={{ locale: l, slug: tour.slug }} className="hover:underline decoration-champagne underline-offset-4">{tour.title[l]}</Link>
         </h3>

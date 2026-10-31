@@ -175,15 +175,15 @@ function Page() {
   // midnight on the 1st is still the previous month in UTC, which shifted the saved month.
   const now = new Date();
   const months = Array.from({ length: 18 }, (_, i) => { const y = now.getFullYear() + Math.floor((now.getMonth() + i) / 12), m = (now.getMonth() + i) % 12, d = new Date(y, m, 1); return { v: `${y}-${String(m + 1).padStart(2, "0")}`, label: d.toLocaleDateString(l === "ar" ? "ar-KW" : l, { month: "long", year: "numeric" }) }; });
-  const input = "min-h-12 w-full rounded-sm border border-input bg-card px-3 text-base focus-visible:border-accent aria-[invalid=true]:border-destructive";
+  const input = "min-h-12 w-full rounded-xl border border-input bg-card px-3 text-base focus-visible:border-accent aria-[invalid=true]:border-destructive";
 
   return (
     <>
       <PageHero compact media="countryside" eyebrow={t("tailor", l)} title={t("planTrip", l)} intro={F.intro[l]} />
       <section className="container-edit max-w-3xl py-16 md:py-24">
-        {!site.inquiryBackendConnected && <p role="status" className="mb-10 border border-champagne bg-card p-4 text-sm">{F.notConnected[l]}</p>}
+        {!site.inquiryBackendConnected && <p role="status" className="mb-10 rounded-2xl bg-butter p-4 text-sm text-butter-ink">{F.notConnected[l]}</p>}
         {done ? (
-          <div role="status" className="border border-champagne bg-card p-8 text-center">
+          <div role="status" className="rounded-3xl bg-mint p-8 text-center">
             <h2 className="font-display text-3xl text-primary">{F.doneT[l]}</h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">{F.doneP[l]}</p>
             <p className="mt-6 text-sm">{F.ref[l]}</p>
@@ -209,7 +209,7 @@ function Page() {
             <legend className="mb-3 text-sm font-semibold">{F.kindQ[l]}</legend>
             <div className="grid gap-3 sm:grid-cols-2">
               {(["tailored", "tour"] as const).map((k) => (
-                <label key={k} className={`flex cursor-pointer gap-3 rounded-sm border p-4 ${kind === k ? "border-accent bg-card" : "border-border"}`}>
+                <label key={k} className={`flex cursor-pointer gap-3 rounded-2xl border p-4 ${kind === k ? "border-accent bg-card" : "border-border"}`}>
                   <input type="radio" name="kind" checked={kind === k} onChange={() => setKind(k)} className="mt-1 h-5 w-5 shrink-0 accent-accent" />
                   <span><span className="block font-semibold">{k === "tour" ? F.kindTour[l] : F.kindTailored[l]}</span><span className="mt-1 block text-sm text-muted-foreground">{k === "tour" ? F.kindTourP[l] : F.kindTailoredP[l]}</span></span>
                 </label>
@@ -222,7 +222,7 @@ function Page() {
                 <legend className="mb-3 text-sm font-semibold">{F.places[l]}</legend>
                 <div className="flex flex-wrap gap-2">
                   {DESTINATIONS.map((d) => (
-                    <label key={d.slug} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-sm border border-border px-3 has-[:checked]:border-accent has-[:checked]:bg-card">
+                    <label key={d.slug} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-border px-3 has-[:checked]:border-accent has-[:checked]:bg-card">
                       <input type="checkbox" name="destinations" value={d.slug} defaultChecked={region === d.slug} className="h-4 w-4 accent-accent" />{d.name[l]}
                     </label>
                   ))}

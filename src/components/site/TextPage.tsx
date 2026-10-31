@@ -13,9 +13,9 @@ export function TextPage({ eyebrow, title, intro, media, sections, notice, cta =
   const l = useLocale();
   return (
     <>
-      <PageHero media={media} eyebrow={eyebrow} title={title[l]} intro={intro[l]} />
+      <PageHero compact media={media} eyebrow={eyebrow} title={title[l]} intro={intro[l]} />
       <section className="container-edit py-16 md:py-24">
-        {notice && <p role="note" className="mb-12 max-w-3xl border border-champagne bg-card p-4 text-sm">{notice}</p>}
+        {notice && <p role="note" className="mb-12 max-w-3xl rounded-2xl bg-butter p-4 text-sm text-butter-ink">{notice}</p>}
         <div className="grid max-w-4xl gap-12">
           {sections.map((s, i) => (
             <div key={i} className="grid gap-4 md:grid-cols-[14rem_1fr] md:gap-10">

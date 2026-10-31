@@ -18,7 +18,7 @@ function Page() {
   const { faq } = useSiteContent();
   return (
     <>
-      <PageHero media="delta" eyebrow={t("faq", l)} title={t("faq", l)} intro={intro[l]} />
+      <PageHero compact media="delta" eyebrow={t("faq", l)} title={t("faq", l)} intro={intro[l]} />
       <section className="container-edit max-w-3xl py-16 md:py-24">
         <Accordion type="single" collapsible>
           {faq.map((f, i) => (
