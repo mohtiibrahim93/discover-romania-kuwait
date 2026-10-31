@@ -26,6 +26,7 @@ import { Route as LocalePrivacyRouteImport } from './routes/$locale.privacy'
 import { Route as LocaleServicesRouteImport } from './routes/$locale.services'
 import { Route as LocaleTermsRouteImport } from './routes/$locale.terms'
 import { Route as LocaleTravelInformationRouteImport } from './routes/$locale.travel-information'
+import { Route as LocaleTripsRouteImport } from './routes/$locale.trips'
 import { Route as LocaleWhyRomaniaRouteImport } from './routes/$locale.why-romania'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as LocaleDestinationsIndexRouteImport } from './routes/$locale.destinations.index'
@@ -119,6 +120,11 @@ const LocaleTravelInformationRoute = LocaleTravelInformationRouteImport.update({
   path: '/travel-information',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleTripsRoute = LocaleTripsRouteImport.update({
+  id: '/trips',
+  path: '/trips',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleWhyRomaniaRoute = LocaleWhyRomaniaRouteImport.update({
   id: '/why-romania',
   path: '/why-romania',
@@ -177,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/$locale/services': typeof LocaleServicesRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/travel-information': typeof LocaleTravelInformationRoute
+  '/$locale/trips': typeof LocaleTripsRoute
   '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/$locale/': typeof LocaleIndexRoute
@@ -202,6 +209,7 @@ export interface FileRoutesByTo {
   '/$locale/services': typeof LocaleServicesRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/travel-information': typeof LocaleTravelInformationRoute
+  '/$locale/trips': typeof LocaleTripsRoute
   '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/$locale': typeof LocaleIndexRoute
@@ -230,6 +238,7 @@ export interface FileRoutesById {
   '/$locale/services': typeof LocaleServicesRoute
   '/$locale/terms': typeof LocaleTermsRoute
   '/$locale/travel-information': typeof LocaleTravelInformationRoute
+  '/$locale/trips': typeof LocaleTripsRoute
   '/$locale/why-romania': typeof LocaleWhyRomaniaRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/$locale/': typeof LocaleIndexRoute
@@ -258,6 +267,7 @@ export interface FileRouteTypes {
     | '/$locale/services'
     | '/$locale/terms'
     | '/$locale/travel-information'
+    | '/$locale/trips'
     | '/$locale/why-romania'
     | '/admin'
     | '/$locale/'
@@ -283,6 +293,7 @@ export interface FileRouteTypes {
     | '/$locale/services'
     | '/$locale/terms'
     | '/$locale/travel-information'
+    | '/$locale/trips'
     | '/$locale/why-romania'
     | '/admin'
     | '/$locale'
@@ -310,6 +321,7 @@ export interface FileRouteTypes {
     | '/$locale/services'
     | '/$locale/terms'
     | '/$locale/travel-information'
+    | '/$locale/trips'
     | '/$locale/why-romania'
     | '/_authenticated/admin'
     | '/$locale/'
@@ -450,6 +462,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleTravelInformationRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/trips': {
+      id: '/$locale/trips'
+      path: '/trips'
+      fullPath: '/$locale/trips'
+      preLoaderRoute: typeof LocaleTripsRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/why-romania': {
       id: '/$locale/why-romania'
       path: '/why-romania'
@@ -536,6 +555,7 @@ interface LocaleRouteChildren {
   LocaleServicesRoute: typeof LocaleServicesRoute
   LocaleTermsRoute: typeof LocaleTermsRoute
   LocaleTravelInformationRoute: typeof LocaleTravelInformationRoute
+  LocaleTripsRoute: typeof LocaleTripsRoute
   LocaleWhyRomaniaRoute: typeof LocaleWhyRomaniaRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
   LocaleDestinationsSlugRoute: typeof LocaleDestinationsSlugRoute
@@ -556,6 +576,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleServicesRoute: LocaleServicesRoute,
   LocaleTermsRoute: LocaleTermsRoute,
   LocaleTravelInformationRoute: LocaleTravelInformationRoute,
+  LocaleTripsRoute: LocaleTripsRoute,
   LocaleWhyRomaniaRoute: LocaleWhyRomaniaRoute,
   LocaleIndexRoute: LocaleIndexRoute,
   LocaleDestinationsSlugRoute: LocaleDestinationsSlugRoute,

@@ -130,6 +130,7 @@ function Home() {
           ))}
         </div>
         <p className="mt-4 text-sm text-muted-foreground">{SERVICE_EXTRAS[l]}</p>
+        <Link to="/$locale/trips" params={{ locale: l }} className="mt-3 inline-flex min-h-11 items-center gap-2 font-bold text-sky">{t("trips", l)}<ArrowRight className="flip-rtl h-4 w-4" aria-hidden /></Link>
       </section>
 
       <section className="container-edit py-14 md:py-16">

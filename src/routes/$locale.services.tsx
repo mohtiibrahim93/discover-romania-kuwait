@@ -7,7 +7,7 @@ import { SERVICES, SERVICE_EXTRAS } from "@/content/services";
 import { PageHero, btn } from "@/components/site/ui";
 
 const C = {
-  intro: { en: "Everything we can arrange in Romania, with our local partner — combined into one private trip around your family.", ar: "كل ما يمكننا ترتيبه في رومانيا مع شريكنا المحلي — في رحلة خاصة واحدة تُصمَّم حول عائلتك.", ro: "Tot ce putem organiza în România, împreună cu partenerul nostru local — într-o singură călătorie privată, în jurul familiei tale." },
+  intro: { en: "Everything we can arrange in Romania with our trusted local partners — combined into one private trip around your family.", ar: "كل ما يمكننا ترتيبه في رومانيا مع شركائنا المحليين الموثوقين — في رحلة خاصة واحدة تُصمَّم حول عائلتك.", ro: "Tot ce putem organiza în România cu partenerii noștri locali de încredere — într-o singură călătorie privată, în jurul familiei tale." },
   examples: { en: "For example", ar: "على سبيل المثال", ro: "De exemplu" },
   ask: { en: "Ask about this", ar: "اسأل عن هذه الخدمة", ro: "Întreabă despre acest serviciu" },
   note: { en: "Programmes, availability and minimum ages are confirmed in your written proposal.", ar: "تُؤكَّد البرامج والتوفر والأعمار الدنيا في عرضك المكتوب.", ro: "Programele, disponibilitatea și vârstele minime sunt confirmate în oferta scrisă." },
@@ -40,7 +40,10 @@ function Page() {
       <section className="container-edit pb-20">
         <p className="text-muted-foreground">{SERVICE_EXTRAS[l]}</p>
         <p className="mt-2 text-sm text-muted-foreground">{C.note[l]}</p>
-        <Link to="/$locale/plan-your-trip" params={{ locale: l }} className={`${btn.primary} mt-8`}>{t("requestPersonalQuote", l)}</Link>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link to="/$locale/trips" params={{ locale: l }} className={btn.outline}>{t("trips", l)}</Link>
+          <Link to="/$locale/plan-your-trip" params={{ locale: l }} className={btn.primary}>{t("requestPersonalQuote", l)}</Link>
+        </div>
       </section>
     </>
   );

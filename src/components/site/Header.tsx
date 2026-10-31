@@ -19,6 +19,7 @@ const NAV: { key: UIKey; to: string; search?: Record<string, string> }[] = [
 
 /** Secondary pages: in the phone menu and the footer, not the desktop bar. */
 const MORE: { key: UIKey; to: string }[] = [
+  { key: "trips", to: "/$locale/trips" },
   { key: "why", to: "/$locale/why-romania" },
   { key: "contact", to: "/$locale/contact" },
   { key: "faq", to: "/$locale/faq" },

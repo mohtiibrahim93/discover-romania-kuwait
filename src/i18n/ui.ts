@@ -6,6 +6,7 @@ export const UI = d({
   home: { en: "Home", ar: "الرئيسية", ro: "Acasă" },
   tours: { en: "Tours", ar: "الرحلات", ro: "Circuite" },
   services: { en: "Services", ar: "خدماتنا", ro: "Servicii" },
+  trips: { en: "All trips & experiences", ar: "كل الرحلات والتجارب", ro: "Toate călătoriile și experiențele" },
   destinations: { en: "Destinations", ar: "الوجهات", ro: "Destinații" },
   styles: { en: "Travel Styles", ar: "أنماط السفر", ro: "Stiluri de călătorie" },
   tailor: { en: "Tailor-Made Trips", ar: "رحلات مصممة خصيصًا لك", ro: "Călătorii personalizate" },
