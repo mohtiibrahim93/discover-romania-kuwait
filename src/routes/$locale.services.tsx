@@ -4,6 +4,7 @@ import { asLocale, type L } from "@/i18n/config";
 import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
 import { SERVICES, SERVICE_EXTRAS } from "@/content/services";
+import type { OfferCategory } from "@/content/offers";
 import { PageHero, btn } from "@/components/site/ui";
 
 const C = {
@@ -12,6 +13,9 @@ const C = {
   ask: { en: "Ask about this", ar: "اسأل عن هذه الخدمة", ro: "Întreabă despre acest serviciu" },
   note: { en: "Programmes, availability and minimum ages are confirmed in your written proposal.", ar: "تُؤكَّد البرامج والتوفر والأعمار الدنيا في عرضك المكتوب.", ro: "Programele, disponibilitatea și vârstele minime sunt confirmate în oferta scrisă." },
 } satisfies Record<string, L>;
+
+/** Which catalogue category best matches each service group. */
+const TRIP_CAT: Record<string, OfferCategory> = { circuits: "transylvania", "short-breaks": "mini", "spa-stays": "spa", "active-nature": "active", winter: "spa", heritage: "active" };
 
 export const Route = createFileRoute("/$locale/services")({
   head: ({ params }) => { const l = asLocale(params.locale); return seo(l, t("services", l), C.intro[l], "/services"); },
@@ -33,7 +37,10 @@ function Page() {
             <ul className="mt-2 space-y-1.5 text-sm">
               {s.examples.map((e, i) => <li key={i} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-terracotta" aria-hidden />{e[l]}</li>)}
             </ul>
-            <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ service: s.id }} className="mt-5 inline-flex min-h-11 items-center gap-2 font-bold text-sky">{C.ask[l]}<ArrowRight className="flip-rtl h-4 w-4" aria-hidden /></Link>
+            <div className="mt-5 flex flex-wrap gap-x-6">
+              <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ service: s.id }} className="inline-flex min-h-11 items-center gap-2 font-bold text-sky">{C.ask[l]}<ArrowRight className="flip-rtl h-4 w-4" aria-hidden /></Link>
+              <Link to="/$locale/trips" params={{ locale: l }} search={{ cat: TRIP_CAT[s.id] }} className="inline-flex min-h-11 items-center gap-2 font-bold text-sky">{t("matchingTrips", l)}<ArrowRight className="flip-rtl h-4 w-4" aria-hidden /></Link>
+            </div>
           </article>
         ))}
       </section>

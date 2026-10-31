@@ -83,6 +83,7 @@ function Catalog() {
           <span><span className="ltr-isolate">{list.length.toLocaleString(l === "ar" ? "ar-KW" : l)}</span> {t("journeysFound", l)}</span>
           {any && <Link to="." search={{}} className={btn.link}>{t("clearFilters", l)}</Link>}
         </div>
+        <Link to="/$locale/trips" params={{ locale: l }} className={`${btn.link} mt-2`}>{t("seeTrips", l)} →</Link>
         {list.length ? (
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{list.map((x) => <TourCard key={x.id} tour={x} />)}</div>
         ) : (

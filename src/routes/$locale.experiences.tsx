@@ -15,7 +15,7 @@ const addToTrip = { en: "Add to my trip", ar: "أضفه إلى رحلتي", ro: 
 const familyLabel = { en: "Family-friendly", ar: "مناسب للعائلة", ro: "Potrivit pentru familii" };
 
 export const Route = createFileRoute("/$locale/experiences")({
-  head: ({ params }) => { const l = asLocale(params.locale); return seo(l, t("styles", l), intro[l], "/experiences"); },
+  head: ({ params }) => { const l = asLocale(params.locale); return seo(l, t("experiencesNav", l), intro[l], "/experiences"); },
   component: Page,
 });
 
@@ -25,8 +25,11 @@ function Page() {
   const tours = publishedTours();
   return (
     <>
-      <PageHero media="countryside" eyebrow={t("styles", l)} title={t("styles", l)} intro={intro[l]} />
-      <section className="container-edit grid gap-6 py-16 md:grid-cols-2 md:py-24 lg:grid-cols-3">
+      <PageHero media="countryside" eyebrow={t("experiencesNav", l)} title={t("experiencesNav", l)} intro={intro[l]} />
+      <section className="container-edit pt-16 md:pt-20">
+        <h2 className="text-3xl md:text-4xl">{t("styles", l)}</h2>
+      </section>
+      <section className="container-edit grid gap-6 pb-16 pt-8 md:grid-cols-2 md:pb-24 lg:grid-cols-3">
         {styles.map((s) => {
           const n = tours.filter((x) => x.styles.includes(s.id)).length;
           return (
