@@ -4,7 +4,7 @@ import { publishedTours } from "@/content/tours";
 import { DESTINATIONS } from "@/content/destinations";
 import { SITE_ORIGIN } from "@/lib/seo";
 
-const STATIC = ["", "/tours", "/services", "/destinations", "/experiences", "/why-romania", "/about", "/contact", "/faq", "/travel-information", "/how-it-works", "/plan-your-trip", "/privacy", "/terms", "/cookies"];
+const STATIC = ["", "/tours", "/services", "/trips", "/destinations", "/experiences", "/why-romania", "/about", "/contact", "/faq", "/travel-information", "/how-it-works", "/plan-your-trip", "/privacy", "/terms", "/cookies"];
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {

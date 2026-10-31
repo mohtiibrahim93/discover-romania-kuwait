@@ -17,6 +17,7 @@ import { HEARD_ABOUT, readLeadSource } from "@/lib/lead-source";
 import { PLANNER_WHEN, PLANNER_WHO } from "@/components/site/QuickPlanner";
 import { SERVICES } from "@/content/services";
 import { ACTIVITIES } from "@/content/activities";
+import { OFFERS } from "@/content/offers";
 
 const F = {
   intro: { en: "Share a few details and we will prepare a personalised proposed itinerary. This is a quote inquiry — not a booking.", ar: "شاركنا بعض التفاصيل وسنعدّ لك برنامجًا مقترحًا مخصصًا. هذا طلب عرض سعر وليس حجزًا.", ro: "Spune-ne câteva detalii și îți pregătim un itinerariu propus personalizat. Aceasta este o cerere de ofertă — nu o rezervare." },
@@ -86,6 +87,7 @@ const searchSchema = z.object({
   region: z.string().max(40).optional().catch(undefined),
   service: z.string().max(40).optional().catch(undefined),
   activity: z.string().max(40).optional().catch(undefined),
+  offer: z.string().max(40).optional().catch(undefined),
 });
 
 export const Route = createFileRoute("/$locale/plan-your-trip")({
@@ -123,7 +125,7 @@ const schema = (l: Locale) => z.object({
 function Page() {
   const l = asLocale(Route.useParams().locale);
   const { styles, site } = useSiteContent();
-  const { tour, who, when, region, service, activity } = Route.useSearch();
+  const { tour, who, when, region, service, activity, offer } = Route.useSearch();
   // Choices made elsewhere on the site (planner, destination, service, activity) travel with the inquiry as a line in the notes.
   const plannerText = [
     PLANNER_WHO.find((o) => o.id === who)?.label[l],
@@ -131,6 +133,7 @@ function Page() {
     DESTINATIONS.find((d) => d.slug === region)?.name[l],
     SERVICES.find((x) => x.id === service)?.title[l],
     ACTIVITIES.find((x) => x.id === activity)?.title[l],
+    OFFERS.find((x) => x.id === offer)?.title[l],
   ].filter(Boolean).join(" · ");
   const tours = publishedTours();
   const [errors, setErrors] = useState<Record<string, string>>({});
