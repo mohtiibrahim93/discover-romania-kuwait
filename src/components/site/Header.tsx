@@ -10,16 +10,16 @@ import { btn } from "./ui";
 const NAV: { key: UIKey; to: string; search?: Record<string, string> }[] = [
   { key: "home", to: "/$locale" },
   { key: "tours", to: "/$locale/tours" },
+  { key: "tripsNav", to: "/$locale/trips" },
   { key: "services", to: "/$locale/services" },
   { key: "destinations", to: "/$locale/destinations" },
-  { key: "styles", to: "/$locale/experiences" },
-  { key: "travelInfo", to: "/$locale/travel-information" },
+  { key: "experiencesNav", to: "/$locale/experiences" },
   { key: "about", to: "/$locale/about" },
 ];
 
 /** Secondary pages: in the phone menu and the footer, not the desktop bar. */
 const MORE: { key: UIKey; to: string }[] = [
-  { key: "trips", to: "/$locale/trips" },
+  { key: "travelInfo", to: "/$locale/travel-information" },
   { key: "why", to: "/$locale/why-romania" },
   { key: "contact", to: "/$locale/contact" },
   { key: "faq", to: "/$locale/faq" },

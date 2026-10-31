@@ -4,9 +4,14 @@ const d = <T extends Record<string, L>>(x: T) => x;
 
 export const UI = d({
   home: { en: "Home", ar: "الرئيسية", ro: "Acasă" },
-  tours: { en: "Tours", ar: "الرحلات", ro: "Circuite" },
+  tours: { en: "Featured tours", ar: "رحلات مختارة", ro: "Circuite recomandate" },
   services: { en: "Services", ar: "خدماتنا", ro: "Servicii" },
   trips: { en: "All trips & experiences", ar: "كل الرحلات والتجارب", ro: "Toate călătoriile și experiențele" },
+  tripsNav: { en: "All trips", ar: "كل الرحلات", ro: "Toate călătoriile" },
+  experiencesNav: { en: "Experiences", ar: "التجارب", ro: "Experiențe" },
+  seeTrips: { en: "See all trips & experiences", ar: "عرض كل الرحلات والتجارب", ro: "Vezi toate călătoriile și experiențele" },
+  seeTours: { en: "Featured tours with day-by-day plans", ar: "رحلات مختارة ببرنامج يومي مفصّل", ro: "Circuite recomandate, cu program zi de zi" },
+  matchingTrips: { en: "See matching trips", ar: "عرض الرحلات المناسبة", ro: "Vezi călătoriile potrivite" },
   destinations: { en: "Destinations", ar: "الوجهات", ro: "Destinații" },
   styles: { en: "Travel Styles", ar: "أنماط السفر", ro: "Stiluri de călătorie" },
   tailor: { en: "Tailor-Made Trips", ar: "رحلات مصممة خصيصًا لك", ro: "Călătorii personalizate" },

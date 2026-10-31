@@ -63,7 +63,8 @@ function Page() {
             <Link key={label} to="/$locale/trips" params={{ locale: l }} search={{ cat, len: k }} className={cn(chip(len === k), "min-h-10 text-xs")}>{label}</Link>
           ))}
         </div>
-        <p className="mt-6 border-b border-border pb-4 text-sm text-muted-foreground">{tripCount(list.length, l)}{cat === "night" ? ` · ${C.nightNote[l]}` : ""}</p>
+        <Link to="/$locale/tours" params={{ locale: l }} className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-sky">{t("seeTours", l)}<ArrowRight className="flip-rtl h-4 w-4" aria-hidden /></Link>
+        <p className="mt-4 border-b border-border pb-4 text-sm text-muted-foreground">{tripCount(list.length, l)}{cat === "night" ? ` · ${C.nightNote[l]}` : ""}</p>
 
         {list.length === 0 && <p className="mt-6 rounded-2xl bg-butter p-4 text-sm text-butter-ink">{C.none[l]}</p>}
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
