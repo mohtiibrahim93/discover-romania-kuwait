@@ -83,7 +83,7 @@ function AdminPage() {
   }
 
   function exportCsv() {
-    const cols: (keyof Inquiry)[] = ["reference", "created_at", "status", "name", "email", "phone", "residence", "nationality", "preferred_language", "request_type", "tour_slug", "destinations", "travel_month", "adults", "children", "budget", "duration", "notes", "heard_about", "utm_source", "utm_medium", "utm_campaign", "referrer_host"];
+    const cols: (keyof Inquiry)[] = ["reference", "created_at", "status", "name", "email", "phone", "residence", "nationality", "preferred_language", "request_type", "tour_slug", "destinations", "travel_month", "adults", "children", "budget", "budget_flights", "hotel_level", "max_drive", "fewer_moves", "relax_days", "avoid", "duration", "notes", "heard_about", "utm_source", "utm_medium", "utm_campaign", "referrer_host"];
     const esc = (v: unknown) => `"${String(Array.isArray(v) ? v.join("; ") : v ?? "").replace(/"/g, '""')}"`;
     const csv = [cols.join(","), ...rows.map((r) => cols.map((c) => esc(r[c])).join(","))].join("\n");
     const a = document.createElement("a");
@@ -241,6 +241,9 @@ function LeadPanel({ lead, email, onClose }: { lead: Inquiry; email: string | nu
           {field("Destinations", lead.destinations)}{field("Travel month", lead.travel_month)}
           {field("Adults", lead.adults)}{field("Children", lead.children)}
           {field("Duration", lead.duration)}{field("Budget", lead.budget)}
+          {field("Budget covers", lead.budget_flights === "with" ? "Including flights" : lead.budget_flights === "without" ? "Without international flights" : null)}{field("Hotel level", lead.hotel_level === "both" ? "Show 4★ and 5★" : lead.hotel_level ? `${lead.hotel_level}★` : null)}
+          {field("Max time on the road / day", lead.max_drive === "any" ? "No preference" : lead.max_drive ? `Up to ${lead.max_drive} h` : null)}{field("Fewer hotel changes", lead.fewer_moves ? "Yes — 2–3 nights per hotel" : null)}
+          {field("Free / relax days", lead.relax_days)}{field("Would rather avoid", lead.avoid)}
           {field("Pace", lead.pace)}{field("Accommodation", lead.accommodation)}
           {field("Travel style", lead.travel_style)}{field("Guide language", lead.guide_language)}
           {field("Dietary", lead.dietary)}{field("Flight help", lead.flight_assistance)}

@@ -18,6 +18,7 @@ import { PLANNER_WHEN, PLANNER_WHO } from "@/components/site/QuickPlanner";
 import { SERVICES } from "@/content/services";
 import { ACTIVITIES } from "@/content/activities";
 import { OFFERS } from "@/content/offers";
+import { ProcessSteps } from "@/components/site/ProcessSteps";
 
 const F = {
   intro: { en: "Share a few details and we will prepare a personalised proposed itinerary. This is a quote inquiry — not a booking.", ar: "شاركنا بعض التفاصيل وسنعدّ لك برنامجًا مقترحًا مخصصًا. هذا طلب عرض سعر وليس حجزًا.", ro: "Spune-ne câteva detalii și îți pregătim un itinerariu propus personalizat. Aceasta este o cerere de ofertă — nu o rezervare." },
@@ -33,8 +34,26 @@ const F = {
   tour: { en: "Journey of interest", ar: "الرحلة التي تهمك", ro: "Circuitul de interes" },
   custom: { en: "Custom / not sure yet", ar: "مخصصة / لم أقرر بعد", ro: "Personalizat / încă nu știu" },
   optional: { en: "Optional details", ar: "تفاصيل اختيارية", ro: "Detalii opționale" },
-  budget: { en: "Approximate budget per party (KWD)", ar: "الميزانية التقريبية للمجموعة (د.ك)", ro: "Buget aproximativ pe grup (KWD)" },
-  budgetHint: { en: "For guidance only — not a price we advertise.", ar: "للاسترشاد فقط — وليس سعرًا معلنًا من قبلنا.", ro: "Doar orientativ — nu este un preț afișat de noi." },
+  budget: { en: "Approximate budget for the whole group (KWD)", ar: "الميزانية التقريبية للمجموعة كاملة (د.ك)", ro: "Buget aproximativ pentru tot grupul (KWD)" },
+  budgetHint: { en: "We plan within it — the more honest, the better the proposal.", ar: "نخطط ضمنها — كلما كانت أدق، كان العرض أنسب.", ro: "Planificăm în limita lui — cu cât e mai realist, cu atât oferta e mai potrivită." },
+  budgetFlights: { en: "Does the budget include flights?", ar: "هل تشمل الميزانية الطيران؟", ro: "Bugetul include zborurile?" },
+  bfWithout: { en: "No — without international flights", ar: "لا — بدون الطيران الدولي", ro: "Nu — fără zborurile internaționale" },
+  bfWith: { en: "Yes — including flights", ar: "نعم — شاملة الطيران", ro: "Da — inclusiv zborurile" },
+  prefs: { en: "How you like to travel", ar: "كيف تحب أن تسافر", ro: "Cum îți place să călătorești" },
+  prefsHint: { en: "All optional — this is what helps us get the first proposal right.", ar: "كلها اختيارية — لكنها تساعدنا على إعداد عرض أول مناسب.", ro: "Toate sunt opționale — dar ne ajută să nimerim prima propunere." },
+  hotelLevel: { en: "Hotel level", ar: "مستوى الفندق", ro: "Nivelul hotelului" },
+  hl4: { en: "4-star", ar: "4 نجوم", ro: "4 stele" },
+  hl5: { en: "5-star", ar: "5 نجوم", ro: "5 stele" },
+  hlBoth: { en: "Show me both options", ar: "أرسلوا لي الخيارين", ro: "Arătați-mi ambele variante" },
+  maxDrive: { en: "Time on the road per day", ar: "مدة الطريق في اليوم", ro: "Timp pe drum pe zi" },
+  md2: { en: "Up to 2 hours", ar: "حتى ساعتين", ro: "Până la 2 ore" },
+  md3: { en: "Up to 3 hours", ar: "حتى 3 ساعات", ro: "Până la 3 ore" },
+  md4: { en: "Up to 4 hours", ar: "حتى 4 ساعات", ro: "Până la 4 ore" },
+  mdAny: { en: "No preference", ar: "لا يهم", ro: "Nu contează" },
+  relaxDays: { en: "Free / relax days", ar: "أيام حرة / للراحة", ro: "Zile libere / de relaxare" },
+  fewerMoves: { en: "Prefer 2–3 nights in the same hotel (fewer luggage moves)", ar: "أفضّل ليلتين أو ثلاثًا في الفندق نفسه (تنقّل أقل بالأمتعة)", ro: "Prefer 2–3 nopți în același hotel (mai puține mutări cu bagajele)" },
+  avoid: { en: "Anything you'd rather avoid?", ar: "هل هناك ما تفضّل تجنّبه؟", ro: "E ceva ce ai vrea să eviți?" },
+  avoidPh: { en: "e.g. long drives, crowded places, early starts, many flights", ar: "مثل الطرق الطويلة، الأماكن المزدحمة، الاستيقاظ المبكر، كثرة الرحلات الجوية", ro: "ex. drumuri lungi, locuri aglomerate, plecări devreme, multe zboruri" },
   duration: { en: "Preferred duration (days)", ar: "المدة المفضلة (أيام)", ro: "Durata preferată (zile)" },
   style: { en: "Preferred travel style", ar: "نمط السفر المفضل", ro: "Stilul de călătorie preferat" },
   dietary: { en: "Dietary requests (e.g. halal)", ar: "طلبات غذائية (مثل الحلال)", ro: "Cerințe alimentare (ex. halal)" },
@@ -112,6 +131,11 @@ const schema = (l: Locale) => z.object({
   pace: z.string().max(20).optional(),
   accommodation: z.string().max(40).optional(),
   budget: z.string().max(40).optional(),
+  budgetFlights: z.enum(["without", "with"]).optional().or(z.literal("").transform(() => undefined)),
+  hotelLevel: z.enum(["4", "5", "both"]).optional().or(z.literal("").transform(() => undefined)),
+  maxDrive: z.enum(["2", "3", "4", "any"]).optional().or(z.literal("").transform(() => undefined)),
+  relaxDays: z.string().max(10).optional(),
+  avoid: z.string().max(500).optional(),
   duration: z.string().max(10).optional(),
   style: z.string().optional(),
   dietary: z.string().max(200).optional(),
@@ -163,7 +187,8 @@ function Page() {
         siteLocale: l, requestType: kind, name: v.name, email: v.email, phone: v.phone, residence: v.residence,
         nationality: v.nationality, lang: v.lang, month: v.month, adults: v.adults, children: v.children,
         tour: kind === "tour" ? v.tour : "custom", destinations: fd.getAll("destinations").map(String),
-        interests: v.interests, pace: v.pace, accommodation: v.accommodation, budget: v.budget, duration: v.duration,
+        interests: v.interests, pace: v.pace, accommodation: v.accommodation, budget: v.budget, budgetFlights: v.budgetFlights, hotelLevel: v.hotelLevel, maxDrive: v.maxDrive,
+        fewerMoves: fd.get("fewerMoves") === "on", relaxDays: v.relaxDays, avoid: v.avoid, duration: v.duration,
         style: v.style, dietary: v.dietary, guideLang: v.guideLang, flights: !!v.flights, notes: plannerText ? [`${F.fromPlanner[l]}: ${plannerText}`, v.notes].filter(Boolean).join("\n") : v.notes, consent: true,
         heardAbout: v.heardAbout, ...readLeadSource(),
         website: String(fd.get("website") ?? ""),
@@ -183,7 +208,8 @@ function Page() {
   return (
     <>
       <PageHero compact media="countryside" eyebrow={t("tailor", l)} title={t("planTrip", l)} intro={F.intro[l]} />
-      <section className="container-edit max-w-3xl py-16 md:py-24">
+      {!done && <section className="container-edit pt-12 md:pt-16"><ProcessSteps l={l} /></section>}
+      <section className="container-edit max-w-3xl py-12 md:py-16">
         {!site.inquiryBackendConnected && <p role="status" className="mb-10 rounded-2xl bg-butter p-4 text-sm text-butter-ink">{F.notConnected[l]}</p>}
         {done ? (
           <div role="status" className="rounded-3xl bg-mint p-8 text-center">
@@ -232,19 +258,29 @@ function Page() {
                 </div>
               </fieldset>
               <Field id="interests" label={F.interests[l]} full><textarea id="f-interests" name="interests" rows={3} placeholder={F.interestsPh[l]} className={`${input} py-3`} /></Field>
-              <Field id="pace" label={F.pace[l]}><select id="f-pace" name="pace" defaultValue="" className={input}><option value="">—</option><option value="relaxed">{F.paceRelaxed[l]}</option><option value="balanced">{F.paceBalanced[l]}</option><option value="active">{F.paceActive[l]}</option></select></Field>
               <Field id="accommodation" label={F.accommodation[l]}><select id="f-accommodation" name="accommodation" defaultValue="" className={input}><option value="">—</option><option value="luxury">{F.accLux[l]}</option><option value="boutique">{F.accBoutique[l]}</option><option value="family">{F.accFamily[l]}</option><option value="mixed">{F.accMixed[l]}</option></select></Field>
             </>
           ) : (
           <Field id="tour" label={F.tour[l]} req full><select id="f-tour" name="tour" defaultValue={tour && tours.some((x) => x.slug === tour) ? tour : "custom"} className={input}><option value="custom">{F.custom[l]}</option>{tours.map((x) => <option key={x.slug} value={x.slug}>{x.title[l]}</option>)}</select></Field>
           )}
+          <fieldset className="grid gap-6 rounded-3xl border-[1.5px] border-border p-5 sm:col-span-2 sm:grid-cols-2 md:p-6">
+            <legend className="px-2 font-display text-xl text-primary">{F.prefs[l]}</legend>
+            <p className="-mt-2 text-sm text-muted-foreground sm:col-span-2">{F.prefsHint[l]}</p>
+            <Field id="budget" label={F.budget[l]} hint={F.budgetHint[l]}><input id="f-budget" name="budget" inputMode="numeric" dir="ltr" className={input} /></Field>
+            <Field id="budgetFlights" label={F.budgetFlights[l]}><select id="f-budgetFlights" name="budgetFlights" defaultValue="" className={input}><option value="">—</option><option value="without">{F.bfWithout[l]}</option><option value="with">{F.bfWith[l]}</option></select></Field>
+            <Field id="hotelLevel" label={F.hotelLevel[l]}><select id="f-hotelLevel" name="hotelLevel" defaultValue="" className={input}><option value="">—</option><option value="4">{F.hl4[l]}</option><option value="5">{F.hl5[l]}</option><option value="both">{F.hlBoth[l]}</option></select></Field>
+            <Field id="pace" label={F.pace[l]}><select id="f-pace" name="pace" defaultValue="" className={input}><option value="">—</option><option value="relaxed">{F.paceRelaxed[l]}</option><option value="balanced">{F.paceBalanced[l]}</option><option value="active">{F.paceActive[l]}</option></select></Field>
+            <Field id="maxDrive" label={F.maxDrive[l]}><select id="f-maxDrive" name="maxDrive" defaultValue="" className={input}><option value="">—</option><option value="2">{F.md2[l]}</option><option value="3">{F.md3[l]}</option><option value="4">{F.md4[l]}</option><option value="any">{F.mdAny[l]}</option></select></Field>
+            <Field id="relaxDays" label={F.relaxDays[l]}><input id="f-relaxDays" name="relaxDays" type="number" min={0} max={30} dir="ltr" className={input} /></Field>
+            <label className="flex min-h-11 items-center gap-3 sm:col-span-2"><input type="checkbox" name="fewerMoves" className="h-5 w-5 shrink-0 accent-accent" />{F.fewerMoves[l]}</label>
+            <Field id="avoid" label={F.avoid[l]} full><textarea id="f-avoid" name="avoid" rows={2} maxLength={500} placeholder={F.avoidPh[l]} className={`${input} py-3`} /></Field>
+          </fieldset>
           <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
 
           <details className="sm:col-span-2 border-y border-border py-4">
             <summary className="min-h-11 cursor-pointer font-display text-xl text-primary">{F.optional[l]}</summary>
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               <Field id="nationality" label={F.nationality[l]}><input id="f-nationality" name="nationality" className={input} /></Field>
-              <Field id="budget" label={F.budget[l]} hint={F.budgetHint[l]}><input id="f-budget" name="budget" inputMode="numeric" dir="ltr" className={input} /></Field>
               <Field id="duration" label={F.duration[l]}><input id="f-duration" name="duration" type="number" min={2} dir="ltr" className={input} /></Field>
               <Field id="style" label={F.style[l]}><select id="f-style" name="style" defaultValue="" className={input}><option value="">—</option>{styles.map((s) => <option key={s.id} value={s.id}>{s.title[l]}</option>)}</select></Field>
               <Field id="dietary" label={F.dietary[l]}><input id="f-dietary" name="dietary" className={input} /></Field>

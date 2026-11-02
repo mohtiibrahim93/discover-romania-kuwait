@@ -78,6 +78,7 @@ export type Database = {
           accommodation: string | null
           adults: number
           budget: string | null
+          budget_flights: string | null
           children: number
           consent: boolean
           created_at: string
@@ -103,6 +104,11 @@ export type Database = {
           tour_slug: string | null
           travel_month: string
           travel_style: string | null
+          hotel_level: string | null
+          max_drive: string | null
+          fewer_moves: boolean
+          relax_days: string | null
+          avoid: string | null
           heard_about: string | null
           referrer_host: string | null
           utm_campaign: string | null
@@ -113,6 +119,7 @@ export type Database = {
           accommodation?: string | null
           adults: number
           budget?: string | null
+          budget_flights?: string | null
           children?: number
           consent: boolean
           created_at?: string
@@ -138,6 +145,11 @@ export type Database = {
           tour_slug?: string | null
           travel_month: string
           travel_style?: string | null
+          hotel_level?: string | null
+          max_drive?: string | null
+          fewer_moves?: boolean
+          relax_days?: string | null
+          avoid?: string | null
           heard_about?: string | null
           referrer_host?: string | null
           utm_campaign?: string | null
@@ -148,6 +160,7 @@ export type Database = {
           accommodation?: string | null
           adults?: number
           budget?: string | null
+          budget_flights?: string | null
           children?: number
           consent?: boolean
           created_at?: string
@@ -173,6 +186,11 @@ export type Database = {
           tour_slug?: string | null
           travel_month?: string
           travel_style?: string | null
+          hotel_level?: string | null
+          max_drive?: string | null
+          fewer_moves?: boolean
+          relax_days?: string | null
+          avoid?: string | null
           heard_about?: string | null
           referrer_host?: string | null
           utm_campaign?: string | null

@@ -19,6 +19,9 @@ export const SITE = {
   inquiryBackendConnected: true,
   /** Show indicative prices on the trips catalogue; false = "price on request" everywhere. */
   showPrices: true,
+  /** Response promises shown on the site — only change if the team can always keep them. */
+  replyHours: 24,
+  draftWorkingDays: 3,
 };
 
 /** Visa / entry information — must be human-reviewed; never auto-verified. */

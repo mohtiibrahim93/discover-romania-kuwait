@@ -4,6 +4,7 @@ import type { L } from "@/i18n/config";
 import { t } from "@/i18n/ui";
 import { seo } from "@/lib/seo";
 import { TextPage, type TextSection } from "@/components/site/TextPage";
+import { SITE } from "@/content/site";
 
 const title: L = { en: "Prices, Payment & Family Comfort", ar: "الأسعار والدفع وراحة العائلة", ro: "Prețuri, plată și confort pentru familie" };
 const intro: L = {
@@ -13,10 +14,10 @@ const intro: L = {
 };
 
 const sections: TextSection[] = [
-  { h: { en: "Why there is no fixed price online", ar: "لماذا لا يوجد سعر ثابت على الموقع", ro: "De ce nu există preț fix online" },
-    p: { en: "The price depends on your dates, group size, children's ages, hotel level, private vehicle and the activities you choose. Instead of a misleading “from” price, we send you a clear written quote — usually within a few working days of your request.",
-      ar: "يعتمد السعر على التواريخ وعدد المسافرين وأعمار الأطفال ومستوى الفندق والسيارة الخاصة والأنشطة التي تختارها. بدلًا من سعر “ابتداءً من” مضلل، نرسل لك عرضًا مكتوبًا واضحًا، عادة خلال أيام عمل قليلة من طلبك.",
-      ro: "Prețul depinde de date, numărul de persoane, vârsta copiilor, nivelul hotelului, vehiculul privat și activitățile alese. În locul unui preț „de la” înșelător, îți trimitem o ofertă scrisă clară — de obicei în câteva zile lucrătoare." } },
+  { h: { en: "Indicative prices, then your own quote", ar: "أسعار تقريبية، ثم عرضك الخاص", ro: "Prețuri orientative, apoi oferta ta" },
+    p: { en: `Our trips catalogue shows indicative “from” prices per person, so you can see the order of magnitude. Your real price depends on your dates, group size, children's ages, hotel level, private vehicle and activities. We reply within ${SITE.replyHours} hours, send a draft route within ${SITE.draftWorkingDays} working days, and the final written quote follows once the route suits you.`,
+      ar: `يعرض دليل الرحلات أسعارًا تقريبية «ابتداءً من» للشخص، لتعرف الحدود التقريبية. يعتمد سعرك الفعلي على التواريخ وعدد المسافرين وأعمار الأطفال ومستوى الفندق والسيارة الخاصة والأنشطة. نرد خلال ${SITE.replyHours} ساعة، ونرسل مسودة المسار خلال ${SITE.draftWorkingDays} أيام عمل، ثم العرض المكتوب النهائي عندما يناسبك المسار.`,
+      ro: `Catalogul de călătorii arată prețuri orientative „de la”, de persoană, ca să vezi ordinul de mărime. Prețul tău real depinde de date, numărul de persoane, vârsta copiilor, nivelul hotelului, vehiculul privat și activități. Îți răspundem în ${SITE.replyHours} de ore, trimitem traseul schiță în ${SITE.draftWorkingDays} zile lucrătoare, iar oferta scrisă finală urmează după ce traseul ți se potrivește.` } },
   { h: { en: "What shapes your quote", ar: "ما الذي يحدد عرض السعر", ro: "Ce influențează oferta" },
     p: { en: "Season and dates · number of travellers and rooms · 4-star, 5-star or private chalet stays · private driver with a family van · Arabic- or English-speaking guide · activities such as shepherd days, rafting or bear watching · number of nights.",
       ar: "الموسم والتواريخ · عدد المسافرين والغرف · فنادق 4 أو 5 نجوم أو شاليه خاص · سائق خاص مع سيارة عائلية · مرشد ناطق بالعربية أو الإنجليزية · أنشطة مثل يوم الرعاة أو التجديف أو مشاهدة الدببة · عدد الليالي.",
