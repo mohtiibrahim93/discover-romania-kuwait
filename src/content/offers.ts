@@ -2,8 +2,8 @@ import type { L, Locale } from "@/i18n/config";
 
 /**
  * Full catalogue of trips and experiences we can arrange through our Romanian partners.
- * Names are our own; partners, their links and their prices are deliberately not stored here
- * (white label: the client deals only with us). Every offer is quoted personally.
+ * Names are our own; partners, their links and their prices are deliberately not stored on the site
+ * (white label: the client deals only with us). Indicative prices live in offer-prices.ts; every offer is still quoted personally.
  */
 export type OfferCategory = "day" | "mini" | "transylvania" | "romania" | "two" | "active" | "delta" | "spa" | "night";
 
@@ -53,7 +53,12 @@ export const OFFERS: Offer[] = [
   { id: "family-transylvania", cat: "transylvania", days: 8, nights: 7, places: TRANS, title: { en: "Family journey in Transylvania", ar: "رحلة عائلية في ترانسيلفانيا", ro: "Călătorie în familie în Transilvania" } },
   { id: "bike-transylvania", cat: "transylvania", days: 6, nights: 5, places: TRANS, title: { en: "Transylvania by bike", ar: "ترانسيلفانيا على الدراجة", ro: "Transilvania pe bicicletă" } },
   { id: "horse-holiday", cat: "transylvania", days: 8, nights: 7, places: TRANS, title: { en: "Horseback holiday in Transylvania", ar: "عطلة على ظهور الخيل في ترانسيلفانيا", ro: "Vacanță călare în Transilvania" } },
-  { id: "castles-west", cat: "transylvania", places: { en: "Bucharest · Timișoara", ar: "بوخارست · تيميشوارا", ro: "București · Timișoara" }, title: { en: "Castles from Bucharest to Timișoara", ar: "قلاع من بوخارست إلى تيميشوارا", ro: "Castele de la București la Timișoara" } },
+  { id: "castles-west", cat: "transylvania", days: 5, nights: 4, places: { en: "Bucharest · Timișoara", ar: "بوخارست · تيميشوارا", ro: "București · Timișoara" }, title: { en: "Castles from Bucharest to Timișoara", ar: "قلاع من بوخارست إلى تيميشوارا", ro: "Castele de la București la Timișoara" } },
+  { id: "legends-group", cat: "transylvania", days: 5, nights: 4, places: { en: "Sinaia · Bran · Brașov · Sighișoara · Sibiu", ar: "سينايا · بران · براشوف · سيغيشوارا · سيبيو", ro: "Sinaia · Bran · Brașov · Sighișoara · Sibiu" }, title: { en: "Castles & legends small-group tour", ar: "جولة القلاع والأساطير لمجموعات صغيرة", ro: "Castele și legende, în grup mic" } },
+  { id: "escape-transylvania", cat: "transylvania", days: 5, nights: 4, places: { en: "Curtea de Argeș · Sibiu · Sighișoara · Brașov · Bran · Sinaia", ar: "كورتيا دي أرجيش · سيبيو · سيغيشوارا · براشوف · بران · سينايا", ro: "Curtea de Argeș · Sibiu · Sighișoara · Brașov · Bran · Sinaia" }, title: { en: "Escape to Transylvania", ar: "استراحة في ترانسيلفانيا", ro: "Evadare în Transilvania" } },
+  { id: "transylvania-triangle", cat: "transylvania", days: 5, nights: 4, places: TRANS, title: { en: "The Transylvania triangle", ar: "مثلث ترانسيلفانيا", ro: "Triunghiul Transilvaniei" } },
+  { id: "deep-transylvania", cat: "transylvania", days: 8, nights: 7, places: { en: "Sibiu · Brașov · Bucharest", ar: "سيبيو · براشوف · بوخارست", ro: "Sibiu · Brașov · București" }, title: { en: "Deep Transylvania", ar: "ترانسيلفانيا العميقة", ro: "Transilvania profundă" } },
+  { id: "family-transfagarasan", cat: "transylvania", days: 8, nights: 7, places: { en: "Curtea de Argeș · Transfăgărășan · Sibiu · Alba Iulia · Turda", ar: "كورتيا دي أرجيش · ترانسفاغاراشان · سيبيو · ألبا يوليا · تُردا", ro: "Curtea de Argeș · Transfăgărășan · Sibiu · Alba Iulia · Turda" }, title: { en: "Family adventure: Transfăgărășan & Transylvania", ar: "مغامرة عائلية: طريق ترانسفاغاراشان وترانسيلفانيا", ro: "Aventură în familie: Transfăgărășan și Transilvania" } },
   // Romania circuits
   { id: "cultural-romania", cat: "romania", days: 7, nights: 6, places: RO, title: { en: "Cultural Romania", ar: "رومانيا الثقافية", ro: "România culturală" } },
   { id: "romania-style", cat: "romania", days: 7, nights: 6, places: RO, title: { en: "Romania in style", ar: "رومانيا بأسلوب راقٍ", ro: "România cu stil" } },
@@ -65,6 +70,7 @@ export const OFFERS: Offer[] = [
   { id: "north-romania", cat: "romania", days: 8, nights: 7, places: { en: "Maramureș · Bucovina", ar: "ماراموريش · بوكوفينا", ro: "Maramureș · Bucovina" }, title: { en: "Northern Romania: Maramureș & Bucovina", ar: "شمال رومانيا: ماراموريش وبوكوفينا", ro: "Nordul României: Maramureș și Bucovina" } },
   { id: "bucovina-monasteries", cat: "romania", days: 7, nights: 6, places: { en: "Bucovina", ar: "بوكوفينا", ro: "Bucovina" }, title: { en: "Painted monasteries of Bucovina", ar: "الأديرة المرسومة في بوكوفينا", ro: "Mănăstirile pictate din Bucovina" } },
   { id: "west-romania", cat: "romania", days: 8, nights: 7, places: { en: "Bucharest · Timișoara", ar: "بوخارست · تيميشوارا", ro: "București · Timișoara" }, title: { en: "Western Romania", ar: "غرب رومانيا", ro: "Vestul României" } },
+  { id: "best-of-romania", cat: "romania", days: 9, nights: 8, places: { en: "Sibiu · Maramureș · Bucovina · Sighișoara · Brașov", ar: "سيبيو · ماراموريش · بوكوفينا · سيغيشوارا · براشوف", ro: "Sibiu · Maramureș · Bucovina · Sighișoara · Brașov" }, title: { en: "The best of Romania", ar: "أفضل ما في رومانيا", ro: "Ce e mai bun în România" } },
   // Two-country trips
   { id: "romania-hungary", cat: "two", days: 5, nights: 4, title: { en: "Romania & Hungary", ar: "رومانيا والمجر", ro: "România și Ungaria" } },
   { id: "romania-moldova", cat: "two", days: 5, nights: 4, title: { en: "Romania & Moldova", ar: "رومانيا ومولدوفا", ro: "România și Republica Moldova" } },
@@ -72,7 +78,7 @@ export const OFFERS: Offer[] = [
   { id: "bulgaria-sea-mountains", cat: "two", days: 5, nights: 4, places: { en: "Bulgaria", ar: "بلغاريا", ro: "Bulgaria" }, title: { en: "Bulgaria: sea & mountains", ar: "بلغاريا: البحر والجبال", ro: "Bulgaria: mare și munte" } },
   { id: "magical-bulgaria", cat: "two", days: 8, nights: 7, places: { en: "Sofia · Veliko Tarnovo · Nesebar · Plovdiv", ar: "صوفيا · فيليكو تارنوفو · نيسيبار · بلوفديف", ro: "Sofia · Veliko Tarnovo · Nesebar · Plovdiv" }, title: { en: "Magical Bulgaria", ar: "بلغاريا الساحرة", ro: "Bulgaria magică" } },
   { id: "romania-bulgaria", cat: "two", days: 10, nights: 9, title: { en: "Romania & Bulgaria cultural tour", ar: "جولة ثقافية في رومانيا وبلغاريا", ro: "Circuit cultural România și Bulgaria" } },
-  { id: "ukraine-moldova", cat: "two", days: 10, nights: 9, title: { en: "Ukraine & Moldova", ar: "أوكرانيا ومولدوفا", ro: "Ucraina și Republica Moldova" } },
+  { id: "bulgaria-romania-grand", cat: "two", days: 11, nights: 10, places: { en: "Sofia · Plovdiv · Veliko Tarnovo · Bucharest", ar: "صوفيا · بلوفديف · فيليكو تارنوفو · بوخارست", ro: "Sofia · Plovdiv · Veliko Tarnovo · București" }, title: { en: "Bulgaria & Romania grand tour", ar: "الجولة الكبرى في بلغاريا ورومانيا", ro: "Marele tur Bulgaria–România" } },
   // Nature, active & themed
   { id: "rural-self-drive", cat: "active", days: 12, nights: 11, places: { en: "Transylvania · Bucovina · Maramureș", ar: "ترانسيلفانيا · بوكوفينا · ماراموريش", ro: "Transilvania · Bucovina · Maramureș" }, title: { en: "Rural Romania self-drive", ar: "رحلة بالسيارة في ريف رومانيا", ro: "Auto-tur prin România rurală" } },
   { id: "nature-transylvania", cat: "active", days: 5, nights: 4, places: TRANS, title: { en: "Nature in Transylvania", ar: "الطبيعة في ترانسيلفانيا", ro: "Natura Transilvaniei" } },
@@ -89,17 +95,19 @@ export const OFFERS: Offer[] = [
   { id: "delta-exotic", cat: "delta", days: 4, nights: 3, title: { en: "Exotic Delta", ar: "الدلتا الساحرة", ro: "Delta exotică" } },
   { id: "delta-nature", cat: "delta", days: 4, nights: 3, title: { en: "Delta nature break", ar: "عطلة طبيعة في الدلتا", ro: "Natura Deltei" } },
   { id: "delta-wild", cat: "delta", days: 5, nights: 4, places: { en: "By boat, with local guesthouses", ar: "بالقارب مع الإقامة في بيوت ضيافة محلية", ro: "Cu barca, cu cazare în pensiuni locale" }, title: { en: "Wild Delta by boat", ar: "الدلتا البرية بالقارب", ro: "Delta sălbatică cu barca" } },
+  { id: "paradise-delta", cat: "delta", days: 4, nights: 3, places: { en: "Murighiol or Crișan", ar: "موريغيول أو كريشان", ro: "Murighiol sau Crișan" }, title: { en: "Paradise Delta", ar: "دلتا الفردوس", ro: "Delta Paradis" } },
   // Spa, sea & snow
-  { id: "spa-eforie", cat: "spa", places: SEA, title: { en: "Spa & thalasso: Eforie Nord", ar: "سبا وعلاج بالمياه: إيفوريه نورد", ro: "Spa și talaso: Eforie Nord" } },
-  { id: "spa-neptun", cat: "spa", places: SEA, title: { en: "Spa stay: Neptun", ar: "إقامة سبا: نبتون", ro: "Sejur spa: Neptun" } },
+  { id: "spa-eforie", cat: "spa", nights: 7, places: SEA, title: { en: "Spa & thalasso: Eforie Nord", ar: "سبا وعلاج بالمياه: إيفوريه نورد", ro: "Spa și talaso: Eforie Nord" } },
+  { id: "spa-neptun", cat: "spa", nights: 7, places: SEA, title: { en: "Spa stay: Neptun", ar: "إقامة سبا: نبتون", ro: "Sejur spa: Neptun" } },
   { id: "spa-mamaia", cat: "spa", nights: 5, places: SEA, title: { en: "Spa stay: Mamaia", ar: "إقامة سبا: مامايا", ro: "Sejur spa: Mamaia" } },
-  { id: "spa-mangalia", cat: "spa", places: SEA, title: { en: "Spa stay: Mangalia", ar: "إقامة سبا: مانغاليا", ro: "Sejur spa: Mangalia" } },
-  { id: "spa-geoagiu", cat: "spa", places: TRANS, title: { en: "Spa stay: Geoagiu Băi", ar: "إقامة سبا: جيواجيو باي", ro: "Sejur spa: Geoagiu Băi" } },
-  { id: "spa-herculane", cat: "spa", places: { en: "Cerna Valley", ar: "وادي تشيرنا", ro: "Valea Cernei" }, title: { en: "Spa stay: Băile Herculane", ar: "إقامة سبا: بايله هيركولانه", ro: "Sejur spa: Băile Herculane" } },
-  { id: "spa-sovata", cat: "spa", places: TRANS, title: { en: "Spa stay: Sovata", ar: "إقامة سبا: سوفاتا", ro: "Sejur spa: Sovata" } },
+  { id: "spa-mangalia", cat: "spa", nights: 7, places: SEA, title: { en: "Spa stay: Mangalia", ar: "إقامة سبا: مانغاليا", ro: "Sejur spa: Mangalia" } },
+  { id: "spa-geoagiu", cat: "spa", nights: 5, places: TRANS, title: { en: "Spa stay: Geoagiu Băi", ar: "إقامة سبا: جيواجيو باي", ro: "Sejur spa: Geoagiu Băi" } },
+  { id: "spa-herculane", cat: "spa", nights: 7, places: { en: "Cerna Valley", ar: "وادي تشيرنا", ro: "Valea Cernei" }, title: { en: "Spa stay: Băile Herculane", ar: "إقامة سبا: بايله هيركولانه", ro: "Sejur spa: Băile Herculane" } },
+  { id: "spa-sovata", cat: "spa", nights: 7, places: TRANS, title: { en: "Spa stay: Sovata", ar: "إقامة سبا: سوفاتا", ro: "Sejur spa: Sovata" } },
   { id: "black-sea-holiday", cat: "spa", places: SEA, title: { en: "Black Sea holiday", ar: "عطلة على البحر الأسود", ro: "Vacanță la Marea Neagră" } },
   { id: "ski-poiana", cat: "spa", places: { en: "Romania's best-known ski resort", ar: "أشهر منتجعات التزلج في رومانيا", ro: "Cea mai cunoscută stațiune de schi din România" }, title: { en: "Skiing in Poiana Brașov", ar: "التزلج في بويانا براشوف", ro: "Schi în Poiana Brașov" } },
   { id: "christmas-markets", cat: "spa", days: 5, nights: 4, places: { en: "December", ar: "ديسمبر", ro: "Decembrie" }, title: { en: "Christmas markets in Transylvania", ar: "أسواق عيد الميلاد في ترانسيلفانيا", ro: "Târgurile de Crăciun din Transilvania" } },
+  { id: "bucharest-christmas", cat: "spa", days: 5, nights: 4, places: { en: "December", ar: "ديسمبر", ro: "Decembrie" }, title: { en: "Christmas markets in Bucharest", ar: "أسواق عيد الميلاد في بوخارست", ro: "Târgurile de Crăciun din București" } },
   { id: "dental-care", cat: "spa", places: RO, title: { en: "Dental care trips", ar: "رحلات علاج الأسنان", ro: "Călătorii pentru tratamente dentare" } },
   // Nightlife & beach (adults and groups of friends)
   { id: "bucharest-nights", cat: "night", places: { en: "Restaurants, lounges & clubs", ar: "مطاعم وصالات ونوادٍ ليلية", ro: "Restaurante, lounge-uri și cluburi" }, title: { en: "Bucharest Old Town nights", ar: "ليالي البلدة القديمة في بوخارست", ro: "Serile din Centrul Vechi al Bucureștiului" } },
