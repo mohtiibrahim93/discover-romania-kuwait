@@ -17,6 +17,8 @@ export const SITE = {
   socials: [] as { label: string; url: string }[],
   businessRegistration: null as string | null,
   inquiryBackendConnected: true,
+  /** Show indicative prices on the trips catalogue; false = "price on request" everywhere. */
+  showPrices: true,
 };
 
 /** Visa / entry information — must be human-reviewed; never auto-verified. */
