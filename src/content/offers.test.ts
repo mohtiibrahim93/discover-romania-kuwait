@@ -26,3 +26,15 @@ describe("offers catalogue", () => {
     expect(offerLength({ ...o, days: 4 })).toBe("short");
   });
 });
+
+import { OFFER_MAX_KM_PER_DAY } from "./offer-route";
+describe("route distances", () => {
+  it("only refer to existing offers and are plausible daily drives", () => {
+    const ids = new Set(OFFERS.map((o) => o.id));
+    for (const [id, km] of Object.entries(OFFER_MAX_KM_PER_DAY)) {
+      expect(ids.has(id)).toBe(true);
+      expect(km).toBeGreaterThan(50);
+      expect(km).toBeLessThan(600);
+    }
+  });
+});
