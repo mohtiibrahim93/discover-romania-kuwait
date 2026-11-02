@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trip proposal template</title>
+<!--
+  Proposal template for the sales team (not a public page).
+  Fill every [square-bracket] field, delete the yellow notes, then print to PDF (A4).
+  The example route and distances are real (a 4-day mini-tour from the partner catalogue);
+  hotels, prices and company details are placeholders on purpose — never send them unfilled.
+  White label: never name the partner agency, its website or its prices.
+-->
+<style>
+  :root { --ink: #10212b; --muted: #5b6770; --line: #dfe3e6; --accent: #b4532a; --soft: #f6f3ee; --note: #fff3d6; --note-ink: #6d4c00; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9e6e1; color: var(--ink); font: 14px/1.55 "Nunito Sans", system-ui, sans-serif; }
+  .page { width: 210mm; min-height: 297mm; margin: 12px auto; padding: 18mm 18mm 16mm; background: #fff; position: relative; }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", system-ui, sans-serif; margin: 0; line-height: 1.2; }
+  h1 { font-size: 30px; } h2 { font-size: 19px; margin: 22px 0 10px; color: var(--ink); } h3 { font-size: 15px; }
+  .eyebrow { color: var(--accent); font-weight: 700; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+  .muted { color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: start; padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); background: var(--soft); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+  .kv dt { font-size: 11px; color: var(--muted); } .kv dd { margin: 0 0 8px; font-weight: 600; }
+  .day { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-bottom: 10px; break-inside: avoid; }
+  .day .meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .pill { display: inline-block; border-radius: 99px; background: var(--soft); padding: 2px 10px; font-size: 12px; margin: 6px 6px 0 0; }
+  .note { background: var(--note); color: var(--note-ink); border-radius: 10px; padding: 8px 12px; font-size: 12px; margin: 8px 0; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  ul { margin: 6px 0; padding-inline-start: 18px; }
+  .price { font-size: 22px; font-weight: 800; }
+  .foot { position: absolute; bottom: 9mm; left: 18mm; right: 18mm; font-size: 10px; color: var(--muted); display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 6px; }
+  .cover-band { background: #0f2a36; color: #fff; border-radius: 18px; padding: 22px 24px; margin: 18px 0; }
+  .cover-band .muted { color: #c9d3d8; }
+  @media print { body { background: #fff; } .page { margin: 0; box-shadow: none; page-break-after: always; } .note { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 — cover, summary, itinerary in brief -->
+<section class="page">
+  <p class="eyebrow">Discover Romania · Kuwait</p>
+  <div class="cover-band">
+    <p class="eyebrow" style="color:#f2c48d">Proposal [V1] · [reference, e.g. DRK-261102-AB12]</p>
+    <h1>[Trip title — e.g. Transylvania at an easy pace]</h1>
+    <p class="muted" style="margin:6px 0 0">[Route — e.g. Bucharest · Sibiu · Sighișoara · Brașov · Bucharest] · [4 days / 3 nights]</p>
+  </div>
+
+  <dl class="kv grid">
+    <div><dt>Prepared for</dt><dd>[Client name]</dd></div>
+    <div><dt>Prepared by</dt><dd>[Consultant name] · WhatsApp [+965 …]</dd></div>
+    <div><dt>Travellers</dt><dd>[2 adults] · [room set-up, e.g. 1 double room]</dd></div>
+    <div><dt>Travel dates</dt><dd>[arrival date] – [departure date]</dd></div>
+    <div><dt>Pace</dt><dd>[Relaxed · max ~[3] h on the road per day]</dd></div>
+    <div><dt>Valid until</dt><dd>[date] — rooms are not held until you confirm</dd></div>
+  </dl>
+
+  <h2>What we built around your request</h2>
+  <p class="note">Recap the client's own words in 3–4 bullets so they see they were heard (as in the first WhatsApp reply). Mention what you changed versus the last version.</p>
+  <ul>
+    <li>[e.g. Two nights in Sibiu, so you unpack only twice]</li>
+    <li>[e.g. Longest drive 300 km on day 1, with a lunch stop at Curtea de Argeș]</li>
+    <li>[e.g. Free afternoon in Brașov old town, no early starts]</li>
+  </ul>
+
+  <h2>Itinerary in brief</h2>
+  <table>
+    <thead><tr><th>Day</th><th>Route</th><th>Overnight</th><th>Road</th><th>Meals</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Bucharest – Curtea de Argeș – Sibiu</td><td>Sibiu</td><td>~300 km</td><td>[B/D]</td></tr>
+      <tr><td>2</td><td>Sibiu – Biertan – Sighișoara</td><td>Sighișoara</td><td>~150 km</td><td>[B/D]</td></tr>
+      <tr><td>3</td><td>Sighișoara – Viscri – Brașov</td><td>Brașov</td><td>~150 km</td><td>[B/D]</td></tr>
+      <tr><td>4</td><td>Brașov – Bran – Sinaia – Bucharest</td><td>—</td><td>~200 km</td><td>[B]</td></tr>
+    </tbody>
+  </table>
+  <p class="muted" style="font-size:12px">B = breakfast · L = lunch · D = dinner. Distances are approximate; driving times depend on traffic and stops.</p>
+  <div class="foot"><span>[Company legal name — to be added] · [address] · [licence no.]</span><span>1</span></div>
+</section>
+
+<!-- PAGE 2 — day by day -->
+<section class="page">
+  <h2 style="margin-top:0">Day by day</h2>
+  <p class="note">One card per day: route, approximate km, what is included that day, and free time. Short, concrete sentences — no marketing filler. Times only when they are fixed.</p>
+  <div class="day">
+    <h3>Day 1 · Bucharest – Curtea de Argeș – Sibiu</h3>
+    <p class="meta">~300 km · overnight Sibiu</p>
+    <p>[Pick-up at your hotel/airport at [time]. Drive north along the Olt valley, stop at Curtea de Argeș monastery, continue to Sibiu. Evening free in the Large Square.]</p>
+    <span class="pill">Private car/van with driver</span><span class="pill">[Guide language: English/Arabic — confirm]</span><span class="pill">[Dinner]</span>
+  </div>
+  <div class="day">
+    <h3>Day 2 · Sibiu – Biertan – Sighișoara</h3>
+    <p class="meta">~150 km · overnight Sighișoara</p>
+    <p>[Fortified church of Biertan, then the medieval citadel of Sighișoara. Afternoon at your own pace.]</p>
+  </div>
+  <div class="day">
+    <h3>Day 3 · Sighișoara – Viscri – Brașov</h3>
+    <p class="meta">~150 km · overnight Brașov</p>
+    <p>[Village of Viscri, then Brașov old town with free time for dinner.]</p>
+  </div>
+  <div class="day">
+    <h3>Day 4 · Brașov – Bran – Sinaia – Bucharest</h3>
+    <p class="meta">~200 km · end of services</p>
+    <p>[Bran, Peleș Castle in Sinaia (subject to opening days and tickets), return to Bucharest / airport.]</p>
+  </div>
+  <div class="foot"><span>[Company legal name — to be added]</span><span>2</span></div>
+</section>
+
+<!-- PAGE 3 — hotels and price -->
+<section class="page">
+  <h2 style="margin-top:0">Your hotels — two options</h2>
+  <p class="note">Same route, two levels. Give the room type and size in m² (clients compare this). Only list hotels the partner has confirmed are bookable.</p>
+  <table>
+    <thead><tr><th>City</th><th>Nights</th><th>Option A · 4★</th><th>Option B · 5★</th></tr></thead>
+    <tbody>
+      <tr><td>Sibiu</td><td>1</td><td>[Hotel] · [room type, m²]</td><td>[Hotel] · [room type, m²]</td></tr>
+      <tr><td>Sighișoara</td><td>1</td><td>[Hotel] · [room type, m²]</td><td>[Hotel] · [room type, m²]</td></tr>
+      <tr><td>Brașov</td><td>1</td><td>[Hotel] · [room type, m²]</td><td>[Hotel] · [room type, m²]</td></tr>
+    </tbody>
+  </table>
+  <p class="muted" style="font-size:12px">If a hotel is full at booking time we propose one of the same standard and location, for your approval.</p>
+
+  <h2>Price</h2>
+  <div class="two">
+    <div class="day"><p class="eyebrow">Option A · 4★</p><p class="price">[KWD …] <span class="muted" style="font-size:13px;font-weight:600">per person</span></p><p class="muted">[Total for [2] travellers: KWD …]</p></div>
+    <div class="day"><p class="eyebrow">Option B · 5★</p><p class="price">[KWD …] <span class="muted" style="font-size:13px;font-weight:600">per person</span></p><p class="muted">[Total for [2] travellers: KWD …]</p></div>
+  </div>
+  <p class="muted" style="font-size:12px">Sharing a double room. Single-room supplement: [KWD …]. Children: [policy — to be set].</p>
+
+  <div class="two">
+    <div><h2>Included</h2><ul>
+      <li>Private car or van with air-conditioning; fuel, tolls and parking</li>
+      <li>[3] nights' accommodation with breakfast</li>
+      <li>[Driver-guide / local guides — language]</li>
+      <li>[Meals as listed in the itinerary]</li>
+      <li>One contact in Kuwait on WhatsApp before and during the trip</li>
+    </ul></div>
+    <div><h2>Not included</h2><ul>
+      <li>International flights [unless quoted separately]</li>
+      <li>Entrance tickets [unless listed]</li>
+      <li>Other meals and drinks</li>
+      <li>Travel insurance, visa costs, personal expenses, tips</li>
+    </ul></div>
+  </div>
+
+  <h2>How booking works</h2>
+  <p class="note">Deposit %, payment methods and cancellation scale must come from the company's own terms once it is registered — do not copy another agency's numbers.</p>
+  <ul>
+    <li>You pay locally in Kuwait to [company legal name] — never to a foreign supplier.</li>
+    <li>Deposit of [..]% to confirm; balance [.. days] before arrival. Methods: [bank transfer / KNET / card].</li>
+    <li>Cancellation: [scale — to be set].</li>
+    <li>Nothing is booked until you approve this proposal in writing.</li>
+  </ul>
+  <div class="foot"><span>[Company legal name — to be added] · [contact]</span><span>3</span></div>
+</section>
+</body>
+</html>

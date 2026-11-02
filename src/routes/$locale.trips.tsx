@@ -7,6 +7,7 @@ import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { OFFERS, OFFER_CATEGORIES, offerDuration, offerLength, type OfferCategory, type OfferLength } from "@/content/offers";
 import { OFFER_PRICES, type OfferPrice } from "@/content/offer-prices";
+import { OFFER_MAX_KM_PER_DAY } from "@/content/offer-route";
 import { SITE } from "@/content/site";
 import { CURRENCIES, RATES_DATE, formatPrice, useCurrency, type Currency } from "@/lib/currency";
 import { PageHero, btn } from "@/components/site/ui";
@@ -22,6 +23,8 @@ const C = {
   flexible: { en: "Length to suit you", ar: "المدة حسب رغبتك", ro: "Durată la alegere" },
   note: { en: "Every trip is private and quoted personally — dates, group size and hotel level shape the price. Programmes and availability are confirmed in your written proposal.", ar: "كل رحلة خاصة ويُعدّ سعرها شخصيًا — فالمواعيد وعدد المسافرين ومستوى الفنادق تحدد السعر. تُؤكَّد البرامج والتوفر في عرضك المكتوب.", ro: "Fiecare călătorie este privată și primește o ofertă personală — datele, mărimea grupului și nivelul hotelurilor stabilesc prețul. Programele și disponibilitatea sunt confirmate în oferta scrisă." },
   priceNote: { en: "Prices are indicative “from” prices per person, set in euros and converted at reference exchange rates; flights are not included. Your final price depends on dates, group size and hotel level and is confirmed in your written proposal.", ar: "الأسعار المعروضة أسعار تقريبية «ابتداءً من» للشخص الواحد، محددة باليورو ومحوَّلة بأسعار صرف مرجعية، ولا تشمل الطيران. يعتمد سعرك النهائي على المواعيد وعدد المسافرين ومستوى الفنادق، ويُؤكَّد في عرضك المكتوب.", ro: "Prețurile sunt orientative, „de la”, de persoană, stabilite în euro și convertite la cursuri de referință; zborurile nu sunt incluse. Prețul final depinde de date, mărimea grupului și nivelul hotelurilor și este confirmat în oferta scrisă." },
+  longestDay: { en: "Longest day on the road", ar: "أطول يوم على الطريق", ro: "Cea mai lungă zi pe drum" },
+  km: { en: "km", ar: "كم", ro: "km" },
   rates: { en: "Exchange rates as of", ar: "أسعار الصرف بتاريخ", ro: "Cursuri de schimb din" },
   currency: { en: "Currency", ar: "العملة", ro: "Monedă" },
   from: { en: "From", ar: "ابتداءً من", ro: "De la" },
@@ -137,6 +140,7 @@ function Page() {
                 <p className="text-xs font-bold uppercase tracking-wide text-terracotta">{OFFER_CATEGORIES.find((c) => c.id === o.cat)!.label[l]}</p>
                 <h2 className="text-lg md:text-xl">{o.title[l]}</h2>
                 <p className="text-sm text-muted-foreground">{[dur ?? C.flexible[l], o.places?.[l]].filter(Boolean).join(" · ")}</p>
+                {OFFER_MAX_KM_PER_DAY[o.id] && <p className="text-xs text-muted-foreground">{C.longestDay[l]}: <span className="font-semibold text-foreground">{OFFER_MAX_KM_PER_DAY[o.id]} {C.km[l]}</span></p>}
                 {prices && <div className="mt-1 border-t border-border pt-3"><PriceBlock p={OFFER_PRICES[o.id]} c={cur} l={l} /></div>}
                 <Link to="/$locale/plan-your-trip" params={{ locale: l }} search={{ offer: o.id }} className="mt-auto inline-flex min-h-11 items-center gap-2 pt-1 text-sm font-bold text-sky">{C.ask[l]}<ArrowRight className="flip-rtl h-4 w-4" aria-hidden /></Link>
               </article>
